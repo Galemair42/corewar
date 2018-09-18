@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:49:58 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/17 20:16:21 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/18 18:35:04 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,19 @@
 */
 
 # define E_OPEN 				1
-# define E_HEAD_MISS 			2
-# define E_HEAD_CMD 			3
-# define E_NAME_OPEN			4
-# define E_NAME_LEN				5
-# define E_NAME_EXTRA			6
-# define E_NAME_NOEND			7
-# define E_COMM_OPEN			8
-# define E_COMM_LEN				9
-# define E_COMM_EXTRA			10
-# define E_COMM_NOEND			11
-# define E_BODY_BADOP			12
+# define E_MALLOC				2
+# define E_HEAD_MISS 			3
+# define E_HEAD_CMD 			4
+# define E_NAME_OPEN			5
+# define E_NAME_LEN				6
+# define E_NAME_EXTRA			7
+# define E_NAME_NOEND			8
+# define E_COMM_OPEN			9
+# define E_COMM_LEN				10
+# define E_COMM_EXTRA			11
+# define E_COMM_NOEND			12
+# define E_BODY_BADOP			13
+# define E_BODY_LABEL			14
 
 # define S_NAME					(1 << 0)
 # define S_COMM					(1 << 1)
@@ -67,7 +69,8 @@
 # define COMMENT_CHAR			'#'
 # define LABEL_CHAR				':'
 # define DIRECT_CHAR			'%'
-# define SEPARATOR_CHAR			','
+# define REG_CHAR				'r'
+# define SEPAR_CHAR				','
 
 # define LABEL_CHARS			"abcdefghijklmnopqrstuvwxyz_0123456789"
 
@@ -118,6 +121,7 @@ typedef struct		s_header
 typedef struct		s_param
 {
 	char			*label;
+	unsigned int	type;
 	unsigned int	size;
 	unsigned int	value;
 }					t_param;
@@ -126,15 +130,14 @@ typedef struct		s_op
 {
 	char			*label;
 	unsigned int	size;
-	unsigned int	code;
-	unsigned int	cp;
+	t_op_tab		info;
 	t_param			params[3];
 	struct s_inst	*next;
 }					t_op;
 
 typedef struct		s_body
 {
-	unsigned int	inst_size;
+	unsigned int	op_size;
 	t_op			op;
 }					t_body;
 
