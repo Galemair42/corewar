@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:07:51 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/18 15:15:03 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/18 22:26:58 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,14 @@ char			*ft_strcatto(char *s1, const char *s2, char ref);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strchrrev(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
-int				ft_strhasc(const char *s, int c);
 char			*ft_strstr(const char *haystack, const char *needle);
 char			*ft_strnstr(const char *haystack, const char *needle,
 		size_t len);
 int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_stratcmp(const char *s, const char *ref, char mark);
+int				ft_strhasc(const char *s, int c);
+int				ft_strcountc(const char *s, char c);
 
 void			ft_strdel(char **as);
 void			ft_tabdel(void **tab, size_t len);
@@ -101,6 +102,7 @@ void			ft_striter(char *s, void (*f)(char *));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 char			**ft_strsplit(char const *s, char c);
 char			**ft_splitwhite(char const *s);
+char			*ft_skipnwhite(char *str, int nb);
 char			*ft_strnew(size_t size, unsigned char c);
 char			*ft_strmap(char const *s, char (*f)(char));
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
