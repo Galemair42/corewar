@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/18 18:35:01 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/18 22:32:06 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,85 +41,128 @@ static int	find_operation(t_asm_file *fl, char *str)
 	return (exit_parsing(fl, E_BODY_BADOP));
 }
 
+static int	set_dir(t_asm_file *fl, char *str, t_param param, unsigned type)
+{
+	if ((type & T_DIR) && str[0] == DIRECT_CHAR)
+	{
+		param.type = T_DIR;
+		if (str[1] == LABEL_CHAR && ft_strisonly(str + 2, LABEL_CHARS))
+		{
+			if (!(param.label = ft_memalloc(ft_strlen(str + 2))))
+				return (exit_parsing(fl, E_MALLOC));
+			param.label = ft_strcpyto(param.label, str + 2, SEPAR_CHAR);
+			param.size = 2;
+		}
+		else if (ft_strisonly(str + 1, "0123456789"))
+		{
+			param.value = ft_atoi(str + 1);
+			param.size = 4;
+		}
+	}
+	return (1);
+}
+
+static int	set_ind(t_asm_file *fl, char *str, t_param param, unsigned type)
+{
+	if (type & T_IND)
+	{
+		if (str[0] == LABEL_CHAR)
+		{
+			if (!(param.label = ft_memalloc(ft_strlen(str + 1))))
+				return (exit_parsing(fl, E_MALLOC));
+			param.label = ft_strcpyto(param.label, str + 1, SEPAR_CHAR);
+			param.size = 2;
+			param.type = T_IND;
+		}
+		else if (ft_strisonly(str, "0123456789"))
+		{
+			param.value = ft_atoi(str);
+			param.size = 2;
+			param.type = T_IND;
+		}
+	}
+	return (1);
+}
+
+static int	set_reg(t_asm_file *fl, char *str, t_param param, unsigned type)
+{
+	if ((type & T_REG) && str[0] == REG_CHAR)
+	{
+		if (ft_strisonly(str + 1, "0123456789")
+				&& ft_atoi(str + 1) <= REG_NUMBER)
+		{
+			param.type = T_REG;
+			param.value = ft_atoi(str + 1);
+			param.size = 1;
+		}
+	}
+	return (1);
+}
+
+static int	set_params(t_asm_file *fl, char **table)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (table[i])
+	{
+		if (!set_dir(fl, table[i], fl->bd.op.params[i], fl->bd.op.info.p_type[i]))
+			return (0);
+		if (!set_ind(fl, table[i], fl->bd.op.params[i], fl->bd.op.info.p_type[i]))
+			return (0);
+		set_reg(fl, table[i], fl->bd.op.params[i], fl->bd.op.info.p_type[i]);
+		i++
+	}
+	return (1);
+}
+
 static int	get_params(t_asm_file *fl, char **table)
 {
+	char	**extra;
+
 	if (fl->bd.op.info.p_count == 1)
 	{
 		if (ft_strtabsize(table) == 1 && !ft_strhasc(table[0], SEPAR_CHAR))
 		{
-			if (fl->bd.op.info.p_type[0] == T_DIR && table[0][0] == DIRECT_CHAR)
-			{
-				fl->bd.op.params[0].type = T_DIR;
-				if (table[0][1] == LABEL_CHAR
-						&& ft_strisonly(table[0] + 2, LABEL_CHARS))
-				{
-					if (!(fl->bd.op.params[0].label = ft_strdup(table[0] + 2)))
-						return (exit_parsing(fl, E_MALLOC));
-					fl->bd.op.params[0].size = 2;
-				}
-				else if (ft_strisonly(table[0] + 1, "0123456789"))
-				{
-					fl->bd.op.params[0].value = ft_atoi(table[0] + 1);
-					fl->bd.op.params[0].size = 4;
-				}
-			}
-			else (fl->bd.op.info.p_type[0] == T_REG && table[0][0] == REG_CHAR 
-					&& ft_strisonly(table[0] + 1, "0123456789")
-					&& ft_atoi(table[0] + 1) <= REG_NUMBER)
-			{
-				fl->bd.op.params[0].type = T_REG;
-				fl->bd.op.params[0].value = ft_atoi(table[0] + 1);
-				fl->bd.op.params[0].size = 1;
-			}
+			if (!set_dir(fl, table[0], fl->bd.op.params[0], fl->bd.op.info.p_type[0]))
+				return (0);
+			set_reg(fl, table[0], fl->bd.op.params[0], fl->bd.op.info.p_type[0]);
 		}
 	}
 	else if (fl->bd.op.info.p_count == 2)
 	{
-		if (ft_strtabsize(table) == 2 && ft_strhas(table[0], SEPAR_CHAR)
+		if (ft_strtabsize(table) == 2 && ft_strhasc(table[0], SEPAR_CHAR)
 				&& !ft_strhasc(table[1], SEPAR_CHAR))
 		{
 			if (!ft_strchr(table[0], SEPAR_CHAR) + 1)
-			{
-				if (table[0][0] == LABEL_CHAR
-						&& (fl->bd.op.info.p_type[0] & T_IND))
-				{
-					if (!(fl->bd.op.params[0].label = ft_strdup(table[0] + 1)))
-						return (exit_parsing(fl, E_MALLOC));
-					fl->bd.op.params[0].size = 2;
-					fl->bd.op.params[0].type = T_IND;
-				}
-				else if (table[0][0] == DIRECT_CHAR
-						&& (fl->bd.op.info.p_type[0] & T_DIR))
-				{
-					if (table[0][1] == LABEL_CHAR
-							&& ft_strisonly(table[0] + 2, LABEL_CHARS))
-					{
-						if (!(fl->bd.op.params[0].label = ft_strdup(table[0] + 2)))
-							return (exit_parsing(fl, E_MALLOC));
-						fl->bd.op.params[0].size = 2;
-					}
-					else if (ft_strisonly(table[0] + 1, "0123456789"))
-					{
-						fl->bd.op.params[0].value = ft_atoi(table[0] + 1);
-						fl->bd.op.params[0].size = 4;
-					}
-				}
-				else if (table[0][0] == REG_CHAR
-						&& (fl->bd.op.info.p_type[0] & T_REG))
-				{
-				}
-				else if (ft_strhasc("0123456789", table[0][0])
-						&& (fl->bd.op.info.p_type[0] & T_IND))
-				{
-				}
-			}
+				if (!set_params(fl, table))
+					return (0);
 		}
-		else if (ft_strtabsize(table) == 1 && ft_strhasc(table[0], SEPAR_CHAR))
+		else if (ft_strtabsize(table) == 1 && ft_strcountc(table[0], SEPAR_CHAR) == 1)
 		{
+			extra = ft_strsplit(table[0], SEPAR_CHAR);
+			if (!set_params(fl, extra))
+				return (0);
 		}
 	}
 	else
 	{
+		if (ft_strtabsize(table) == 3 && ft_strhasc(table[0], SEPAR_CHAR)
+				&& ft_strhasc(table[1], SEPAR_CHAR)
+				&& !ft_strhasc(table[2], SEPAR_CHAR))
+		{
+		}
+		else if (ft_strtabsize(table) == 2 && ((ft_strhas(table[0], SEPAR_CHAR)
+				&& ft_strcountc(table[1], SEPAR_CHAR) == 1)
+				|| (ft_strcountc(table[0], SEPAR_CHAR) == 2
+				&& !ft_strhasc(table[1], SEPAR_CHAR))))
+		{
+		}
+		else if (ft_strtabsize(table) == 3 && ft_strhasc(table[0], SEPAR_CHAR)
+				&& ft_strhasc(table[1], SEPAR_CHAR)
+				&& !ft_strhasc(table[2], SEPAR_CHAR))
+		{
+		}
 	}
 	return (exit_parsing(fl, E_BODY_PARAM));
 }
