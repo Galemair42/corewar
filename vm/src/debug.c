@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:41:57 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/19 17:16:16 by jabt             ###   ########.fr       */
+/*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
+/*   Updated: 2018/09/19 11:24:17 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		COREWAR_H
-# define	COREWAR_H
+#include "corewar.h"
 
-# include	<string.h>
-# include	<unistd.h>
-# include	<stdlib.h>
-# include	"stdio.h"
-# include	"libft.h"
-# include	"cw_struct.h"
-# include	"cw_op.h"
-# include	"cw_prototype.h"
+void	print_buffer_in_hexa(unsigned char *buffer, size_t size)
+{
+	size_t	i;
+	size_t	j;
 
-# define HEADER_SIZE	16 + PROG_NAME_LENGTH + COMMENT_LENGTH
-
-/*
-**		global var
-*/
-
-t_processeur	arena;
-
-#endif
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < 16)
+		{
+			printf("%02x ", buffer[i]);
+			j++;
+			i++;
+		}
+		printf("\n");
+	}
+}

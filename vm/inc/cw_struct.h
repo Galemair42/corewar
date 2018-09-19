@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/18 17:19:21 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/19 11:36:20 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ typedef struct		s_processus
 
 typedef struct		s_champion
 {
+	char		*name;
 	int			id;	
-	header_t	header;
 	int			nb_live;
+	header_t	header;
 }					t_champion;
 
 typedef struct		s_processeur

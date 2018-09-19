@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/18 17:54:00 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/19 11:01:27 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,11 @@ int			cw_parse_arg(char **argv, int argc);
 
 int			cw_get_new_champ_id(void);
 int			cw_read_champion(char *champ_name, int id);
+
+/*
+** 		debug
+*/
+
+void		print_buffer_in_hexa(unsigned char *buffer, size_t size);
 
 #endif
