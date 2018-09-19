@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:07:51 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/18 22:26:58 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/19 17:10:16 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strnjoin(char const *s1, char const *s2, size_t len);
 char			*ft_strjoin_split(char const *s1, char const *s2, char split);
 char			*ft_strtrim(char const *s);
+char			*ft_strstrip(char const *s);
 int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 
