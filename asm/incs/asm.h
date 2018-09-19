@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:49:58 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/18 22:32:10 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/19 17:22:42 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define E_COMM_NOEND			12
 # define E_BODY_BADOP			13
 # define E_BODY_LABEL			14
+# define E_BODY_PARAM			15
 
 # define S_NAME					(1 << 0)
 # define S_COMM					(1 << 1)
@@ -132,13 +133,13 @@ typedef struct		s_op
 	unsigned int	size;
 	t_op_tab		info;
 	t_param			params[3];
-	struct s_inst	*next;
+	struct s_op		*next;
 }					t_op;
 
 typedef struct		s_body
 {
 	unsigned int	op_size;
-	t_op			op;
+	t_op			*op;
 }					t_body;
 
 typedef struct		s_asm_file
@@ -160,8 +161,15 @@ typedef struct		s_asm_file
 int					parse_file(char *file_name);
 int					parse_header(t_asm_file *fl, int fd);
 int					parse_body(t_asm_file *fl, int fd);
+int					get_params(t_asm_file *fl, char **params,
+						int count, t_op *op);
 int					exit_parsing(t_asm_file *fl, int er);
 void				create_binary(t_asm_file *fl, char *file_name);
+
+t_op				*new_op(void);
+void				add_op(t_op **head, t_op *new);
+
+void				print_ops(t_op *op);
 
 extern t_op_tab		g_op_tab[17];
 
