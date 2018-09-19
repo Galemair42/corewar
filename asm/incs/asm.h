@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:49:58 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/19 17:22:42 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/19 19:02:27 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_op_tab
 	unsigned int	p_type[3];
 	unsigned int	dir_size;
 	unsigned int	carry;
+	unsigned int	ocp;
 
 }				t_op_tab;
 
@@ -168,8 +169,8 @@ void				create_binary(t_asm_file *fl, char *file_name);
 
 t_op				*new_op(void);
 void				add_op(t_op **head, t_op *new);
+int					size_op(t_op **head);
 
-void				print_ops(t_op *op);
 
 extern t_op_tab		g_op_tab[17];
 

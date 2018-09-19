@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 15:43:17 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/19 16:43:30 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/19 19:25:30 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,17 @@ void	add_op(t_op **head, t_op *new)
 	}
 }
 
+int		size_op(t_op **head)
+{
+	int		size;
+	t_op	*curr;
 
+	size = 0;
+	curr = *head;
+	while (curr)
+	{
+		size += curr->size;
+		curr = curr->next;
+	}
+	return (size);
+}

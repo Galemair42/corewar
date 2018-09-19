@@ -6,13 +6,14 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/19 17:57:36 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/19 18:54:53 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	set_dir(t_asm_file *fl, char *str, t_param *param, unsigned type)
+static int	set_dir(t_asm_file *fl, char *str, t_param *param, unsigned type,
+		unsigned dir_size)
 {
 	if ((type & T_DIR) && str[0] == DIRECT_CHAR)
 	{
@@ -22,13 +23,13 @@ static int	set_dir(t_asm_file *fl, char *str, t_param *param, unsigned type)
 			if (!(param->label = ft_memalloc(ft_strlen(str + 2))))
 				return (exit_parsing(fl, E_MALLOC));
 			param->label = ft_strcpyto(param->label, str + 2, SEPAR_CHAR);
-			param->size = 2;
+			param->size = dir_size;
 			fl->status++;
 		}
 		else if (ft_strisonly(str + 1, "0123456789"))
 		{
 			param->value = ft_atoi(str + 1);
-			param->size = 4;
+			param->size = dir_size;
 			fl->status++;
 		}
 	}
@@ -82,14 +83,16 @@ static int	set_params(t_asm_file *fl, char **params, t_op *op)
 	i = 0;
 	while (params[i])
 	{
-		if (!set_dir(fl, params[i], &op->params[i], op->info.p_type[i]))
+		if (!set_dir(fl, params[i], &op->params[i], op->info.p_type[i],
+				op->info.dir_size))
 			return (0);
 		if (!set_ind(fl, params[i], &op->params[i], op->info.p_type[i]))
 			return (0);
 		set_reg(fl, params[i], &op->params[i], op->info.p_type[i]);
 		i++;
 	}
-	op->size = op->params[0].size + op->params[1].size + op->params[2].size + 2;
+	op->size = op->params[0].size + op->params[1].size + op->params[2].size
+		+ (op->info.ocp ? 2 : 1);
 	return (1);
 }
 
@@ -99,10 +102,11 @@ int			get_params(t_asm_file *fl, char **params, int count, t_op *op)
 		return (exit_parsing(fl, E_MALLOC));
 	if (op->info.p_count == 1 && ft_strtabsize(params) == 1 && !count)
 	{
-		if (!set_dir(fl, params[0], &op->params[0], op->info.p_type[0]))
+		if (!set_dir(fl, params[0], &op->params[0], op->info.p_type[0],
+					op->info.dir_size))
 			return (0);
 		set_reg(fl, params[0], &op->params[0], op->info.p_type[0]);
-		op->size = op->params[0].size + 2;
+		op->size = op->params[0].size + (op->info.ocp ? 2 : 1);
 		if (fl->status == 1)
 			return (1);
 	}

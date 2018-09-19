@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/19 17:34:32 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/19 19:05:23 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static int	parse_instruction(t_asm_file *fl, char *ln, t_op *op)
 				ft_strcountc(ln, SEPAR_CHAR), op))
 			return (1);
 	}
-	print_ops(fl->bd.op);
 	return (0);
 }
 
@@ -108,5 +107,6 @@ int			parse_body(t_asm_file *fl, int fd)
 		ft_strdel(&ln);
 		fl->ln++;
 	}
+	fl->bd.op_size = ft_revbits(size_op(&fl->bd.op));
 	return (1);
 }
