@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:07:51 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 14:03:33 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/20 17:59:11 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void			ft_strdel(char **as);
 void			ft_tabdel(void **tab, size_t len);
 void			ft_strclr(char *s);
 void			ft_strnclr(char *s, size_t len);
+void			ft_strclrfrom(char *s, char ref);
 void			ft_striter(char *s, void (*f)(char *));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));
 char			**ft_strsplit(char const *s, char c);
