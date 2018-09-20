@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:49:58 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 17:27:37 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/20 18:54:45 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,8 @@ int					parse_header(t_asm_file *fl, int fd);
 int					parse_body(t_asm_file *fl, int fd);
 int					get_params(t_asm_file *fl, char **params,
 						int count, t_op *op);
+int					get_label(t_asm_file *fl, char *str);
+int					find_operation(t_asm_file *fl, char *str, t_op *op);
 int					exit_parsing(t_asm_file *fl, int er);
 void				create_binary(t_asm_file *fl, char *file_name);
 

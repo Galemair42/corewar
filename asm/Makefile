@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/09/20 16:50:19 by femaury          ###   ########.fr        #
+#    Updated: 2018/09/20 18:55:03 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = asm
 SRC_PATH = srcs
 SRC_NAME = asm_main.c asm_op_tab.c asm_parse.c asm_parse_head.c asm_write.c \
 		   asm_parse_body.c asm_parse_body_ops.c asm_oplist_utils.c \
-		   asm_lablist_utils.c
+		   asm_lablist_utils.c asm_parse_body_2.c
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_PATH = incs

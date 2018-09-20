@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 18:35:34 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 17:28:44 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/20 18:58:03 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_ops(t_op *op)
 	curr = op;
 	while (curr)
 	{
-		ft_printf("Size: %u\nInfo: %s (%#x)\nParams:\n\n\tLabel[1]: %s\n\tType[1]: %u\n\tSize[1]: %u\n\tValue[1]: %u\n\n\tLabel[2]: %s\n\tType[2]: %u\n\tSize[2]: %u\n\tValue[2]: %u\n\n\tLabel[3]: %s\n\tType[3]: %u\n\tSize[3]: %u\n\tValue[3]: %u\n\n", curr->size, curr->info.name, curr->info.opcode, curr->params[0].label, curr->params[0].type, curr->params[0].size, curr->params[0].value, curr->params[1].label, curr->params[1].type, curr->params[1].size, curr->params[1].value, curr->params[2].label, curr->params[2].type, curr->params[2].size, curr->params[2].value);
+		ft_printf("Size: %u\nLine: %u\nInfo: %s (%#x)\nParams:\n\n\tLabel[1]: %s\n\tType[1]: %u\n\tSize[1]: %u\n\tValue[1]: %u\n\n\tLabel[2]: %s\n\tType[2]: %u\n\tSize[2]: %u\n\tValue[2]: %u\n\n\tLabel[3]: %s\n\tType[3]: %u\n\tSize[3]: %u\n\tValue[3]: %u\n\n", curr->size, curr->line, curr->info.name, curr->info.opcode, curr->params[0].label, curr->params[0].type, curr->params[0].size, curr->params[0].value, curr->params[1].label, curr->params[1].type, curr->params[1].size, curr->params[1].value, curr->params[2].label, curr->params[2].type, curr->params[2].size, curr->params[2].value);
 		curr = curr->next;
 	}
 }

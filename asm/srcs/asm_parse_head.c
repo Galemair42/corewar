@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 22:24:31 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/17 20:24:35 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/20 19:02:33 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ static int	parse_name(t_asm_file *fl, char *ln, int fd)
 			return (exit_parsing(fl, E_NAME_OPEN));
 	fl->ch++;
 	ft_strcpyto(fl->hd.prog_name, ln + fl->ch, '"');
-	if (ft_strlen(fl->hd.prog_name) - (fl->ch - ft_strlen(NAME_CMD_STR))
-			> PROG_NAME_LENGTH)
+	if (ft_strlen(fl->hd.prog_name) > PROG_NAME_LENGTH)
 		return (exit_parsing(fl, E_NAME_LEN));
 	fl->ch += ft_strlen(fl->hd.prog_name);
 	if (ln[fl->ch] == '"')
@@ -149,7 +148,7 @@ static int	parse_comment(t_asm_file *fl, char *ln, int fd)
 			return (exit_parsing(fl, E_COMM_OPEN));
 	fl->ch++;
 	ft_strcpyto(fl->hd.comment, ln + fl->ch, '"');
-	if (ft_strlen(fl->hd.comment) - fl->ch > COMMENT_LENGTH)
+	if (ft_strlen(fl->hd.comment) > COMMENT_LENGTH)
 		return (exit_parsing(fl, E_COMM_LEN));
 	fl->ch += ft_strlen(fl->hd.comment);
 	if (ln[fl->ch] == '"')
