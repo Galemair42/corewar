@@ -6,12 +6,31 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:54:40 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/18 17:39:16 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/20 16:54:25 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "corewar.h"
 
+static int			cw_is_valid_id(int id)
+{
+	int			ret;
+	t_list		*lst;
+	t_champion	*champ;
+
+	lst = arena.champion;
+	while (lst)
+	{
+		champ = (t_champion *)lst->content;
+		if (champ->id == id)
+		{
+			printf("Corewar : Two champ has the same ID\n");
+			return (0);
+		}
+		lst = lst->next;
+	}
+	return (1);
+}
 
 /*
 **		INPUT 
@@ -20,7 +39,7 @@
 **		it in arena->arg flag in question
 */
 
-static int	cw_parse_flag(char **argv, int cur)
+static int			cw_parse_flag(char **argv, int cur)
 {
 	int		i;
 	char	*arg;
@@ -29,11 +48,6 @@ static int	cw_parse_flag(char **argv, int cur)
 	if (ft_strequ(arg, "v"))
 	{
 		printf("t'as pas encore fait le mode verbose parsing/cw_parsing_args.c\n");
-		exit(8);
-	}
-	else if (ft_strequ(arg, "n"))
-	{
-		printf("aucun visu\n");
 		exit(8);
 	}
 	else if (ft_strequ(arg, "dump"))
@@ -48,12 +62,6 @@ static int	cw_parse_flag(char **argv, int cur)
 		printf("fais ton atoi bizarre\n");
 		exit(5);
 	}
-	else if (ft_strequ(arg, "n"))
-	{
-		//arena.cycle_to_dump = atoichelou; // faire le atoi chelou
-		printf("gerer ca : [-n number] champion.cor\n");
-		exit(5);
-	}	
 	return (0);
 }
 
@@ -73,13 +81,24 @@ int			cw_parse_arg(char **argv, int argc)
 	{
 		if (argv[i][0] != '-' || !(cw_parse_flag(argv, i)))
 		{
-			id = cw_get_new_champ_id(); // essayer de parser en tant que file
+			if (ft_strequ(&argv[i][1], "n"))
+			{
+				if (!argv[i + 1] || !argv[i + 2] ||
+						!cw_is_valid_id((id = ft_atoi(argv[i + 1]))))
+				{
+					printf("Corewar : Wrong Arguement\n");
+					return (0);
+				}
+				i += 2;
+			}
+			else
+				id = cw_get_new_champ_id();
 			if (cw_read_champion(argv[i], id) == -1)
 				return (0);
 		}
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 /*

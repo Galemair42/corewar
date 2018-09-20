@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/19 11:24:17 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/20 16:57:07 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,39 @@ void	print_buffer_in_hexa(unsigned char *buffer, size_t size)
 	while (i < size)
 	{
 		j = 0;
-		while (j < 16)
+		while (j < 64 && i < size) // comme zaz
 		{
 			printf("%02x ", buffer[i]);
 			j++;
 			i++;
 		}
 		printf("\n");
+	}
+}
+
+void	print_one_champ(t_champion *champ)
+{
+	
+	printf("name : %s\n", champ->name);
+	printf("prog_name : %s\n", champ->header.prog_name);
+	printf("comment : %s\n", champ->header.comment);
+	printf("prog_size : %u\n", champ->header.prog_size);
+	printf("id : %d\n", champ->id);
+	printf("ces instrus :\n");
+	print_buffer_in_hexa(champ->instruction, CHAMP_MAX_SIZE);
+	printf("\n\n");
+}
+
+void	print_all_champ(void)
+{
+	t_list	*lst;
+	t_champion	*champ;
+
+	lst = arena.champion;
+	while (lst)
+	{
+		champ = lst->content;
+		print_one_champ(champ);
+		lst = lst->next;
 	}
 }

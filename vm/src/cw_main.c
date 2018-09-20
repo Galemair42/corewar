@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/18 16:33:04 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/20 18:50:14 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@
 int		main(int argc, char **argv)
 {
 	cw_init_processeur();
-	cw_parse_arg(argv, argc);
-	printf("je sors du parsing\n");
-	exit(5);
+	if (!cw_parse_arg(argv, argc))
+	{
+		printf("lol\n");
+		return (42);
+	}
+	cw_put_champion_in_memory();
+	print_buffer_in_hexa(arena.memory, MEM_SIZE);
+	//fonction pour ecrire les champion en memoire
 
 	// dans un premier temps recup mes params	
 	// parsing du header

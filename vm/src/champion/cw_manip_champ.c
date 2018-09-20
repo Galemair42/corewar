@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 16:54:30 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/18 17:31:08 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/20 15:20:49 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ int		cw_get_new_champ_id(void)
 	error = 1;
 	if (!arena.champion)
 		return (1);
-	id = 1;
+	id = 0;
 	while (error == 1)
 	{
+		id++;
 		error = 0;
 		lst_champ = arena.champion;
 		while (lst_champ)
@@ -37,7 +38,6 @@ int		cw_get_new_champ_id(void)
 			}
 			lst_champ = lst_champ->next;
 		}
-		id++;
 	}
 	return (id);
 }

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/19 11:36:20 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/20 13:25:47 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ typedef struct		s_processus
 	int				carry;
 	int				reg[REG_NUMBER];
 	int				id_player;
-//	t_instruction	instru;		alors j'en ai besoins ou pas ??	pk pas un mode verbose
 }					t_processus;
 
 typedef struct		s_champion
 {
-	char		*name;
-	int			id;	
-	int			nb_live;
-	header_t	header;
+	char				*name;
+	int					id;	
+	int					nb_live;
+	header_t			header;
+	unsigned char		instruction[CHAMP_MAX_SIZE + 1];
 }					t_champion;
 
 typedef struct		s_processeur
@@ -59,7 +59,6 @@ typedef struct		s_processeur
 	unsigned long long	max_cycle;
 	unsigned long long	cur_cycle;
 	unsigned long long	cycle_to_dump;	
-//	t_args				args;
 }					t_processeur;
 
 #endif
