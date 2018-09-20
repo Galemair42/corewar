@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/09/19 17:10:32 by femaury          ###   ########.fr        #
+#    Updated: 2018/09/20 14:03:46 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC_NAME = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		   ft_strjoin_split.c ft_strisdigit.c ft_strchrrev.c ft_stratcmp.c \
 		   ft_revbits.c ft_strcpyto.c ft_strcatto.c ft_iswhite.c \
 		   ft_striswhiteuntil.c ft_splitwhite.c ft_strcountc.c ft_skipnwhite.c \
-		   ft_strstrip.c
+		   ft_strstrip.c ft_rev2bits.c
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_PATH = incs

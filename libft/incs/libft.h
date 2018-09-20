@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:07:51 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/19 17:10:16 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/20 14:03:33 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void			ft_memdel(void **ap);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 
 unsigned int	ft_revbits(unsigned int x);
+unsigned int	ft_rev2bits(unsigned int x);
 
 float			ft_sqrt(float nb);
 int				ft_pow(int n, int power);
