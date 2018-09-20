@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_oplist_utils.c                                 :+:      :+:    :+:   */
+/*   asm_lablist_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 15:43:17 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 17:15:42 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/20 17:20:20 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_op	*new_op(void)
+t_label	*new_label(char	*label, unsigned int size)
 {
-	t_op			*new;
-	unsigned int	i;
+	t_label			*new;
 
-	i = 0;
-	if (!(new = (t_op *)malloc(sizeof(t_op))))
+	if (!(new = (t_label *)malloc(sizeof(t_label))))
 		return (NULL);
-	new->size = 0;
-	new->line = 0;
-	while (i < 3)
-	{
-		new->params[i].label = NULL;
-		new->params[i].type = 0;
-		new->params[i].size = 0;
-		new->params[i].value = 0;
-		i++;
-	}
+	new->s = label;
+	new->size = size;
 	new->next = NULL;
 	return (new);
 }
 
-void	add_op(t_op **head, t_op *new)
+void	add_label(t_label **head, t_label *new)
 {
-	t_op	*curr;
+	t_label	*curr;
 
 	curr = *head;
 	if (new && curr)
@@ -47,34 +37,43 @@ void	add_op(t_op **head, t_op *new)
 	}
 }
 
-int		size_op(t_op **head)
+int		get_label_size(t_label **head, char *label)
 {
-	int		size;
-	t_op	*curr;
+	t_label *curr;
 
-	size = 0;
 	curr = *head;
 	while (curr)
 	{
-		size += curr->size;
+		if (ft_strequ(curr->s, label))
+			return ((int)curr->size);
 		curr = curr->next;
 	}
-	return (size);
+	return (-1);
 }
 
-int		sizeto_op(t_op **head, t_op *ref)
+int		check_labels(t_asm_file *fl, t_op **ophd, t_label **labhd)
 {
-	int		size;
-	t_op	*curr;
+	unsigned int	i;
+	t_op			*curr;
+	t_label			*check;
 
-	size = 0;
-	curr = *head;
-	while (curr)
+	curr = *ophd;
+	while ((i = -1) && curr)
 	{
-		if (curr == ref)
-			break ;
-		size += curr->size;
+		while (++i < 3)
+			if (curr->params[i].label)
+			{
+				check = *labhd;
+				while (check)
+				{
+					if (ft_strequ(check->s, curr->params[i].label))
+						break ;
+					check = check->next;
+				}
+				if (!check)
+					return (!(fl->ln = curr->line));
+			}
 		curr = curr->next;
 	}
-	return (size);
+	return (1);
 }

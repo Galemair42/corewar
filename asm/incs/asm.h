@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:49:58 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/19 19:02:27 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/20 17:27:37 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,22 @@
 */
 
 # define E_OPEN 				1
-# define E_MALLOC				2
-# define E_HEAD_MISS 			3
-# define E_HEAD_CMD 			4
-# define E_NAME_OPEN			5
-# define E_NAME_LEN				6
-# define E_NAME_EXTRA			7
-# define E_NAME_NOEND			8
-# define E_COMM_OPEN			9
-# define E_COMM_LEN				10
-# define E_COMM_EXTRA			11
-# define E_COMM_NOEND			12
-# define E_BODY_BADOP			13
-# define E_BODY_LABEL			14
+# define E_CREATE				2
+# define E_MALLOC				3
+# define E_HEAD_MISS 			4
+# define E_HEAD_CMD 			5
+# define E_NAME_OPEN			6
+# define E_NAME_LEN				7
+# define E_NAME_EXTRA			8
+# define E_NAME_NOEND			9
+# define E_COMM_OPEN			10
+# define E_COMM_LEN				11
+# define E_COMM_EXTRA			12
+# define E_COMM_NOEND			13
+# define E_BODY_BADOP			14
 # define E_BODY_PARAM			15
+# define E_BODY_LB_NAME			16
+# define E_BODY_LB_CALL			17
 
 # define S_NAME					(1 << 0)
 # define S_COMM					(1 << 1)
@@ -100,7 +102,7 @@ typedef char		t_arg_type;
 **	-------------------------------- STRUCTURES --------------------------------
 */
 
-typedef struct s_op_tab
+typedef struct 		s_op_tab
 {
 	char			*name;
 	unsigned int	opcode;
@@ -110,7 +112,7 @@ typedef struct s_op_tab
 	unsigned int	carry;
 	unsigned int	ocp;
 
-}				t_op_tab;
+}					t_op_tab;
 
 typedef struct		s_header
 {
@@ -130,17 +132,25 @@ typedef struct		s_param
 
 typedef struct		s_op
 {
-	char			*label;
 	unsigned int	size;
+	unsigned int	line;
 	t_op_tab		info;
 	t_param			params[3];
 	struct s_op		*next;
 }					t_op;
 
+typedef struct		s_label
+{
+	char			*s;
+	unsigned int	size;
+	struct s_label	*next;
+}					t_label;
+
 typedef struct		s_body
 {
 	unsigned int	op_size;
 	t_op			*op;
+	t_label			*label;
 }					t_body;
 
 typedef struct		s_asm_file
@@ -170,7 +180,12 @@ void				create_binary(t_asm_file *fl, char *file_name);
 t_op				*new_op(void);
 void				add_op(t_op **head, t_op *new);
 int					size_op(t_op **head);
+int					sizeto_op(t_op **head, t_op *ref);
 
+t_label				*new_label(char *label, unsigned int size);
+void				add_label(t_label **head, t_label *new);
+int					get_label_size(t_label **head, char *label);
+int					check_labels(t_asm_file *fl, t_op **ophd, t_label **labhd);
 
 extern t_op_tab		g_op_tab[17];
 

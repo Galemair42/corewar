@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 22:37:35 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/19 21:23:36 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/20 17:25:49 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,33 @@ static void	write_ocp(t_op *op, int fd)
 	write(fd, &ocp, 1);
 }
 
+static void	write_params(int op_size, int lb_size, t_param param, int fd)
+{
+	unsigned int	val;
+
+	if (param.label)
+	{
+		if (lb_size > op_size)
+			val = lb_size - op_size;
+		else
+			val = (param.size == 2 ? 0xFFFF : 0xFFFFFFFF)
+				- (op_size - lb_size) + 1;
+		if (param.size == 2)
+			val = ft_rev2bits(val);
+		else
+			val = ft_revbits(val);
+	}
+	else
+	{
+		val = param.value;
+		if (param.size == 2)
+			val = ft_rev2bits(val);
+		else if (param.size == 4)
+			val = ft_revbits(val);
+	}
+	write(fd, &val, param.size);
+}
+
 static void	write_instructions(t_asm_file *fl, int fd)
 {
 	t_op			*curr;
@@ -62,9 +89,11 @@ static void	write_instructions(t_asm_file *fl, int fd)
 		write(fd, &curr->info.opcode, 1);
 		if (curr->info.ocp)
 			write_ocp(curr, fd);
-		while (curr->params[i].type)
+		while (curr->params[i].type && i < 3)
 		{
-			write(fd, &curr->params[i].value, curr->params[i].size);
+			write_params(sizeto_op(&fl->bd.op, curr),
+					get_label_size(&fl->bd.label, curr->params[i].label),
+					curr->params[i], fd);
 			i++;
 		}
 		curr = curr->next;
@@ -77,9 +106,15 @@ void		create_binary(t_asm_file *fl, char *file_name)
 	char	*name;
 
 	if (!(name = modify_name(file_name)))
+	{
+		exit_parsing(fl, E_MALLOC);
 		return ;
+	}
 	if ((fd = open(name, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0)
+	{
+		exit_parsing(fl, E_CREATE);
 		return ;
+	}
 	write(fd, &fl->hd.magic, 4);
 	write(fd, fl->hd.prog_name, PROG_NAME_LENGTH);
 	write(fd, &fl->onull, 4);

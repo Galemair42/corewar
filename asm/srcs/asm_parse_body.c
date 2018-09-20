@@ -6,25 +6,33 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/19 19:05:23 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/20 17:26:45 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	get_label(t_asm_file *fl, char *str, t_op *op)
+static int	get_label(t_asm_file *fl, char *str)
 {
+	t_label	*new;
+
 	while (str[fl->ch] && ft_strhasc(LABEL_CHARS, str[fl->ch]))
 		fl->ch++;
 	if (str[fl->ch] == LABEL_CHAR && !str[fl->ch + 1])
 	{
-		if (!(op->label = ft_memalloc(ft_strlen(str))))
+		if (!(new = new_label(NULL, size_op(&fl->bd.op))))
 			return (exit_parsing(fl, E_MALLOC));
-		op->label = ft_strcpyto(op->label, str, LABEL_CHAR);
+		if (!(new->s = ft_memalloc(ft_strlen(str))))
+			return (exit_parsing(fl, E_MALLOC));
+		new->s = ft_strcpyto(new->s, str, LABEL_CHAR);
+		if (fl->bd.label)
+			add_label(&fl->bd.label, new);
+		else
+			fl->bd.label = new;
 		return (1);
 	}
 	else
-		return (exit_parsing(fl, E_BODY_LABEL));
+		return (exit_parsing(fl, E_BODY_LB_NAME));
 }
 
 static int	find_operation(t_asm_file *fl, char *str, t_op *op)
@@ -66,11 +74,13 @@ static int	parse_instruction(t_asm_file *fl, char *ln, t_op *op)
 	table = ft_splitwhite(ln);
 	if (ft_strhasc(table[0], LABEL_CHAR))
 	{
-		if (get_label(fl, table[0], op) && table[1])
+		if (get_label(fl, table[0]) && table[1])
+		{
 			if (find_operation(fl, table[1], op)
 					&& get_params(fl, prepare_params(ln, 2),
 					ft_strcountc(ln, SEPAR_CHAR), op))
 				return (1);
+		}
 	}
 	else
 	{
@@ -88,10 +98,9 @@ int			parse_body(t_asm_file *fl, int fd)
 	t_op	*new;
 
 	ln = NULL;
-	fl->ch = 0;
-	fl->bd.op = NULL;
 	while (ft_gnl(fd, &ln) > 0)
 	{
+		fl->ch = 0;
 		fl->status = 0;
 		if (ln[0] && !ft_striswhiteuntil(ln, COMMENT_CHAR))
 		{
@@ -99,6 +108,7 @@ int			parse_body(t_asm_file *fl, int fd)
 				return (exit_parsing(fl, E_MALLOC));
 			if (!parse_instruction(fl, ln, new))
 				return (0);
+			new->line = fl->ln;
 			if (!fl->bd.op)
 				fl->bd.op = new;
 			else
