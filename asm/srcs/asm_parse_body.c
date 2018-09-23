@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 18:57:24 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/23 20:41:58 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,11 @@ int			parse_body(t_asm_file *fl, int fd)
 					return (0);
 			}
 			else
-				parse_body_ext(fl, ln);
+				if(!parse_body_ext(fl, ln))
+				{
+					ft_printf("Line: %s\n", ln);
+					return (0);
+				}
 		}
 		ft_strdel(&ln);
 		fl->ln++;

@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 18:35:34 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 18:58:03 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/23 17:34:16 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	exit_parsing_ext(int er)
 
 int			exit_parsing(t_asm_file *fl, int er)
 {
+	ft_printf("Exit called with %d\n", er);
 	if ((fl->exit = 1) && er == E_OPEN)
 		ft_printf("ERROR: Couldn't open file...\n");
 	else if (er == E_HEAD_MISS)
@@ -86,7 +87,7 @@ int			exit_parsing(t_asm_file *fl, int er)
 static void	init_file(t_asm_file *fl)
 {
 	fl->tmp_ln = NULL;
-	fl->ln = 0;
+	fl->ln = 1;
 	fl->ch = 0;
 	fl->status = 0;
 	fl->exit = 0;

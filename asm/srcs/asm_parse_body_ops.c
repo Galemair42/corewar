@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 16:49:54 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/23 20:41:51 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	set_dir(t_asm_file *fl, char *str, t_param *param, unsigned type,
 			param->size = dir_size;
 			fl->status++;
 		}
-		else if (ft_strisonly(str + 1, "0123456789"))
+		else if (ft_strisonly(str + (str[1] == '-' ? 2 : 1), "0123456789"))
 		{
 			param->value = ft_atoi(str + 1);
 			param->size = dir_size;
@@ -49,7 +49,7 @@ static int	set_ind(t_asm_file *fl, char *str, t_param *param, unsigned type)
 			param->type = T_IND;
 			fl->status++;
 		}
-		else if (ft_strisonly(str, "0123456789"))
+		else if (ft_strisonly(str + (str[0] == '-' ? 1 : 0), "0123456789"))
 		{
 			param->value = ft_atoi(str);
 			param->size = 2;
