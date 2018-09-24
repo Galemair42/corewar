@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Created: 2018/03/29 09:45:28 by jabt              #+#    #+#             */
+/*   Updated: 2018/03/29 09:47:26 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
+# define BUFF_SIZE 248
 
+int			get_next_line(const int fd, char **line);
 
-int		main(int argc, char **argv)
-{
-//	t_list		*process;
-
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
-	{
-		return (42);
-	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
-
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
-}
+#endif

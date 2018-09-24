@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   cw_core_vm.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
+/*   Updated: 2018/09/24 16:26:55 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-
-
-int		main(int argc, char **argv)
+int			cw_fight(void)
 {
-//	t_list		*process;
+	t_list			*process;
+	unsigned int	ctd;
+	int				i;
+	size_t			k;
 
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
+	k = 0;
+	process = arena.process;
+	ctd = arena.cycle_to_die;
+	i = 0;
+	while (process)
 	{
-		return (42);
-	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
+		//iterer sur tous les proc, exec leurs instru etc...`
 
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
+		while (i < ctd)
+		{
+			;// iterer sur tous les process et exec leurs instru
+			i++;
+		}
+		k++;
+		if (k == MAX_CHECK /*|| nb_live >= NBR_LIVE */)
+		{
+			ctd -= CYCLE_DELTA;
+			k = 0;
+		}
+	}
 }

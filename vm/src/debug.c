@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/20 16:57:07 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/24 14:27:52 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,33 @@ void	print_all_champ(void)
 		champ = lst->content;
 		print_one_champ(champ);
 		lst = lst->next;
+	}
+}
+
+void	print_process(t_processus *process)
+{
+	printf("process id : %d\n", process->id);
+	printf("process PC : %d\n", process->pc);
+	printf("process carry : %u\n", process->carry);
+	printf("process id_player : %d\n", process->id_player);
+	printf("valeur de mes registres :\n");
+	for (int i = 0; i < REG_NUMBER; i++)
+	{
+		printf("REG[%d] : %u\n", i, process->reg[i]);
+	}
+}
+
+void	print_all_process(void)
+{
+	t_processus		*cur_process;
+	t_list			*process;
+
+	process = arena.process;
+	while (process)
+	{
+		cur_process = (t_processus *)process->content;
+		print_process(cur_process);
+		process = process->next;
+		printf("\n");
 	}
 }

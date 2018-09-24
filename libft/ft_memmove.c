@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Created: 2017/11/10 15:59:19 by jabt              #+#    #+#             */
+/*   Updated: 2017/11/21 12:02:08 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "libft.h"
 
-
-
-int		main(int argc, char **argv)
+void		*ft_memmove(void *dst, const void *src, size_t len)
 {
-//	t_list		*process;
+	char	*dstchar;
+	char	*srcchar;
+	size_t	i;
 
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
+	i = -1;
+	dstchar = (char *)dst;
+	srcchar = (char *)src;
+	if (srcchar > dstchar)
 	{
-		return (42);
+		while (++i < len)
+			dstchar[i] = srcchar[i];
 	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
-
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
+	else
+	{
+		while ((int)--len >= 0)
+			dstchar[len] = srcchar[len];
+	}
+	return (dst);
 }

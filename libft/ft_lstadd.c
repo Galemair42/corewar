@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Created: 2017/11/13 14:06:39 by jabt              #+#    #+#             */
+/*   Updated: 2018/04/27 11:11:41 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "libft.h"
 
-
-
-int		main(int argc, char **argv)
+void	ft_lstadd(t_list **alst, t_list *new)
 {
-//	t_list		*process;
-
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
-	{
-		return (42);
-	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
-
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
+	new->next = *alst;
+	*alst = new;
 }

@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Created: 2017/11/09 17:17:37 by jabt              #+#    #+#             */
+/*   Updated: 2017/11/21 12:10:58 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "libft.h"
 
-
-
-int		main(int argc, char **argv)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-//	t_list		*process;
+	size_t	dstlen;
+	size_t	srclen;
+	int		i;
+	size_t	j;
 
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
+	i = 0;
+	j = 0;
+	dstlen = ft_strlen(dst);
+	srclen = ft_strlen(src);
+	if (size > dstlen)
 	{
-		return (42);
+		while (dst[i])
+			i++;
+		while (j + 1 < (size - dstlen))
+		{
+			dst[i] = src[j];
+			i++;
+			j++;
+		}
+		dst[i] = '\0';
+		return (srclen + dstlen);
 	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
-
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
+	return (srclen + size);
 }

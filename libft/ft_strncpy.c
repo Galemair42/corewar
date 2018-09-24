@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Created: 2017/11/09 15:11:49 by jabt              #+#    #+#             */
+/*   Updated: 2017/12/01 15:29:10 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <string.h>
+#include "libft.h"
 
-
-
-int		main(int argc, char **argv)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-//	t_list		*process;
+	size_t	i;
 
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
+	i = 0;
+	while (src[i] && i < len)
 	{
-		return (42);
+		dst[i] = src[i];
+		i++;
 	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
-
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
+	while (i < len)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return (dst);
 }

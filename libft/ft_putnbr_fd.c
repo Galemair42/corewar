@@ -1,37 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Created: 2017/11/13 11:39:10 by jabt              #+#    #+#             */
+/*   Updated: 2017/11/21 12:38:05 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <unistd.h>
+#include "libft.h"
 
-
-
-int		main(int argc, char **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-//	t_list		*process;
+	char	c;
 
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
+	c = (n % 10) + 48;
+	if (n < 0)
 	{
-		return (42);
+		if (n == -2147483648)
+		{
+			ft_putnbr_fd(n / 10, fd);
+			write(fd, "8", 1);
+		}
+		else
+		{
+			write(fd, "-", 1);
+			ft_putnbr_fd(n * -1, fd);
+		}
 	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
-
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
+	if (n == 0)
+		write(fd, "0", 1);
+	if (n > 0 && n < 10)
+		write(fd, &c, 1);
+	if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		write(fd, &c, 1);
+	}
 }

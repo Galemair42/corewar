@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Created: 2017/11/13 13:34:00 by jabt              #+#    #+#             */
+/*   Updated: 2017/11/21 12:39:03 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <stdlib.h>
+#include "libft.h"
 
-
-
-int		main(int argc, char **argv)
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
-//	t_list		*process;
-
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
-	{
-		return (42);
-	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
-
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
+	del(alst[0]->content, alst[0]->content_size);
+	free(*alst);
+	*alst = NULL;
 }

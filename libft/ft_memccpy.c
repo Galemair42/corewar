@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Created: 2017/11/10 15:38:00 by jabt              #+#    #+#             */
+/*   Updated: 2017/11/21 11:29:06 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "libft.h"
 
-
-
-int		main(int argc, char **argv)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-//	t_list		*process;
+	char			*dstchar;
+	const char		*srcchar;
+	size_t			i;
+	unsigned char	carac;
 
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
+	carac = (unsigned char)c;
+	i = 0;
+	dstchar = (char *)dst;
+	srcchar = (const char *)src;
+	while (i < n)
 	{
-		return (42);
+		dstchar[i] = srcchar[i];
+		if ((unsigned char)srcchar[i] == carac)
+			return (&dst[i + 1]);
+		i++;
 	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
-
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
+	return (NULL);
 }
