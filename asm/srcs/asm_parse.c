@@ -6,35 +6,11 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 18:35:34 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/23 17:34:16 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/24 16:34:27 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-void		print_ops(t_op *op)
-{
-	t_op	*curr;
-
-	curr = op;
-	while (curr)
-	{
-		ft_printf("Size: %u\nLine: %u\nInfo: %s (%#x)\nParams:\n\n\tLabel[1]: %s\n\tType[1]: %u\n\tSize[1]: %u\n\tValue[1]: %u\n\n\tLabel[2]: %s\n\tType[2]: %u\n\tSize[2]: %u\n\tValue[2]: %u\n\n\tLabel[3]: %s\n\tType[3]: %u\n\tSize[3]: %u\n\tValue[3]: %u\n\n", curr->size, curr->line, curr->info.name, curr->info.opcode, curr->params[0].label, curr->params[0].type, curr->params[0].size, curr->params[0].value, curr->params[1].label, curr->params[1].type, curr->params[1].size, curr->params[1].value, curr->params[2].label, curr->params[2].type, curr->params[2].size, curr->params[2].value);
-		curr = curr->next;
-	}
-}
-
-void		print_labels(t_label *label)
-{
-	t_label	*curr;
-
-	curr = label;
-	while (curr)
-	{
-		ft_printf("Label: %s\nSize: %u\n\n", curr->s, curr->size);
-		curr = curr->next;
-	}
-}
 
 static int	exit_parsing_ext(int er)
 {
@@ -60,7 +36,6 @@ static int	exit_parsing_ext(int er)
 
 int			exit_parsing(t_asm_file *fl, int er)
 {
-	ft_printf("Exit called with %d\n", er);
 	if ((fl->exit = 1) && er == E_OPEN)
 		ft_printf("ERROR: Couldn't open file...\n");
 	else if (er == E_HEAD_MISS)
@@ -115,8 +90,6 @@ int			parse_file(char *file_name)
 		return (0);
 	if (!check_labels(&fl, &fl.bd.op, &fl.bd.label))
 		return (exit_parsing(&fl, E_BODY_LB_CALL));
-//	print_ops(fl.bd.op);
-//	print_labels(fl.bd.label);
 	create_binary(&fl, file_name);
 	close(fd);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/23 20:41:58 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/24 16:39:50 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char	**prepare_params(char *ln, int nb)
 {
-	char	*trimmed;
-	char	**params;
+	char			*trimmed;
+	char			**params;
 	unsigned int	i;
 	unsigned int	kill;
 
@@ -54,9 +54,8 @@ static int	parse_instruction(t_asm_file *fl, char *ln, t_op *op)
 	}
 	else
 	{
-		if (find_operation(fl, table[0], op)
-				&& get_params(fl, prepare_params(ln, 1),
-				ft_strcountc(ln, SEPAR_CHAR), op))
+		if (find_operation(fl, table[0], op) && get_params(fl,
+				prepare_params(ln, 1), ft_strcountc(ln, SEPAR_CHAR), op))
 			return (1);
 	}
 	return (0);
@@ -98,10 +97,9 @@ int			parse_body(t_asm_file *fl, int fd)
 	char	*tmp;
 
 	ln = NULL;
-	while (ft_gnl(fd, &ln) > 0)
+	while (!(fl->status = 0) && ft_gnl(fd, &ln) > 0)
 	{
 		fl->ch = 0;
-		fl->status = 0;
 		if (ln[0] && !ft_striswhiteuntil(ln, COMMENT_CHAR))
 		{
 			if ((tmp = prepare_label(fl, ln)))
@@ -110,11 +108,10 @@ int			parse_body(t_asm_file *fl, int fd)
 					return (0);
 			}
 			else
-				if(!parse_body_ext(fl, ln))
-				{
-					ft_printf("Line: %s\n", ln);
+			{
+				if (!parse_body_ext(fl, ln))
 					return (0);
-				}
+			}
 		}
 		ft_strdel(&ln);
 		fl->ln++;

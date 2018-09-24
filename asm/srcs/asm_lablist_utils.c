@@ -6,15 +6,15 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 15:43:17 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 17:20:20 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/24 16:35:34 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_label	*new_label(char	*label, unsigned int size)
+t_label	*new_label(char *label, unsigned size)
 {
-	t_label			*new;
+	t_label	*new;
 
 	if (!(new = (t_label *)malloc(sizeof(t_label))))
 		return (NULL);

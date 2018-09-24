@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:49:58 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 18:54:45 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/24 16:53:06 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ typedef char		t_arg_type;
 **	-------------------------------- STRUCTURES --------------------------------
 */
 
-typedef struct 		s_op_tab
+typedef struct		s_op_tab
 {
 	char			*name;
 	unsigned int	opcode;
@@ -111,7 +111,6 @@ typedef struct 		s_op_tab
 	unsigned int	dir_size;
 	unsigned int	carry;
 	unsigned int	ocp;
-
 }					t_op_tab;
 
 typedef struct		s_header

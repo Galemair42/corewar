@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 22:24:31 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 19:02:33 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/24 16:52:27 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ static int	parse_name(t_asm_file *fl, char *ln, int fd)
 					return (exit_parsing(fl, E_NAME_EXTRA));
 	}
 	else
+	{
 		if (!parse_name_multi_ln(fl, ln, fd))
 			return (0);
+	}
 	fl->status |= S_NAME;
 	return (1);
 }
@@ -159,8 +161,10 @@ static int	parse_comment(t_asm_file *fl, char *ln, int fd)
 					return (exit_parsing(fl, E_COMM_EXTRA));
 	}
 	else
+	{
 		if (!parse_comment_multi_ln(fl, ln, fd))
 			return (0);
+	}
 	fl->status |= S_COMM;
 	return (1);
 }
