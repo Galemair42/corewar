@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 18:35:34 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/24 16:34:27 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/25 16:40:57 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 static int	exit_parsing_ext(int er)
 {
 	if (er == E_BODY_BADOP)
-		ft_printf("Invalid instruction.\n");
+		ft_dprintf(2, "Invalid instruction.\n");
 	else if (er == E_BODY_PARAM)
-		ft_printf("Instruction parameters are invalid.\n");
+		ft_dprintf(2, "Instruction parameters are invalid.\n");
 	else if (er == E_BODY_LB_NAME)
-		ft_printf("Invalid label name.\n");
+		ft_dprintf(2, "Invalid label name.\n");
 	else if (er == E_BODY_LB_CALL)
-		ft_printf("Label given as parameter doesn't exist.\n");
+		ft_dprintf(2, "Label given as parameter doesn't exist.\n");
 	else if (er == E_NAME_LEN || er == E_COMM_LEN)
-		ft_printf("%s is too long...\n",
+		ft_dprintf(2, "%s is too long...\n",
 				er == E_NAME_LEN ? "name" : "comment");
 	else if (er == E_NAME_EXTRA || er == E_COMM_EXTRA)
-		ft_printf("%s has trailing characters after closing double "
+		ft_dprintf(2, "%s has trailing characters after closing double "
 				"quote...\n", er == E_NAME_EXTRA ? "name" : "comment");
 	else if (er == E_NAME_NOEND || er == E_COMM_NOEND)
-		ft_printf("%s doesn't have a closing quote...\n",
+		ft_dprintf(2, "%s doesn't have a closing quote...\n",
 				er == E_NAME_NOEND ? "name" : "comment");
 	return (0);
 }
@@ -37,21 +37,22 @@ static int	exit_parsing_ext(int er)
 int			exit_parsing(t_asm_file *fl, int er)
 {
 	if ((fl->exit = 1) && er == E_OPEN)
-		ft_printf("ERROR: Couldn't open file...\n");
+		ft_dprintf(2, "{RED}ERROR{EOC}: Couldn't open file...\n");
 	else if (er == E_HEAD_MISS)
-		ft_printf("ERROR: %s is missing...\n",
+		ft_dprintf(2, "{RED}ERROR{EOC}: %s is missing...\n",
 				fl->status & S_NAME ? "comment" : "name");
 	else if (er == E_MALLOC)
-		ft_printf("ERROR: Couldn't find enough memory to allocate...\n");
+		ft_dprintf(2, "{RED}ERROR{EOC}: Not enough memory to allocate...\n");
 	else if (er == E_CREATE)
-		ft_printf("ERROR: Couldn't create .cor file...\n");
+		ft_dprintf(2, "{RED}ERROR{EOC}: Couldn't create .cor file...\n");
 	else
 	{
-		ft_printf("ERROR [%03u:%03u]: ", fl->ln + 1, fl->ch);
+		ft_dprintf(2, "{RED}ERROR{EOC} [{YELLOW}%03u{EOC}:{YELLOW}%03u{EOC}]: ",
+				fl->ln + 1, fl->ch);
 		if (er == E_HEAD_CMD)
-			ft_printf("Invalid command...\n");
+			ft_dprintf(2, "Invalid command...\n");
 		else if (er == E_NAME_OPEN || er == E_COMM_OPEN)
-			ft_printf("%s command's argument isn't a string.\n",
+			ft_dprintf(2, "%s command's argument isn't a string.\n",
 					er == E_NAME_OPEN ? ".name" : ".comment");
 		else
 			exit_parsing_ext(er);

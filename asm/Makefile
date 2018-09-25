@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/09/20 18:55:03 by femaury          ###   ########.fr        #
+#    Updated: 2018/09/25 16:39:08 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INC_NAME = asm.h
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
-LIB = ../libft/libft.a ../libft/ft_printf/libftprintf.a
+LIB = ../libft/libft.a ../libft/ft_dprintf/libftdprintf.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I$(INC_PATH)
 

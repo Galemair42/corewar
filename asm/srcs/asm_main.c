@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 11:57:20 by femaury           #+#    #+#             */
-/*   Updated: 2018/07/26 21:15:35 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/25 16:40:19 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int			main(int ac, char **av)
 			if (ft_stratcmp(av[i], "s", '.'))
 				parse_file(av[i]);
 			else
-				ft_printf("ERROR: %s is not an asm file.\n", av[i]);
+				ft_dprintf(2, "{RED}ERROR{EOC}: %s is not an asm file.\n", av[i]);
 		}
 	else
-		ft_printf("usage: ./asm file_name.s\n"
-				"\tCan take multiple files.\n"
-				"\tAll files need a .s extension.\n");
+		ft_dprintf(2, "usage: ./asm file_name.s\n\n"
+				"   {YELLOW}->{EOC}   Can take multiple files.\n"
+				"   {YELLOW}->{EOC}   All files need a .s extension.\n");
 	return (0);
 }

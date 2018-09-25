@@ -6,14 +6,14 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/07/07 23:29:14 by femaury          ###   ########.fr        #
+#    Updated: 2018/09/25 16:37:27 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = libftdprintf.a
 LIBFT = ../libft.a
 SRC_PATH = srcs
-SRC_NAME = ft_printf.c ftp_parsing.c ftp_get_arg.c ftp_get_int.c \
+SRC_NAME = ft_dprintf.c ftp_parsing.c ftp_get_arg.c ftp_get_int.c \
 		   ftp_fill_buffer.c ftp_pad_buffer.c ftp_get_str.c ftp_imaxtoa_base.c \
 		   ftp_uimaxtoa_base.c ftp_get_wstr.c ftp_check_wstr.c ftp_colors.c
 LIB_SRC_PATH = ../srcs
