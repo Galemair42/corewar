@@ -6,11 +6,24 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/24 16:50:43 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/25 15:59:48 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+**		int		set_dir(t_asm_file *fl, char *str, t_op *op, unsigned i);
+**
+**	Parses a DIRECT parameter. Checks that the instruction can contain a DIR,
+**	that the param starts with DIRECT_CHAR. Then it checks whether it is
+**	followed by a label or a numeric value. For the former, it makes sure it
+**	is a valid label (**not in the sense that it exists, but that its name
+**	is valid**) and then adds to the t_param structure all relevant information.
+**	For the latter, it makes sure it is a valid numeric value ([-]N) and also
+**	adds to t_param relevant info. Adds +1 to status to indicate a valid param
+**	was parsed.
+*/
 
 static int	set_dir(t_asm_file *fl, char *str, t_op *op, unsigned i)
 {
@@ -36,6 +49,12 @@ static int	set_dir(t_asm_file *fl, char *str, t_op *op, unsigned i)
 	return (1);
 }
 
+/*
+**		int	set_ind(t_asm_file *fl, char *str, t_param *param, unsigned type);
+**
+**	Parses an INDIRECT parameter. Same as set_dir() above.
+*/
+
 static int	set_ind(t_asm_file *fl, char *str, t_param *param, unsigned type)
 {
 	if (type & T_IND)
@@ -60,6 +79,15 @@ static int	set_ind(t_asm_file *fl, char *str, t_param *param, unsigned type)
 	return (1);
 }
 
+/*
+**		int	set_reg(t_asm_file *fl, char *str, t_param *param, unsigned type);
+**
+**	Parses a REGISTER parameter. Checks that the instruction can contain a REG,
+**	that the param starts with a REG_CHAR and that the numeric value given is
+**	valid (<= REG_NUMBER). Adds all relevant information to t_param. Adds +1 to
+**	status to indicate a valid param was parsed.
+*/
+
 static int	set_reg(t_asm_file *fl, char *str, t_param *param, unsigned type)
 {
 	if ((type & T_REG) && str[0] == REG_CHAR)
@@ -75,6 +103,14 @@ static int	set_reg(t_asm_file *fl, char *str, t_param *param, unsigned type)
 	}
 	return (1);
 }
+
+/*
+**		int	set_params(t_asm_file *fl, char **params, t_op *op, unsigned nb);
+**
+**	Calls the proper parsing function for all params found in (char **)params.
+**	Checks that the right number of params, through fl->status, has been parsed.
+**	Then calculates the size of the instruction.
+*/
 
 static int	set_params(t_asm_file *fl, char **params, t_op *op, unsigned nb)
 {
@@ -96,6 +132,14 @@ static int	set_params(t_asm_file *fl, char **params, t_op *op, unsigned nb)
 		+ (op->info.ocp ? 2 : 1);
 	return (1);
 }
+
+/*
+**		int		get_params(t_asm_file *fl, char **params, int count, t_op *op);
+**
+**	Checks whether the instructions requires 1, 2 or 3 parameters and that
+**	there are enough parameters in (char **)params, then calls the appropriate
+**	functions to parse them.
+*/
 
 int			get_params(t_asm_file *fl, char **params, int count, t_op *op)
 {

@@ -6,11 +6,19 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 18:51:33 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/20 18:55:06 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/25 15:46:32 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+**		int		get_label(t_asm_file *fl, char *str);
+**
+**	Parses the label in front of an instruction. Makes sure it is properly
+**	written with LABEL_CHARS ending with a LABEL_CHAR and adds it to the
+**	label list at fl->bd.label.
+*/
 
 int		get_label(t_asm_file *fl, char *str)
 {
@@ -34,6 +42,14 @@ int		get_label(t_asm_file *fl, char *str)
 	else
 		return (exit_parsing(fl, E_BODY_LB_NAME));
 }
+
+/*
+**		int		find_operation(t_asm_file *fl, char *str, t_op *op);
+**
+**	Looks through the g_op_tab[17] containing all valid instructions to see
+**	if the one passed as parameter is one of them. Indicates in the t_op
+**	structure which instruction was found.
+*/
 
 int		find_operation(t_asm_file *fl, char *str, t_op *op)
 {
