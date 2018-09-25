@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 22:24:31 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/24 17:19:51 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/25 18:03:27 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,5 +201,5 @@ int			parse_header(t_asm_file *fl, int fd)
 			return (fl->exit ? 0 : 1);
 		fl->ln++;
 	}
-	return (1);
+	return (fl->status == (S_NAME | S_COMM) ? 1 : exit_parsing(fl, E_EMPTY));
 }

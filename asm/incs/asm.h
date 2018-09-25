@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:49:58 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/24 16:53:06 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/25 18:00:42 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,21 @@
 # define E_OPEN 				1
 # define E_CREATE				2
 # define E_MALLOC				3
-# define E_HEAD_MISS 			4
-# define E_HEAD_CMD 			5
-# define E_NAME_OPEN			6
-# define E_NAME_LEN				7
-# define E_NAME_EXTRA			8
-# define E_NAME_NOEND			9
-# define E_COMM_OPEN			10
-# define E_COMM_LEN				11
-# define E_COMM_EXTRA			12
-# define E_COMM_NOEND			13
-# define E_BODY_BADOP			14
-# define E_BODY_PARAM			15
-# define E_BODY_LB_NAME			16
-# define E_BODY_LB_CALL			17
+# define E_EMPTY				4
+# define E_HEAD_MISS 			5
+# define E_HEAD_CMD 			6
+# define E_NAME_OPEN			7
+# define E_NAME_LEN				8
+# define E_NAME_EXTRA			9
+# define E_NAME_NOEND			10
+# define E_COMM_OPEN			11
+# define E_COMM_LEN				12
+# define E_COMM_EXTRA			13
+# define E_COMM_NOEND			14
+# define E_BODY_BADOP			15
+# define E_BODY_PARAM			16
+# define E_BODY_LB_NAME			17
+# define E_BODY_LB_CALL			18
 
 # define S_NAME					(1 << 0)
 # define S_COMM					(1 << 1)

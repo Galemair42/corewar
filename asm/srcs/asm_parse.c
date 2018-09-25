@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 18:35:34 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/25 16:40:57 by femaury          ###   ########.fr       */
+/*   Updated: 2018/09/25 18:04:04 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int			exit_parsing(t_asm_file *fl, int er)
 		ft_dprintf(2, "{RED}ERROR{EOC}: Not enough memory to allocate...\n");
 	else if (er == E_CREATE)
 		ft_dprintf(2, "{RED}ERROR{EOC}: Couldn't create .cor file...\n");
+	else if (er == E_EMPTY)
+		ft_dprintf(2, "{RED}ERROR{EOC}: File is incomplete...\n");
 	else
 	{
 		ft_dprintf(2, "{RED}ERROR{EOC} [{YELLOW}%03u{EOC}:{YELLOW}%03u{EOC}]: ",
