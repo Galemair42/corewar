@@ -1,0 +1,8 @@
+une instruction contient ces differents trucs (je precise quand c'est obligatoire ou non ) :
+
+    - opcode d'instruction courante (sur un int a priori mais pas sur);
+    - octet de codage des param, definit sur 8 bit, chaque paire definit le param dun elem et le dernier est null; (pour certaine instruc aucun opcode ne doit etre spe)
+    - ensuite plusieur param max 3, un param peut etre : 
+        - Registre (REG_CODE), taille : REG_SIZE
+        - Dir (DIR_CODE) : utilise la vraie valeur donne, taille : DIR_SIZE
+        - IND (IBD_CODE) : ce comporte comme un pointeur et load, taille : IND_SIZE

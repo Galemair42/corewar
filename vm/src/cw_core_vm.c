@@ -12,7 +12,35 @@
 
 #include "corewar.h"
 
-int			cw_fight(void)
+static void		cw_init_funtab(void (**ptr)(t_processus *))
+{
+	ptr[0] = &cw_inst_live;
+}
+
+static void		cw_exec_cycle(void)
+{
+	t_list			*lst_process;
+	t_processus		*process;
+	static void (*ptr[16]) (t_processus *);
+
+	if (!*ptr)
+	{
+		cw_init_funtab(ptr);
+		(ptr[0])(arena.process->content);
+	}
+	printf("ici whesh tas fais de la merde");
+	exit(5);
+	lst_process = arena.process;
+	while (lst_process)
+	{
+		process = (t_processus *)lst_process->content;
+		//exec mon opcode
+
+		lst_process = lst_process->next;
+	}
+}
+
+int				cw_fight(void)
 {
 	t_list			*process;
 	unsigned int	ctd;
@@ -26,6 +54,9 @@ int			cw_fight(void)
 	while (process)
 	{
 		//iterer sur tous les proc, exec leurs instru etc...`
+		// fonction pour boucler sur tous les process
+
+		cw_exec_cycle();
 
 		while (i < ctd)
 		{
@@ -33,10 +64,11 @@ int			cw_fight(void)
 			i++;
 		}
 		k++;
-		if (k == MAX_CHECK /*|| nb_live >= NBR_LIVE */)
+		if (k == MAX_CHECKS /*|| nb_live >= NBR_LIVE */)
 		{
 			ctd -= CYCLE_DELTA;
 			k = 0;
 		}
 	}
+	return (1);
 }

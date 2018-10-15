@@ -26,12 +26,13 @@ int		main(int argc, char **argv)
 	cw_put_champion_in_memory();
 	if (!(arena.process = cw_init_process()))
 		return (42);
+	
+	//print_all_champ();
+//	print_all_process();
+
 //	process = arena.process;
+
 	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
 
 	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
 }

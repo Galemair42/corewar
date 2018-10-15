@@ -28,7 +28,7 @@ typedef struct		s_processus
 	unsigned int	nb_live;
 	unsigned int	carry;
 	unsigned int	reg[REG_NUMBER];
-	int				id_player;
+//	int				id_player;
 }					t_processus;
 
 typedef struct		s_champion

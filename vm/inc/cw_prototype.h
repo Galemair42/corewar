@@ -26,6 +26,7 @@ int			cw_parse_arg(char **argv, int argc);
 */
 
 void		cw_put_champion_in_memory(void);
+int			cw_update_champ_live(int id_champ);
 
 /*
 **		champion
@@ -43,6 +44,12 @@ int			cw_header_verif_null_byte(unsigned char *buf_file);
 */
 
 t_list		*cw_init_process(void);
+
+/*
+**	instruction
+*/
+
+void		cw_inst_live(t_processus *process);
 
 /*
 ** 		debug

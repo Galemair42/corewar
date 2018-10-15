@@ -41,3 +41,33 @@ int		cw_get_new_champ_id(void)
 	}
 	return (id);
 }
+
+
+/*
+**		INPUT
+**		take a number as input ans search in all the champions if it's a valid champ's id,
+**		if it is , then the nb_live of the champion is incremented else nothing
+*/
+
+int		cw_update_champ_live(int id_champ)
+{
+	t_list			*lst_champ = arena.champion;
+	t_champion 		*champ;
+
+	while (lst_champ)
+	{
+		champ = (t_champion *)lst_champ->content;
+		if (champ->id == id_champ)
+		{
+			champ->nb_live++;
+			printf("Player 1 (%s) is said to be alive\n", champ->name);
+			return (1);
+		}
+		lst_champ = lst_champ->next;
+	}
+	return (0);
+}
+
+/*
+**		return 0 if none champion are find with the id else 1
+*/

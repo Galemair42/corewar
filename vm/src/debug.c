@@ -63,7 +63,7 @@ void	print_process(t_processus *process)
 	printf("process id : %d\n", process->id);
 	printf("process PC : %d\n", process->pc);
 	printf("process carry : %u\n", process->carry);
-	printf("process id_player : %d\n", process->id_player);
+	//printf("process id_player : %d\n", process->id_player);
 	printf("valeur de mes registres :\n");
 	for (int i = 0; i < REG_NUMBER; i++)
 	{
