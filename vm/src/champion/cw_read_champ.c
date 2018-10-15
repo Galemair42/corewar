@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 17:39:18 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 12:53:36 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/25 14:36:19 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int					cw_read_champion(char *champ_name, int id)
 		free(buffer);
 		return (-1);
 	}
+	free(buffer);
 	close(fd);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 10:54:56 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:35:56 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/25 14:51:47 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			cw_add_new_champ(unsigned char *buffer,
 
 	if (!(champ = malloc(sizeof(t_champion))))
 		return (-1);
-	if (!(new_node = ft_lstnew((void *)champ, sizeof(t_champion))))
+	if (!(new_node = ft_lstnew(NULL, sizeof(t_champion))))
 	{
 		free(champ);
 		return (-1);

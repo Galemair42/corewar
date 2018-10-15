@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cw_main.c                                          :+:      :+:    :+:   */
+/*   cw_free_procedure.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/27 18:08:23 by jabt             ###   ########.fr       */
+/*   Created: 2018/09/25 14:10:17 by jabt              #+#    #+#             */
+/*   Updated: 2018/09/25 14:11:51 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-
-int		main(int argc, char **argv)
+void	cw_free_process(void *process, size_t size)
 {
-//	t_list		*process;
-
-	cw_init_processeur();
-	if (!cw_parse_arg(argv, argc))
-	{
-		return (42);
-	}
-	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
-		return (42);
-//	process = arena.process;
-	// procedure de creation de map visu
-	cw_manage_visu()
-	cw_fight();
-//	while (process)
-//	{
-//		
-//	}
-
-	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
+	free(process);
 }

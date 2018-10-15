@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:54:40 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/20 16:54:25 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/25 13:41:20 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ static int			cw_parse_flag(char **argv, int cur)
 	}
 	else if (ft_strequ(arg, "dump"))
 	{
-	//	arena.dump_limit = ft_atoi();// enfaite juste gerer ce parsing
-		printf("fais ton atoi bizarre\n");
-		exit(5);
+		printf("mec fais ton atoi bizarre\n");
+		arena.cycle_to_dump = ft_atoi(arg);
 	}
 	else if (ft_strequ(arg, "s"))
 	{

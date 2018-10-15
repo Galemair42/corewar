@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 16:07:53 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/27 12:54:36 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,17 @@ typedef struct		s_processeur
 	t_list	 	   		*champion;
 	t_list				*process;
 	size_t				nb_champ;
-	unsigned int 	   	cycle_to_die;
-	unsigned int 	   	max_check;
+//	unsigned int 	   	cycle_to_die;
+//	unsigned int 	   	max_check;
 	int			 	   	id_last_player_alive;
+	int					bool_dump;
 	unsigned int		max_cycle;
 	unsigned int		cur_cycle;
 	unsigned int		cycle_to_dump;
+	unsigned int		cycle_to_stop;
 }					t_processeur;
 
+/*
+ * 		bool_dump
+ *		1 = 	
 #endif

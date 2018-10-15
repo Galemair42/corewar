@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 16:26:55 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/25 14:26:59 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ int			cw_header_verif_null_byte(unsigned char *buf_file);
 */
 
 t_list		*cw_init_process(void);
+void		cw_roam_of_the_bat(void);
+
+/*
+** 		free procedure
+*/
+
+void		cw_free_process(void *process, size_t size);
 
 /*
 ** 		debug

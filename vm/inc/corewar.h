@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:41:57 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/19 17:16:16 by jabt             ###   ########.fr       */
+/*   Updated: 2018/09/26 10:38:56 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include	"cw_struct.h"
 # include	"cw_op.h"
 # include	"cw_prototype.h"
+# include 	"ncurses.h"
 
 # define HEADER_SIZE	16 + PROG_NAME_LENGTH + COMMENT_LENGTH
 
