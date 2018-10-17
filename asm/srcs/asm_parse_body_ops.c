@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/25 15:59:48 by femaury          ###   ########.fr       */
+/*   Updated: 2018/10/17 17:21:32 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int	set_reg(t_asm_file *fl, char *str, t_param *param, unsigned type)
 	if ((type & T_REG) && str[0] == REG_CHAR)
 	{
 		if (ft_strisonly(str + 1, "0123456789")
-				&& ft_atoi(str + 1) <= REG_NUMBER)
+				&& ft_atoi(str + 1) <= REG_NUMBER && ft_atoi(str + 1) > 0)
 		{
 			param->type = T_REG;
 			param->value = ft_atoi(str + 1);
