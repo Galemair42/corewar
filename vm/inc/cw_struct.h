@@ -24,7 +24,7 @@ typedef struct		s_args
 typedef struct		s_processus
 {
 	int				id;
-	int				pc;
+	unsigned int	pc;
 	unsigned int	nb_live;
 	unsigned int	carry;
 	unsigned int	reg[REG_NUMBER];

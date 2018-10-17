@@ -15,6 +15,7 @@
 static void		cw_init_funtab(void (**ptr)(t_processus *))
 {
 	ptr[0] = &cw_inst_live;
+	ptr[11] = &cw_inst_fork;
 }
 
 static void		cw_exec_cycle(void)
@@ -26,7 +27,7 @@ static void		cw_exec_cycle(void)
 	if (!*ptr)
 	{
 		cw_init_funtab(ptr);
-		(ptr[0])(arena.process->content);
+		(ptr[11])(arena.process->content);
 	}
 	printf("ici whesh tas fais de la merde");
 	exit(5);
