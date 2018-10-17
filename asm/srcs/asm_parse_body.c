@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/25 15:41:25 by femaury          ###   ########.fr       */
+/*   Updated: 2018/10/17 16:10:38 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ static char	*prepare_label(t_asm_file *fl, char *ln)
 		fl->ch++;
 	while (ft_strhasc(LABEL_CHARS, ln[fl->ch]))
 		fl->ch++;
-	if (ln[fl->ch] == LABEL_CHAR && ft_striswhiteuntil(ln + fl->ch + 1, '\0'))
+	if (ln[fl->ch] == LABEL_CHAR
+			&& ft_striswhiteuntil(ln + fl->ch + 1, COMMENT_CHAR))
 	{
+		ft_strclr(ln + fl->ch + 1);
 		fl->ch = 0;
 		return (ft_strtrim(ln));
 	}
