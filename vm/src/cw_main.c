@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 15:43:08 by jabt             ###   ########.fr       */
+/*   Updated: 2018/10/18 18:40:24 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int		main(int argc, char **argv)
 	}
 	cw_put_champion_in_memory();
 	if (!(arena.process = cw_init_process()))
+	{
+		printf("sa\n");
 		return (42);
+	}
 	
 	//print_all_champ();
 //	print_all_process();

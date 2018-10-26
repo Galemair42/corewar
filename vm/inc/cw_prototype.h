@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 16:26:55 by jabt             ###   ########.fr       */
+/*   Updated: 2018/10/26 17:42:20 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,10 @@ void		print_one_champ(t_champion *champion);
 void		print_all_champ(void);
 void		print_all_process(void);
 void		print_process(t_processus *process);
+
+/*
+**		cw_instructions_utils.c
+*/
+unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc);
 
 #endif

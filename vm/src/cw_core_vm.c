@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 16:26:55 by jabt             ###   ########.fr       */
+/*   Updated: 2018/10/26 14:20:13 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,20 @@
 static void		cw_init_funtab(void (**ptr)(t_processus *))
 {
 	ptr[0] = &cw_inst_live;
+//	ptr[1] = 
+//	ptr[2] = 
+//	ptr[3] = 
+//	ptr[4] = 
+//	ptr[5] = 
+//	ptr[6] = 
+//	ptr[8] = 
+//	ptr[9] = 
+//	ptr[10] = 
 	ptr[11] = &cw_inst_fork;
+//	ptr[12] = 
+//	ptr[13] = 
+//	ptr[14] = 
+//	ptr[15] = 
 }
 
 static void		cw_exec_cycle(void)
@@ -29,13 +42,15 @@ static void		cw_exec_cycle(void)
 		cw_init_funtab(ptr);
 		(ptr[11])(arena.process->content);
 	}
-	printf("ici whesh tas fais de la merde");
+	printf("ici whesh tas fait de la merde");
 	exit(5);
 	lst_process = arena.process;
 	while (lst_process)
 	{
 		process = (t_processus *)lst_process->content;
 		//exec mon opcode
+		// si opcode == 0, -> lire
+		// sinon -> exec
 
 		lst_process = lst_process->next;
 	}
