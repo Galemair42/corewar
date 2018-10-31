@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/09/24 16:07:53 by jabt             ###   ########.fr       */
+/*   Updated: 2018/10/31 12:04:00 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ typedef struct		s_args
 
 typedef struct		s_processus
 {
-	int						id;
-	unsigned int			pc;
-	unsigned int			nb_live;
-	short unsigned int		carry;
-	unsigned int			param1;
-	unsigned int			param2;
-	unsigned int			param3;
-	unsigned int			nb_cycle;
-	short unsigned int		opcode;
-	unsigned int			reg[REG_NUMBER];
+	int				opcode;
+	int				id;
+	unsigned int	ocp;
+	unsigned int	pc;
+	unsigned int	nb_live;
+	unsigned int	carry;
+	unsigned int	reg[REG_NUMBER];
+	int				params[4];
+//	int				id_player;
 }					t_processus;
 
 typedef struct		s_champion
