@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/10/31 12:58:24 by galemair         ###   ########.fr       */
+/*   Updated: 2018/10/31 13:05:36 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@
 **		Return -1 when an error occurs
 **		!! STILL HAVE TO MANAGE DIRECT PARAMETERS !! CARE IF IT STANDS FOR AN ADDRESS OR AN INTEGER	**
 */
+unsigned int		get_value(unsigned char cmp)
+{
+	unsigned char hexa[17];
+	unsigned int i;
+
+	i = 0;
+	hexa = "0123456789abcdef";
+	while (hexa[i] && hexa[i] != cmp)
+		i++;
+	return(i);
+}
+
 unsigned int		get_size(unsigned int ocp)
 {
 	if (ocp == 1)
@@ -36,7 +48,7 @@ unsigned int		get_size(unsigned int ocp)
 
 int		get_params(unsigned int ocp, unsigned int *current_pc)
 {
-	int	return_value;
+	int	value;
 	int i;
 
 	i = 0;
@@ -51,7 +63,7 @@ int		get_params(unsigned int ocp, unsigned int *current_pc)
 	}
 	while (i < get_size(ocp))
 	{
-		value += calculate_power(16, (get_size(ocp) - 1)) * memory[0xFFF & (i + *current_pc)];
+		value += calculate_power(16, (get_size(ocp) - i - 1)) * get_value(memory[0xFFF & (i + *current_pc)]);
 		i++;
 	}
 	*current_pc += i;
