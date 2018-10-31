@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/26 17:42:03 by galemair         ###   ########.fr       */
+/*   Updated: 2018/10/31 12:04:00 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ typedef struct		s_processus
 	unsigned int	nb_live;
 	unsigned int	carry;
 	unsigned int	reg[REG_NUMBER];
-	int				param1;
-	int				param2;
-	int				param3;
+	int				params[4];
 //	int				id_player;
 }					t_processus;
 

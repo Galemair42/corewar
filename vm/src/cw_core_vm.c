@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/26 14:20:13 by galemair         ###   ########.fr       */
+/*   Updated: 2018/10/31 12:02:12 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,19 @@ int				cw_fight(void)
 		//iterer sur tous les proc, exec leurs instru etc...`
 		// fonction pour boucler sur tous les process
 
-		cw_exec_cycle();
+		cw_exec_cycle(); // execution d'un cycle
 
-		while (i < ctd)
+	/*	while (i < ctd)
+		{*/
+			// iterer sur tous les process et exec leurs instru
+		i++;
+		if (i < ctd)
 		{
-			;// iterer sur tous les process et exec leurs instru
-			i++;
+			; // verif des process
+			i = 0;
 		}
+
+		
 		k++;
 		if (k == MAX_CHECKS /*|| nb_live >= NBR_LIVE */)
 		{

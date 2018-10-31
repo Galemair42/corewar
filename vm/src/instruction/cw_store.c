@@ -6,15 +6,13 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 17:08:06 by galemair          #+#    #+#             */
-/*   Updated: 2018/10/25 11:44:03 by galemair         ###   ########.fr       */
+/*   Updated: 2018/10/30 19:16:30 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-//void	cw_store(t_processus *process)
-//{
-//	int params[3];
-//	
-//	nb_args = get_params(params);
-//}
+void	cw_store(t_processus *process)
+{
+	get_params(params);
+}

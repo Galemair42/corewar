@@ -10,7 +10,7 @@ void    cw_inst_fork(t_processus *process)
 
     memory = arena.memory;
     pc = process->pc;
-	//pc = apply_IDX_MOD(current_pc, 0xFFF & (current_pc + jump)); //Correct way to calculate new PC
+	pc = apply_IDX_MOD(current_pc, 0xFFF & (current_pc + jump)); //Correct way to calculate new PC
 	printf("%d\n", pc);
 	printf("%u\n", apply_IDX_MOD(0, 3000));
 	exit (0);
