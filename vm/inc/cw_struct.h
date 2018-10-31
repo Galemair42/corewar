@@ -23,12 +23,16 @@ typedef struct		s_args
 
 typedef struct		s_processus
 {
-	int				id;
-	unsigned int	pc;
-	unsigned int	nb_live;
-	unsigned int	carry;
-	unsigned int	reg[REG_NUMBER];
-//	int				id_player;
+	int						id;
+	unsigned int			pc;
+	unsigned int			nb_live;
+	short unsigned int		carry;
+	unsigned int			param1;
+	unsigned int			param2;
+	unsigned int			param3;
+	unsigned int			nb_cycle;
+	short unsigned int		opcode;
+	unsigned int			reg[REG_NUMBER];
 }					t_processus;
 
 typedef struct		s_champion
@@ -53,5 +57,14 @@ typedef struct		s_processeur
 	unsigned int		cur_cycle;
 	unsigned int		cycle_to_dump;
 }					t_processeur;
+
+typedef struct		s_cw_op_tab
+{
+	short unsigned int	nb_instru;
+	unsigned int		param;
+	short unsigned int	opcode;
+	short unsigned int	nb_cycle;
+	short unsigned int	bool_ocp;
+}					t_cw_op_tab;
 
 #endif

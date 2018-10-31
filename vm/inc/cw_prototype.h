@@ -51,6 +51,7 @@ t_list		*cw_init_process(void);
 
 void		cw_inst_live(t_processus *process);
 void		cw_inst_fork(t_processus *process);
+void		cw_read_instru(void);
 
 /*
 ** 		debug

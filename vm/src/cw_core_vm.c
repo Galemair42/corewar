@@ -12,31 +12,24 @@
 
 #include "corewar.h"
 
-static void		cw_init_funtab(void (**ptr)(t_processus *))
-{
-	ptr[0] = &cw_inst_live;
-	ptr[11] = &cw_inst_fork;
-}
 
 static void		cw_exec_cycle(void)
 {
 	t_list			*lst_process;
 	t_processus		*process;
-	static void (*ptr[16]) (t_processus *);
 
-	if (!*ptr)
-	{
-		cw_init_funtab(ptr);
-		(ptr[11])(arena.process->content);
-	}
-	printf("ici whesh tas fais de la merde");
-	exit(5);
 	lst_process = arena.process;
 	while (lst_process)
 	{
 		process = (t_processus *)lst_process->content;
-		//exec mon opcode
-
+		if (process->opcode != 0 && process->nb_live == 0)
+		{
+			cw_exec_process(process);// japelle la fonction d'execution qui correspond
+		}
+		else if (process->opcode == 0)
+			cw_read_instruction(process);// fonction pour lire un param
+		else
+			process->nb_live--;
 		lst_process = lst_process->next;
 	}
 }
@@ -45,30 +38,19 @@ int				cw_fight(void)
 {
 	t_list			*process;
 	unsigned int	ctd;
-	int				i;
-	size_t			k;
+	size_t			i;
 
-	k = 0;
 	process = arena.process;
 	ctd = arena.cycle_to_die;
 	i = 0;
 	while (process)
 	{
-		//iterer sur tous les proc, exec leurs instru etc...`
-		// fonction pour boucler sur tous les process
-
 		cw_exec_cycle();
-
-		while (i < ctd)
-		{
-			;// iterer sur tous les process et exec leurs instru
-			i++;
-		}
-		k++;
-		if (k == MAX_CHECKS /*|| nb_live >= NBR_LIVE */)
+		i++;
+		if (i == MAX_CHECKS)
 		{
 			ctd -= CYCLE_DELTA;
-			k = 0;
+			i = 0;
 		}
 	}
 	return (1);

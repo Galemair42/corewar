@@ -2,7 +2,7 @@
 
 void    cw_inst_fork(t_processus *process)
 {
-    int             location;
+   /* int             location;
     unsigned int    pc;
     unsigned char   *memory;
 
@@ -17,5 +17,5 @@ void    cw_inst_fork(t_processus *process)
     pc++;
     pc &= ~((~0) << 12));
 //
-    location = memory[pc];
+    location = memory[pc];*/
 }
