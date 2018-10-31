@@ -21,12 +21,13 @@ void		cw_init_processeur(void)
 {
 	ft_bzero(arena.memory, MEM_SIZE);
 	arena.champion = NULL;
-	arena.process = NULL;
+	ft_bzero(arena.process, sizeof(t_list *) * CYCLE_TO_DIE);
+	arena.awaiting_process = NULL;
+	arena.nb_champ = 0;
 	arena.cycle_to_die = CYCLE_TO_DIE;	
 	arena.max_check = MAX_CHECKS;
 	arena.id_last_player_alive = 0;
 	arena.max_cycle = ~0;
 	arena.cur_cycle = 0;
 	arena.cycle_to_dump = ~0;
-	arena.nb_champ = 0;
 }

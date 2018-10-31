@@ -22,13 +22,12 @@ static t_processus	*cw_init_process_champ(t_champion *champ, int id)
 	new_process->pc = (id - 1) * (MEM_SIZE / arena.nb_champ);
 	new_process->nb_live = 0;
 	new_process->carry = 0;
-	new_process->param1 = 0;
-	new_process->param2 = 0;
-	new_process->param3 = 0;
 	new_process->nb_cycle = 0;
 	new_process->opcode = 0;
 	ft_memset(new_process->reg, 0, sizeof(unsigned int) * REG_NUMBER);
 	new_process->reg[1] = champ->id;
+	ft_memset(new_process->params, 0, sizeof(int) * 4);
+
 	return (new_process);
 }
 

@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "corewar.h"
-//#include <stdlib.h>
+#include "corewar.h"
 
-#include <stdio.h>
 /*
 **		Receive the OCP and the current PC
 **		First, it will isolate the 2 lightest bits to determine the size of the
@@ -69,11 +67,13 @@ int		get_params(unsigned int ocp, unsigned int *current_pc)
 	*current_pc += i;
 	return (value);
 }
+
 /*
 **		If an instruction has an OCP, this function is called
 **		It will read the params in the virtual memory and stock them in the variable 
 **		params of the structure t_processus
 */
+
 int		get_params(t_processus *process)
 {
 	unsigned int ocp;

@@ -30,8 +30,7 @@ typedef struct		s_processus
 	unsigned int	nb_live;
 	unsigned int	carry;
 	unsigned int	reg[REG_NUMBER];
-	int				params[4];
-//	int				id_player;
+	int				params[3];
 }					t_processus;
 
 typedef struct		s_champion
@@ -47,7 +46,8 @@ typedef struct		s_processeur
 {
 	unsigned char		memory[MEM_SIZE];
 	t_list	 	   		*champion;
-	t_list				*process;
+	t_list				*process[CYCLE_TO_DIE];
+	t_list				*awaiting_process;
 	size_t				nb_champ;
 	unsigned int 	   	cycle_to_die;
 	unsigned int 	   	max_check;

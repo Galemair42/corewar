@@ -12,9 +12,7 @@
 
 #include "corewar.h"
 
-
-
-int		main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 //	t_list		*process;
 
