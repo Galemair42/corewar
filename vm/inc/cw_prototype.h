@@ -50,7 +50,22 @@ t_list		*cw_init_process(void);
 */
 
 void		cw_inst_live(t_processus *process);
+void		cw_inst_ld(t_processus *process);
+void		cw_inst_st(t_processus *process);
+void		cw_inst_add(t_processus *process);
+void		cw_inst_sub(t_processus *process);
+void		cw_inst_and(t_processus *process);
+void		cw_inst_or(t_processus *process);
+void		cw_inst_xor(t_processus *process);
+void		cw_inst_zjmp(t_processus *process);
+void		cw_inst_ldi(t_processus *process);
+void		cw_inst_sti(t_processus *process);
 void		cw_inst_fork(t_processus *process);
+void		cw_inst_lld(t_processus *process);
+void		cw_inst_lldi(t_processus *process);
+void		cw_inst_lfork(t_processus *process);
+void		cw_inst_aff(t_processus *process);
+
 void		cw_read_instru(void);
 
 /*

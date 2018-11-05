@@ -23,6 +23,7 @@
 # include	"cw_prototype.h"
 
 # define HEADER_SIZE	16 + PROG_NAME_LENGTH + COMMENT_LENGTH
+# define MEM_MASK(x) x & 0xFFF
 
 /*
 **		global var

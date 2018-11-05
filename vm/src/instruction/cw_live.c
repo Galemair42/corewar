@@ -19,6 +19,11 @@ void    cw_inst_live(t_processus *process)
     int             id_champ;
     unsigned char   *memory;
 
+    if ((ret = get_params(process)) == -1)
+    {
+        cw_reset_process();
+        return ;
+    }
     memory = arena.memory;
     process->nb_live++;
     id_champ = memory[(process->pc) +1] << 24;
@@ -26,7 +31,7 @@ void    cw_inst_live(t_processus *process)
     id_champ += memory[(process->pc + 3)] << 8;
     id_champ += memory[process->pc + 4];
     cw_update_champ_live(id_champ);
-    process->pc += 5;
+    process->pc = (process->pc + ret) & 0xFFF; // c'est ok ca ?
 }
 
 // augmenter le nb_live du proc current

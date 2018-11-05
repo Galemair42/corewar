@@ -25,5 +25,6 @@ void    cw_inst_fork(t_processus *process)
 	pc = apply_IDX_MOD(current_pc, 0xFFF & (current_pc + jump)); //Correct way to calculate new PC
 	printf("%d\n", pc);
 	printf("%u\n", apply_IDX_MOD(0, 3000));
+	printf("le fork n'est pas fait, go le faire");
 	exit (0);
 }
