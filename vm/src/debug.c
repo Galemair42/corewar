@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/06 10:06:35 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/06 17:43:48 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	print_buffer_in_hexa(unsigned char *buffer, size_t size)
 	size_t	j;
 
 	i = 0;
+	printf("sa\n");
 	while (i < size)
 	{
 		j = 0;
@@ -39,8 +40,7 @@ void	print_one_champ(t_champion *champ)
 	printf("comment : %s\n", champ->header.comment);
 	printf("prog_size : %u\n", champ->header.prog_size);
 	printf("id : %d\n", champ->id);
-	printf("ces instrus :\n");
-	print_buffer_in_hexa(champ->instruction, CHAMP_MAX_SIZE);
+//	print_buffer_in_hexa(champ->instruction, CHAMP_MAX_SIZE);
 	printf("\n\n");
 }
 

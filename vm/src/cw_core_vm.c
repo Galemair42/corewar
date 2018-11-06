@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/06 11:10:40 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/06 18:08:41 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 10:15:56 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -57,7 +57,7 @@ static void		cw_exec_instructions(int index)
 	{
 		(*ptr[process->opcode - 1])(process);
 		process = process->next;
-		ft_lstappend(arena.process, ft_lstnew(process, sizeof(process)));
+		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(process)));
 	}
 }
 
@@ -68,24 +68,30 @@ void		cw_read_processus_opc(int index, int ctd)
 	unsigned int	opc_tmp;
 
 	lst_process = arena.process;
-	while (lst_process->content)
+	while (lst_process)
 	{
 		process = (t_processus *)lst_process->content;
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
+		//printf("opc = %u\n", opc_tmp);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
 			if (op_tab[opc_tmp].cycle <= (ctd - index))
-				add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index), opc_tmp); // sinon le processus est kill
+			{
+				printf("salut a tous\n");
+			//	add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index), opc_tmp); // sinon le processus est kill
+			}
 		}
 		else
 		{
 			process = (t_processus *)lst_process->content;
 			process->pc++;
-			ft_lstappend(lst_process, ft_lstnew(process, sizeof(process)));
+			ft_lstappend(&lst_process, ft_lstnew(process, sizeof(process)));
 		}
 		lst_process = lst_process->next;
 	}
-	ft_lstappend(lst_process, ft_lstnew("delimiter", 0));
+	ft_lstappend(&lst_process, ft_lstnew("delimiter", sizeof(char) * 10));
+	arena.process = lst_process;
+	print_all_process();
 	cw_clean_lst();
 }
 
@@ -100,12 +106,13 @@ int				cw_fight(void)
 	i = 0;
 	while (1)
 	{
-		cw_read_processus_opc(i, 1); // execution d'un cycle
+		cw_read_processus_opc(i, ctd); // execution d'un cycle
+		exit (0);
 		cw_exec_instructions(i);
 		i++;
 		if (i >= ctd)
 		{
-			;			
+			;
 		}
 	}
 	return (1);

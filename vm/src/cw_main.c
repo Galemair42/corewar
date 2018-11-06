@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/30 19:33:00 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/06 17:44:12 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,17 @@ int				main(int argc, char **argv)
 
 	cw_init_processeur();
 	if (!cw_parse_arg(argv, argc))
-	{
 		return (42);
-	}
 	cw_put_champion_in_memory();
-
-
-	/*if (!(arena.process = cw_init_process()))
+	//print_buffer_in_hexa(arena.memory, 4096);
+	if (!(arena.process = cw_init_process()))
 	{
 		printf("sa\n");
 		return (42);
-	}*/
-
-	printf("go implementer le init_porcess bande de boloss comment vous voulez que je marche sinon ??\n\n");
+	}
 	
-	//print_all_champ();
-//	print_all_process();
+//	print_all_champ();
+	//print_all_process();
 
 //	process = arena.process;
 
