@@ -92,5 +92,6 @@ unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc);
 
 void			cw_put_four_octet(unsigned int index, unsigned int four_octet);
 unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length);
+unsigned int	get_size(unsigned int ocp);
 
 #endif
