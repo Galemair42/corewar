@@ -17,12 +17,11 @@
 void    cw_inst_live(t_processus *process)
 {
     int             id_champ;
-    int             ret;
     unsigned char   *memory;
 
     if ((ret = get_params(process)) == -1)
     {
-        cw_reset_process(process);
+        cw_reset_process();
         return ;
     }
     memory = arena.memory;
@@ -33,5 +32,9 @@ void    cw_inst_live(t_processus *process)
     id_champ += memory[process->pc + 4];
     cw_update_champ_live(id_champ);
     process->pc = (process->pc + ret) & 0xFFF; // c'est ok ca ?
-    cw_reset_process(process);
 }
+
+// augmenter le nb_live du proc current
+// augmenter le nb_live du champ present a op + 1 si ca correspond a un champ
+// qui existe
+// et changer le last champ qui live

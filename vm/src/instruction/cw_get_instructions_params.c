@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
 /*   Updated: 2018/11/06 11:26:45 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +54,26 @@ unsigned int		get_size(unsigned int ocp)
 	return (0);
 }
 
+static	int		get_params1(unsigned int ocp, unsigned int *current_pc)
+{
+	int	value;
+	int i;
+
+	i = 0;
+	value = 0;
+	printf("before %u\n", ocp);	
+	ocp = ocp >> 30;
+	printf("after %u\n", ocp);
+	if (ocp == 0)
+	{
+		printf("Parameters is non existant, how do we handle it ?\n");
+		exit(0);
+	}
+	value = calculate_value_on_ram(*current_pc, get_size(ocp));
+	*current_pc += get_size(ocp);
+	return (value);
+}
+
 /*
 **		If an instruction has an OCP, this function is called
 **		It will read the params in the virtual memory and stock them in the variable 
@@ -70,10 +91,10 @@ int		get_params(t_processus *process)
 	ocp = cw_calculate_value_on_ram(current_pc, 2);
 	if (ocp > 0xFC || process.opc > 16)
 		return (-1);
-	ocp = opc << 24;//Met le bit interessant tout a gauche
-	while (i < op_tab[process->opc - 1].nb_args)
+	ocp = ocp << 24;//Met le bit interessant tout a gauche
+	while (i < op_tab[process->opcode - 1].nb_args)
 	{
-		tab[i] = get_params1(ocp, &current_pc);
+		process->params[i] = get_params1(ocp, &current_pc);
 		i++;
 		ocp = ocp << 2;
 	}

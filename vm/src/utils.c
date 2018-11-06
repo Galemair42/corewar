@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 17:51:59 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/05 16:34:27 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/06 11:45:19 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 unsigned int		cw_get_value(unsigned char cmp)
 {
-	unsigned char hexa[17];
+	char *hexa="0123456789abcdef";
 	unsigned int i;
 
 	i = 0;
-	hexa = "0123456789abcdef";
+	
 	while (hexa[i] && hexa[i] != cmp)
 		i++;
 	return(i);

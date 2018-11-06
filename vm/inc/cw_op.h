@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:31:34 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/05 14:11:42 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/06 10:49:47 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct		header_s
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
 typedef struct	s_op
 {
 	char		*name;
