@@ -35,7 +35,8 @@ struct		s_processus
 	int				params[4];
 	t_processus		*next;
 //	int				id_player;
-}
+};
+
 typedef struct		s_champion
 {
 	char				*name;

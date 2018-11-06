@@ -19,7 +19,7 @@
 
 void		cw_init_processeur(void);
 int			cw_parse_arg(char **argv, int argc);
-	int			cw_fight(void);
+int			cw_fight(void);
 
 /*
 ** 		memory's arena
@@ -44,6 +44,7 @@ int			cw_header_verif_null_byte(unsigned char *buf_file);
 */
 
 t_list		*cw_init_process(void);
+void		cw_reset_process(t_processus *process);
 
 /*
 **	instruction
@@ -67,6 +68,7 @@ void		cw_inst_lfork(t_processus *process);
 void		cw_inst_aff(t_processus *process);
 
 void		cw_read_instru(void);
+int			get_params(t_processus *process);
 
 /*
 ** 		debug
@@ -81,6 +83,14 @@ void		print_process(t_processus *process);
 /*
 **		cw_instructions_utils.c
 */
+
 unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc);
+
+/*
+ *		utils 
+*/
+
+void			cw_put_four_octet(unsigned int index, unsigned int four_octet);
+unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length);
 
 #endif

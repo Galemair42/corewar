@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-unsigned int		get_value(unsigned char cmp)
+unsigned int		cw_get_value(unsigned char cmp)
 {
 	unsigned char hexa[17];
 	unsigned int i;
@@ -24,7 +24,7 @@ unsigned int		get_value(unsigned char cmp)
 	return(i);
 }
 
-int					calculate_power(int number, int power)
+int					cw_calculate_power(int number, int power)
 {
 	int i;
 	int return_value;
@@ -40,7 +40,7 @@ int					calculate_power(int number, int power)
 }
 
 
-unsigned int	calculate_value_on_ram(unsigned int starting_pc, unsigned int length)
+unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length)
 {
 	int i;
 	unsigned int value;
@@ -49,7 +49,7 @@ unsigned int	calculate_value_on_ram(unsigned int starting_pc, unsigned int lengt
 	i = 0;
 	while (i < length)
 	{
-		value += calculate_power(16, length - i - 1) * get_value(arena.memory[0xFFF & (i + starting_pc)]);
+		value += cw_calculate_power(16, length - i - 1) * cw_get_value(arena.memory[0xFFF & (i + starting_pc)]);
 		i++;
 	}
 	return (value);	

@@ -6,11 +6,31 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/05 13:17:25 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/06 11:26:45 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+static int		get_params1(unsigned int ocp, unsigned int *current_pc)
+{
+	int	value;
+	int i;
+
+	i = 0;
+	value = 0;
+	printf("before %u\n", ocp);	
+	ocp = ocp >> 30;
+	printf("after %u\n", ocp);
+	if (ocp == 0)
+	{
+		printf("Parameters is non existant, how do we handle it ?\n");
+		exit(0);
+	}
+	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp));
+	*current_pc += get_size(ocp);
+	return (value);
+}
 
 /*
 **		Receive the OCP and the current PC
@@ -33,26 +53,6 @@ unsigned int		get_size(unsigned int ocp)
 	return (0);
 }
 
-int		get_params1(unsigned int ocp, unsigned int *current_pc)
-{
-	int	value;
-	int i;
-
-	i = 0;
-	value = 0;
-	printf("before %u\n", ocp);	
-	ocp = ocp >> 30;
-	printf("after %u\n", ocp);
-	if (ocp == 0)
-	{
-		printf("Parameters is non existant, how do we handle it ?\n");
-		exit(0);
-	}
-	value = calculate_value_on_ram(*current_pc, get_size(ocp));
-	*current_pc += get_size(ocp);
-	return (value);
-}
-
 /*
 **		If an instruction has an OCP, this function is called
 **		It will read the params in the virtual memory and stock them in the variable 
@@ -67,7 +67,7 @@ int		get_params(t_processus *process)
 
 	i = 0;
 	current_pc = 0xFFF & (process->pc + 2);
-	ocp = calculate_value_on_ram(current_pc, 2);
+	ocp = cw_calculate_value_on_ram(current_pc, 2);
 	if (ocp > 0xFC || process.opc > 16)
 		return (-1);
 	ocp = opc << 24;//Met le bit interessant tout a gauche
@@ -79,11 +79,3 @@ int		get_params(t_processus *process)
 	}
 	return (1);
 }
-//int		main(int argc, char **argv)
-//{
-//	t_processus processus;
-//	processus.opcode = atoi(argv[1]);
-//	processus.ocp = atoi(argv[2]);
-//	get_params(NULL, processus);
-//	return (0);
-//}

@@ -9,7 +9,7 @@ void    cw_inst_and(t_processus *process)
 
     if ((ret = get_params(process)) == -1)
     {
-        cw_reset_process();
+        cw_reset_process(process);
         return ;
     }
     reg_1 = process->reg[process->params[0]];
@@ -20,4 +20,5 @@ void    cw_inst_and(t_processus *process)
     else
         process->carry = 0;
     process->pc = (process->pc + ret) & 0xFFF; // c'est ok ca ?
+    cw_reset_process(process);
 }

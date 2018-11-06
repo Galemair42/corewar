@@ -28,3 +28,9 @@ void				cw_exec_process(t_list *process)
 		cw_init_funtab(ptr);
     
 }
+
+void		cw_reset_process(t_processus *process)
+{
+	process->ocp = 0;
+	ft_bzero(process->params, sizeof(int) * 4);
+}

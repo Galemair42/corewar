@@ -87,7 +87,7 @@ typedef struct	s_op
 	char		*name;
 	int			params;
 	int			types[5];
-	int			nb.args;
+	int			nb_args;
 	int			cycle;
 	char		*cool;
 	int			c;

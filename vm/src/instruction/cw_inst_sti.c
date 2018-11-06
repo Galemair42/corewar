@@ -12,10 +12,10 @@ void    cw_inst_sti(t_processus *process)
     int     landing;
     int     ret;
 
-    if (!(ret = get_params(process)) == -1)
+    if ((ret = get_params(process)) == -1)
     {
-        cw_reset_process();
-        return (-1);
+        cw_reset_process(process);
+        return ;
     }
     reg_1 = process->reg[process->params[0]];
     if (((process->ocp >> 4) & ~3) == 1)
@@ -30,4 +30,5 @@ void    cw_inst_sti(t_processus *process)
     (process->pc + param_2 + param_3) % MEM_SIZE);
     cw_put_four_octet(landing, reg_1);
     process->pc = (process->pc + ret) & 0xFFF;
+    cw_reset_process(process);
 }
