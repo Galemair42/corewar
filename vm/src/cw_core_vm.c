@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/31 13:17:51 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/06 11:10:40 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 10:15:56 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -38,11 +38,11 @@ void			add_instruction_to_tab(t_processus *process, int index, unsigned int opc)
 	t_processus 	*tab;
 
 	tab = arena.process_to_exec[index];
-	while (tab.next)
-		tab = tab.next;
+	while (tab->next)
+		tab = tab->next;
 	tab = malloc(sizeof(t_processus));
 	memcpy(tab, process, sizeof(t_processus));
-	tab->opc = opc;
+	tab->opcode = opc;
 }
 
 static void		cw_exec_instructions(int index)
@@ -55,7 +55,7 @@ static void		cw_exec_instructions(int index)
 	process = arena.process_to_exec[index];
 	while (process)
 	{
-		(*ptr[tab->opcode - 1])(process);
+		(*ptr[process->opcode - 1])(process);
 		process = process->next;
 		ft_lstappend(arena.process, ft_lstnew(process, sizeof(process)));
 	}
@@ -70,14 +70,16 @@ void		cw_read_processus_opc(int index, int ctd)
 	lst_process = arena.process;
 	while (lst_process->content)
 	{
-		process = (t_processus *)lst.process->content;
+		process = (t_processus *)lst_process->content;
 		opc_tmp = calculate_value_on_ram(process->pc, 1);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
+		{
 			if (op_tab[opc_tmp].cycle <= (ctd - index))
-				add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index, opc_tmp)); // sinon le processus est kill
+				add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index), opc_tmp); // sinon le processus est kill
+		}
 		else
 		{
-			process = (t_processus *)lst.process->content;
+			process = (t_processus *)lst_process->content;
 			process->pc++;
 			ft_lstappend(lst_process, ft_lstnew(process, sizeof(process)));
 		}

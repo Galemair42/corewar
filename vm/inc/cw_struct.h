@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/05 17:56:50 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/06 10:44:52 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ struct		s_processus
 	int				params[4];
 	t_processus		*next;
 //	int				id_player;
-}
+};
 typedef struct		s_champion
 {
 	char				*name;

@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/05 13:17:25 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ unsigned int		get_size(unsigned int ocp)
 	return (0);
 }
 
-int		get_params1(unsigned int ocp, unsigned int *current_pc)
+static	int		get_params1(unsigned int ocp, unsigned int *current_pc)
 {
 	int	value;
 	int i;
@@ -68,22 +68,14 @@ int		get_params(t_processus *process)
 	i = 0;
 	current_pc = 0xFFF & (process->pc + 2);
 	ocp = calculate_value_on_ram(current_pc, 2);
-	if (ocp > 0xFC || process.opc > 16)
+	if (ocp > 0xFC)
 		return (-1);
-	ocp = opc << 24;//Met le bit interessant tout a gauche
-	while (i < op_tab[process->opc - 1].nb_args)
+	ocp = ocp << 24;//Met le bit interessant tout a gauche
+	while (i < op_tab[process->opcode - 1].nb_args)
 	{
-		tab[i] = get_params1(ocp, &current_pc);
+		process->params[i] = get_params1(ocp, &current_pc);
 		i++;
 		ocp = ocp << 2;
 	}
 	return (1);
 }
-//int		main(int argc, char **argv)
-//{
-//	t_processus processus;
-//	processus.opcode = atoi(argv[1]);
-//	processus.ocp = atoi(argv[2]);
-//	get_params(NULL, processus);
-//	return (0);
-//}
