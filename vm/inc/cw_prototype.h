@@ -45,6 +45,7 @@ int			cw_header_verif_null_byte(unsigned char *buf_file);
 
 t_list		*cw_init_process(void);
 void		cw_reset_process(t_processus *process);
+void		cw_clean_lst();
 
 /*
 **	instruction

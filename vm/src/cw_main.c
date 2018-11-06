@@ -22,11 +22,15 @@ int				main(int argc, char **argv)
 		return (42);
 	}
 	cw_put_champion_in_memory();
-	if (!(arena.process = cw_init_process()))
+
+
+	/*if (!(arena.process = cw_init_process()))
 	{
 		printf("sa\n");
 		return (42);
-	}
+	}*/
+
+	printf("go implementer le init_porcess bande de boloss comment vous voulez que je marche sinon ??\n\n");
 	
 	//print_all_champ();
 //	print_all_process();

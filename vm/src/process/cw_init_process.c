@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "corewar.h"
-//
+#include "corewar.h"
+
 //static t_processus	*cw_init_process_champ(t_champion *champ, int id)
 //{
 //	t_processus		*new_process;
@@ -37,31 +37,34 @@
 //** 		and the number of champion sorted in growing order
 //*/
 //
-//t_list				*cw_init_process(void)
-//{
-//	t_list			*cur_lst;
-//	t_list			*new_proc_lst;
-//	t_list			*tmp;
-//	t_processus		*cur_process;
-//	int				id_proc;
-//
-//	id_proc = 1;
-//	new_proc_lst = NULL;
-//	cur_lst = arena.champion;
-//	while (cur_lst)
-//	{
-//		if (!(cur_process = cw_init_process_champ((t_champion *)cur_lst->content,
-//				id_proc)))
-//			return (NULL); // les procedure de free encore et encore
-//		tmp = new_proc_lst;
-//		if (!(new_proc_lst = ft_lstnew(NULL,
-//						sizeof(t_processus))))
-//			return (NULL);
-//		new_proc_lst->content = (void *)cur_process;
-//		new_proc_lst->next = tmp;
-//		cur_lst = cur_lst->next;
-//		id_proc++;
-//	}
-//	arena.process = new_proc_lst;
-//	return (new_proc_lst);
-//}
+t_list				*cw_init_process(void)
+{
+/*	t_list			*cur_lst;
+	t_list			*new_proc_lst;
+	t_list			*tmp;
+	t_processus		*cur_process;
+	int				id_proc;
+
+	id_proc = 1;
+	new_proc_lst = NULL;
+	cur_lst = arena.champion;
+	while (cur_lst)
+	{
+		if (!(cur_process = cw_init_process_champ((t_champion *)cur_lst->content,
+				id_proc)))
+			return (NULL); // les procedure de free encore et encore
+		tmp = new_proc_lst;
+		if (!(new_proc_lst = ft_lstnew(NULL,
+						sizeof(t_processus))))
+			return (NULL);
+		new_proc_lst->content = (void *)cur_process;
+		new_proc_lst->next = tmp;
+		cur_lst = cur_lst->next;
+		id_proc++;
+	}
+	arena.process = new_proc_lst;
+	return (new_proc_lst);*/
+
+	return (NULL);
+
+}

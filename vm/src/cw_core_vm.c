@@ -71,7 +71,7 @@ void		cw_read_processus_opc(int index, int ctd)
 	while (lst_process->content)
 	{
 		process = (t_processus *)lst_process->content;
-		opc_tmp = calculate_value_on_ram(process->pc, 1);
+		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
 			if (op_tab[opc_tmp].cycle <= (ctd - index))
@@ -100,7 +100,7 @@ int				cw_fight(void)
 	i = 0;
 	while (1)
 	{
-		cw_read_process_opc(i); // execution d'un cycle
+		cw_read_processus_opc(i, 1); // execution d'un cycle
 		cw_exec_instructions(i);
 		i++;
 		if (i >= ctd)

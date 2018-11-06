@@ -21,7 +21,7 @@ t_list      *cw_list_pop(t_list **tab_lst)
 
 void        cw_insert_process(t_list **process_tab, t_list *process)
 {
-    t_list      *lst_iter;
+    /*t_list      *lst_iter;
     t_list      *before;
 
     lst_iter = *process_tab;
@@ -45,5 +45,5 @@ void        cw_insert_process(t_list **process_tab, t_list *process)
         lst_iter = lst_iter->next;
     }
     process->next = NULL; // ajouter un node a la toute fin
-    lst_iter->next = process;
+    lst_iter->next = process;*/
 }

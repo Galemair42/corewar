@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void	cw_free_content(t_processus *content, __unused size_t size)
+void	cw_free_content(void *content, __unused size_t size)
 {
 	free(content);
 }
@@ -21,7 +21,7 @@ void	cw_clean_lst()
 {
 	t_list	*tmp;
 	int		delimiter_flag;
-	void	(*free_ptr)(t_processus *, size_t);
+	void	(*free_ptr)(void *, size_t);
 
 	free_ptr = &cw_free_content;
 	delimiter_flag = 0;
@@ -31,6 +31,6 @@ void	cw_clean_lst()
 			delimiter_flag++;
 		tmp = arena.process;
 		arena.process = arena.process->next;
-		ft_lstdelone(&tmp, (*free_ptr)(tmp->content, tmp->content_size));
+		ft_lstdelone(&tmp, free_ptr);
 	}
 }
