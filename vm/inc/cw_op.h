@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:31:34 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/31 11:51:56 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/05 14:11:42 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ typedef struct	s_op
 	char		*name;
 	int			params;
 	int			types[5];
-	int			opc;
-	int			b;
+	int			nb.args;
+	int			cycle;
 	char		*cool;
 	int			c;
 	int			f;

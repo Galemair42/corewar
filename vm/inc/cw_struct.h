@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/31 12:04:00 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/05 17:56:50 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ typedef struct		s_args
 	int		f_v; // a defnir comment ce truc marche
 }					t_args;
 
-typedef struct		s_processus
+typedef	struct		s_processus	t_processus;
+
+struct		s_processus
 {
 	int				opcode;
 	int				id;
@@ -30,9 +32,10 @@ typedef struct		s_processus
 	unsigned int	nb_live;
 	unsigned int	carry;
 	unsigned int	reg[REG_NUMBER];
-	int				params[3];
-}					t_processus;
-
+	int				params[4];
+	t_processus		*next;
+//	int				id_player;
+}
 typedef struct		s_champion
 {
 	char				*name;
@@ -46,8 +49,8 @@ typedef struct		s_processeur
 {
 	unsigned char		memory[MEM_SIZE];
 	t_list	 	   		*champion;
-	t_list				*process[CYCLE_TO_DIE];
-	t_list				*awaiting_process;
+	t_list				*process;
+	t_processus			*process_to_exec[CYCLE_TO_DIE];
 	size_t				nb_champ;
 	unsigned int 	   	cycle_to_die;
 	unsigned int 	   	max_check;

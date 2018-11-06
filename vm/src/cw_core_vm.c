@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
 /*   Updated: 2018/10/31 13:17:51 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/06 10:15:56 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,78 +16,94 @@
 static void		cw_init_funtab(void (**ptr)(t_processus *))
 {
 	ptr[0] = &cw_inst_live;
-//	ptr[1] = 
-//	ptr[2] = 
-//	ptr[3] = 
-//	ptr[4] = 
-//	ptr[5] = 
-//	ptr[6] = 
-//	ptr[8] = 
-//	ptr[9] = 
-//	ptr[10] = 
+	ptr[1] = &cw_inst_ld;
+	ptr[2] = &cw_inst_st;
+	ptr[3] = &cw_inst_add;
+	ptr[4] = &cw_inst_sub;
+	ptr[5] = &cw_inst_and;
+	ptr[6] = &cw_inst_or;
+	ptr[7] = &cw_inst_xor;
+	ptr[8] = &cw_inst_zjmp;
+	ptr[9] = &cw_inst_ldi;
+	ptr[10] = &cw_inst_sti;
 	ptr[11] = &cw_inst_fork;
-//	ptr[12] = 
-//	ptr[13] = 
-//	ptr[14] = 
-//	ptr[15] = 
+	ptr[12] = &cw_inst_lld;
+	ptr[13] = &cw_inst_lldi; 
+	ptr[14] = &cw_inst_lfork;
+	ptr[15] = &cw_inst_aff;
 }
 
-static void		cw_exec_cycle(void)
+void			add_instruction_to_tab(t_processus *process, int index, unsigned int opc)
+{
+	t_processus 	*tab;
+
+	tab = arena.process_to_exec[index];
+	while (tab.next)
+		tab = tab.next;
+	tab = malloc(sizeof(t_processus));
+	memcpy(tab, process, sizeof(t_processus));
+	tab->opc = opc;
+}
+
+static void		cw_exec_instructions(int index)
+{
+	static void		(*ptr[16]) (t_processus *);
+	t_processus		*process;
+
+	if (!*ptr)
+		cw_init_funtab(ptr);
+	process = arena.process_to_exec[index];
+	while (process)
+	{
+		(*ptr[tab->opcode - 1])(process);
+		process = process->next;
+		ft_lstappend(arena.process, ft_lstnew(process, sizeof(process)));
+	}
+}
+
+void		cw_read_processus_opc(int index, int ctd)
 {
 	t_list			*lst_process;
 	t_processus		*process;
+	unsigned int	opc_tmp;
 
 	lst_process = arena.process;
-	while (lst_process)
+	while (lst_process->content)
 	{
-		process = (t_processus *)lst_process->content;
-		if (process->opcode != 0 && process->nb_live == 0)
-		{
-			cw_exec_process(process);// japelle la fonction d'execution qui correspond
-		}
-		else if (process->opcode == 0)
-			cw_read_instruction(process);// fonction pour lire un param
+		process = (t_processus *)lst.process->content;
+		opc_tmp = calculate_value_on_ram(process->pc, 1);
+		if (opc_tmp >= 1 && opc_tmp <= 16)
+			if (op_tab[opc_tmp].cycle <= (ctd - index))
+				add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index, opc_tmp)); // sinon le processus est kill
 		else
-			process->nb_live--;
+		{
+			process = (t_processus *)lst.process->content;
+			process->pc++;
+			ft_lstappend(lst_process, ft_lstnew(process, sizeof(process)));
+		}
 		lst_process = lst_process->next;
 	}
+	ft_lstappend(lst_process, ft_lstnew("delimiter", 0));
+	cw_clean_lst();
 }
 
 int				cw_fight(void)
 {
 	t_list			*process;
 	unsigned int	ctd;
-	size_t			i;
+	int				i;
 
 	process = arena.process;
 	ctd = arena.cycle_to_die;
 	i = 0;
-	while (process)
+	while (1)
 	{
-		cw_exec_cycle();
+		cw_read_process_opc(i); // execution d'un cycle
+		cw_exec_instructions(i);
 		i++;
-		if (i == MAX_CHECKS)
-		//iterer sur tous les proc, exec leurs instru etc...`
-		// fonction pour boucler sur tous les process
-
-		cw_exec_cycle(); // execution d'un cycle
-
-	/*	while (i < ctd)
-		{*/
-			// iterer sur tous les process et exec leurs instru
-		i++;
-		if (i < ctd)
+		if (i >= ctd)
 		{
-			; // verif des process
-			i = 0;
-		}
-
-		
-		k++;
-		if (k == MAX_CHECKS /*|| nb_live >= NBR_LIVE */)
-		{
-			ctd -= CYCLE_DELTA;
-			i = 0;
+			;			
 		}
 	}
 	return (1);
