@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/10/31 17:55:56 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/05 13:17:25 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,8 @@ int		get_params1(unsigned int ocp, unsigned int *current_pc)
 		printf("Parameters is non existant, how do we handle it ?\n");
 		exit(0);
 	}
-	while (i < get_size(ocp))
-	{
-		value += calculate_power(16, (get_size(ocp) - i - 1)) * get_value(memory[0xFFF & (i + *current_pc)]);
-		i++;
-	}
-	*current_pc += i;
+	value = calculate_value_on_ram(*current_pc, get_size(ocp));
+	*current_pc += get_size(ocp);
 	return (value);
 }
 /*
@@ -70,8 +66,8 @@ int		get_params(t_processus *process)
 	unsigned int current_pc;
 
 	i = 0;
-	current_pc = 0xFFF & (process->pc + 4);
-	ocp = process->ocp;
+	current_pc = 0xFFF & (process->pc + 2);
+	ocp = calculate_value_on_ram(current_pc, 2);
 	if (ocp > 0xFC || process.opc > 16)
 		return (-1);
 	ocp = opc << 24;//Met le bit interessant tout a gauche

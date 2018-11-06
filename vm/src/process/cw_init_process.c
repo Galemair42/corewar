@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 12:58:01 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/30 19:40:06 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/05 18:03:52 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,3 @@ t_list				*cw_init_process(void)
 	arena.process = new_proc_lst;
 	return (new_proc_lst);
 }
-
-/*
-** 		Ca c'est ta partie gautier !
-*/
-
-/*
-void				cw_exec_process(t_list *process)
-{
-	t_processus		*cur_process;
-	
-	while (process)
-	{
-		cur_process = (t_processus *)process->content;
-
-		process = process->next;
-	}
-}*/
-/*	OUTPOUT
-**	bon on verra ensemble mais ca serait bien que ta fonction retourne le
-**	nombre de live de tous les processus
-*/

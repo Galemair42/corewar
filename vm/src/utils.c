@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 17:51:59 by galemair          #+#    #+#             */
-/*   Updated: 2018/10/31 18:30:27 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/05 16:34:27 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ unsigned int	calculate_value_on_ram(unsigned int starting_pc, unsigned int lengt
 	i = 0;
 	while (i < length)
 	{
-		value += calculate_power(16, length - i - 1) * get_value(memory[0xFFF & (i + starting_pc)]);
+		value += calculate_power(16, length - i - 1) * get_value(arena.memory[0xFFF & (i + starting_pc)]);
 		i++;
 	}
 	return (value);	
