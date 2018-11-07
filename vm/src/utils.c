@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 17:51:59 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/07 17:18:27 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 18:38:48 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int le
 	result = 0;
 	while (i >= 0) 
 	{
-    	result += arena.memory[j] << (i * 8);
+    	result += arena.memory[MEM_MASK(j)] << (i * 8);
 		i--;
 		j++;
 	}

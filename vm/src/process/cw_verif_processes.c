@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:26:15 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/07 16:59:52 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 18:55:08 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		cw_verif_processes(void)
 	live_total = 0;
 	while (arena.process && ((t_processus *)(arena.process)->content)->nb_live <= 0)
 	{
-		tmp = lst->next;
+		tmp = (arena.process)->next;
 		ft_lstdelone(&arena.process, free_ptr);
 		arena.process = tmp;
 	}
