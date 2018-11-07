@@ -80,6 +80,7 @@ void		print_one_champ(t_champion *champion);
 void		print_all_champ(void);
 void		print_all_process(void);
 void		print_process(t_processus *process);
+void 		print_register(t_processus *process);
 
 /*
 **		cw_instructions_utils.c

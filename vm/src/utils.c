@@ -30,15 +30,18 @@ int					cw_calculate_power(int number, int power)
 
 unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length)
 {
-	int i;
-	unsigned int value;
+	unsigned int 	result;
+	int 			i;
+	int				j;
 
-	value = 0;
-	i = 0;
-	while (i < length)
+	i = length - 1;
+	j = starting_pc;
+	result = 0;
+	while (i >= 0) 
 	{
-		value += cw_calculate_power(16, length - i - 1) * arena.memory[0xFFF & (i + starting_pc)];
-		i++;
+    	result += arena.memory[j] << (i * 8);
+		i--;
+		j++;
 	}
-	return (value);	
+    return (result);
 }

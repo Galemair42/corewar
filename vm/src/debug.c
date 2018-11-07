@@ -58,6 +58,19 @@ void	print_all_champ(void)
 	}
 }
 
+void print_register(t_processus *process)
+{
+	unsigned int *reg;
+
+	reg = process->reg;
+	int i = 0;
+	while (i < REG_NUMBER)
+	{
+		printf("process->reg[%d] : %u\n", i, process->reg[i]);
+		i++;
+	}
+}
+
 void	print_process(t_processus *process)
 {
 	printf("process id : %d\n", process->id);
