@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/07 16:05:59 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:49:50 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 10:15:56 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -104,7 +104,7 @@ int				cw_fight(void)
 		cycle++;
 		if (cycle == ctd)
 		{
-			if (cw_verif_processes() >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1);
+			if (cw_verif_processes() >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
 			{
 				ctd -= CYCLE_DELTA;
 				cycle_decrementation = 0;

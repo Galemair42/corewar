@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:26:15 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/07 16:00:40 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:59:52 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		cw_verif_processes(void)
 	
 	free_ptr = &cw_free_content;	
 	live_total = 0;
-	while (arena.process && ((t_process *)(arena.process)->content).nb_live =< 0)
+	while (arena.process && ((t_processus *)(arena.process)->content)->nb_live <= 0)
 	{
 		tmp = lst->next;
 		ft_lstdelone(&arena.process, free_ptr);
@@ -30,8 +30,8 @@ int		cw_verif_processes(void)
 	lst = arena.process;
 	while (lst && lst->next)
 	{
-		live_total += ((t_process *)lst->content).nb_live;
-		if (((t_process *)lst->next->content).nb_live =< 0)
+		live_total += ((t_processus *)lst->content)->nb_live;
+		if (((t_processus *)lst->next->content)->nb_live <= 0)
 		{
 			tmp	= lst->next->next;
 			ft_lstdelone(&lst->next, free_ptr);
