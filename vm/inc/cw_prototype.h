@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/26 17:42:20 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 15:46:45 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc);
 void			cw_put_four_octet(unsigned int index, unsigned int four_octet);
 unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length);
 unsigned int	get_size(unsigned int ocp);
+void			cw_insert_process(t_processus **process_tab, t_processus *process);
 
 #endif

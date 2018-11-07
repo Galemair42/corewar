@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:34:40 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/06 13:34:54 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:00:25 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	cw_free_content(void *content, __unused size_t size)
 {
-	free(content);
+	free((t_processus *)content);
 }
 
 void	cw_clean_lst()
@@ -27,7 +27,7 @@ void	cw_clean_lst()
 	delimiter_flag = 0;
 	while (arena.process && delimiter_flag == 0)
 	{
-		if (ft_strcmp((char*)arena.process->content, "delimiter") == 0)
+		if (((t_processus *)arena.process)->id == 0)
 			delimiter_flag++;
 		tmp = arena.process;
 		arena.process = arena.process->next;

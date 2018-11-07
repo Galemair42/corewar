@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/06 11:10:40 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:05:59 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 10:15:56 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -37,12 +37,13 @@ void			add_instruction_to_tab(t_processus *process, int index, unsigned int opc)
 {
 	t_processus 	*tab;
 
-	tab = arena.process_to_exec[index];
-	while (tab->next)
-		tab = tab->next;
 	tab = malloc(sizeof(t_processus));
 	memcpy(tab, process, sizeof(t_processus));
 	tab->opcode = opc;
+	if (!arena.process_to_exec[index])
+		arena.process_to_exec[index] = tab;
+	else
+		cw_insert_process(&arena.process_to_exec[index], tab);
 }
 
 static void		cw_exec_instructions(int index)
@@ -55,9 +56,10 @@ static void		cw_exec_instructions(int index)
 	process = arena.process_to_exec[index];
 	while (process)
 	{
+		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
 		process = process->next;
-		ft_lstappend(arena.process, ft_lstnew(process, sizeof(process)));
+		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(process)));
 	}
 }
 
@@ -68,44 +70,48 @@ void		cw_read_processus_opc(int index, int ctd)
 	unsigned int	opc_tmp;
 
 	lst_process = arena.process;
-	while (lst_process->content)
+	while (lst_process && ((t_processus *)lst_process)->id != 0)
 	{
 		process = (t_processus *)lst_process->content;
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
-		if (opc_tmp >= 1 && opc_tmp <= 16)
-		{
-			if (op_tab[opc_tmp].cycle <= (ctd - index))
-				add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index), opc_tmp); // sinon le processus est kill
-		}
+		if (opc_tmp >= 1 && opc_tmp <= 16 && op_tab[opc_tmp].cycle <= (ctd - index))
+				add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index), opc_tmp);
 		else
 		{
 			process = (t_processus *)lst_process->content;
 			process->pc++;
-			ft_lstappend(lst_process, ft_lstnew(process, sizeof(process)));
+			ft_lstappend(&lst_process, ft_lstnew(process, sizeof(process)));
 		}
 		lst_process = lst_process->next;
 	}
-	ft_lstappend(lst_process, ft_lstnew("delimiter", 0));
+	ft_lstappend(&arena.process, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 	cw_clean_lst();
 }
 
 int				cw_fight(void)
 {
-	t_list			*process;
 	unsigned int	ctd;
-	int				i;
+	int				cycle;
+	int				cycle_decrementation;
 
-	process = arena.process;
 	ctd = arena.cycle_to_die;
-	i = 0;
+	cycle_decrementation = 0;
+	cycle = 0;
 	while (1)
 	{
-		cw_read_processus_opc(i, 1); // execution d'un cycle
-		cw_exec_instructions(i);
-		i++;
-		if (i >= ctd)
+		cw_read_processus_opc(cycle, ctd);
+		cw_exec_instructions(cycle);
+		cycle++;
+		if (cycle == ctd)
 		{
-			;			
+			if (cw_verif_processes() >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1);
+			{
+				ctd -= CYCLE_DELTA;
+				cycle_decrementation = 0;
+			}
+			else
+				cycle_decrementation++ ;
+			cycle = 0;
 		}
 	}
 	return (1);

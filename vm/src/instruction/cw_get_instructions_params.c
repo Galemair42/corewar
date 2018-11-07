@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/06 13:32:00 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 13:34:02 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -30,16 +30,14 @@ static int		get_params1(unsigned int ocp, unsigned int *current_pc)
 
 	i = 0;
 	value = 0;
-	printf("before %u\n", ocp);	
 	ocp = ocp >> 30;
-	printf("after %u\n", ocp);
 	if (ocp == 0)
 	{
 		printf("Parameters is non existant, how do we handle it ?\n");
 		exit(0);
 	}
 	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp));
-	*current_pc += get_size(ocp);
+	*current_pc = MEM_MASK(*current_pc + get_size(ocp));
 	return (value);
 }
 
@@ -67,16 +65,17 @@ int		get_params(t_processus *process)
 	unsigned int current_pc;
 
 	i = 0;
-	current_pc = 0xFFF & (process->pc + 2);
-	ocp = cw_calculate_value_on_ram(current_pc, 2);
+	current_pc = MEM_MASK(process->pc + 1);
+	ocp = cw_calculate_value_on_ram(current_pc, 1);
+	current_pc = MEM_MASK(current_pc + 1);
 	if (ocp > 0xFC || process->opcode > 16)
 		return (-1);
-	ocp = ocp << 24;//Met le bit interessant tout a gauche
+	ocp = ocp << 24;
 	while (i < op_tab[process->opcode - 1].nb_args)
 	{
 		process->params[i] = get_params1(ocp, &current_pc);
 		i++;
 		ocp = ocp << 2;
 	}
-	return (1);
+	return (current_pc);
 }
