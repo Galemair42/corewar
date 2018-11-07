@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 18:35:34 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/25 18:04:04 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/07 16:19:40 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	init_file(t_asm_file *fl)
 {
 	fl->tmp_ln = NULL;
 	fl->ln = 1;
-	fl->ch = 0;
+	fl->ch = 1;
 	fl->status = 0;
 	fl->exit = 0;
 	fl->onull = 0;
