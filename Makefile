@@ -6,11 +6,11 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/11/07 16:53:53 by femaury          ###   ########.fr        #
+#    Updated: 2018/11/07 17:22:48 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all, clean, fclean, re
+.PHONY: all, clean, fclean, re, libft
 
 all:
 	@$(MAKE) -C libft/
@@ -28,3 +28,6 @@ fclean:
 #	@$(MAKE) -C corewar/ fclean
 
 re: fclean all
+
+libft:
+	@$(MAKE) -C libft/
