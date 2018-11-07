@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/07 16:51:10 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 18:09:12 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void		print_one_champ(t_champion *champion);
 void		print_all_champ(void);
 void		print_all_process(void);
 void		print_process(t_processus *process);
+void 		print_register(t_processus *process);
 
 /*
 **		cw_instructions_utils.c

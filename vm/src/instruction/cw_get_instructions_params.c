@@ -67,6 +67,7 @@ int		get_params(t_processus *process)
 	i = 0;
 	current_pc = MEM_MASK(process->pc + 1);
 	ocp = cw_calculate_value_on_ram(current_pc, 1);
+	process->ocp = ocp;
 	current_pc = MEM_MASK(current_pc + 1);
 	if (ocp > 0xFC || process->opcode > 16)
 		return (-1);
