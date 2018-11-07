@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/07 14:01:36 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:05:59 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 10:15:56 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -90,26 +90,29 @@ void		cw_read_processus_opc(int index, int ctd)
 
 int				cw_fight(void)
 {
-	t_list			*process;
 	unsigned int	ctd;
-	int				i;
-	t_processus		*tab;
+	int				cycle;
+	int				cycle_decrementation;
 
-	process = arena.process;
 	ctd = arena.cycle_to_die;
-	i = 0;
+	cycle_decrementation = 0;
+	cycle = 0;
 	while (1)
 	{
-		cw_read_processus_opc(i, ctd); // execution d'un cycle
-		cw_exec_instructions(i);
-		i++;
-//		if (i >= ctd)
-//		{
-//			;
-//		)
-		printf("--\n");
-		if (i > 500)
-			break;
+		cw_read_processus_opc(cycle, ctd);
+		cw_exec_instructions(cycle);
+		cycle++;
+		if (cycle == ctd)
+		{
+			if (cw_verif_processes() >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1);
+			{
+				ctd -= CYCLE_DELTA;
+				cycle_decrementation = 0;
+			}
+			else
+				cycle_decrementation++ ;
+			cycle = 0;
+		}
 	}
 	return (1);
 }

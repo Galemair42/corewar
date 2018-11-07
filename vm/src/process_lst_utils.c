@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:34:40 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/07 10:41:16 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:00:25 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	cw_free_content(void *content, __unused size_t size)
 {
-	free(content);
+	free((t_processus *)content);
 }
 
 void	cw_clean_lst()
