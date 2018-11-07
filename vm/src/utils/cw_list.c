@@ -19,13 +19,13 @@ t_list      *cw_list_pop(t_list **tab_lst)
 **          A TESTER JAI FAIS CA VITE FAIT !!!
 */
 
-void        cw_insert_process(t_list **process_tab, t_list *process)
+void        cw_insert_process(t_processus **process_tab, t_processus *process)
 {
-    /*t_list      *lst_iter;
-    t_list      *before;
+    t_processus      *lst_iter;
+    t_processus      *before;
 
     lst_iter = *process_tab;
-    if (lst_iter->id < process->id) // mettre un node en tout debut de liste
+    if (lst_iter->id < process->id)
     {
         process->next = *process_tab;
         *process_tab = process;
@@ -45,5 +45,5 @@ void        cw_insert_process(t_list **process_tab, t_list *process)
         lst_iter = lst_iter->next;
     }
     process->next = NULL; // ajouter un node a la toute fin
-    lst_iter->next = process;*/
+    lst_iter->next = process;
 }

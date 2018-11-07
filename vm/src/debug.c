@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/06 17:43:48 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 13:21:49 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ void	print_process(t_processus *process)
 	printf("process PC : %d\n", process->pc);
 	printf("process carry : %u\n", process->carry);
 	//printf("process id_player : %d\n", process->id_player);
-	printf("valeur de mes registres :\n");
-	for (int i = 0; i < REG_NUMBER; i++)
+//	for (int i = 0; i < REG_NUMBER; i++)
+//	{
+//		printf("REG[%d] : %u\n", i, process->reg[i]);
+//	}
+	printf("Params Value :\n");
+	for (int i = 0; i < 5; i++)
 	{
-		printf("REG[%d] : %u\n", i, process->reg[i]);
+		printf("Params[%d] : %u\n", i, process->params[i]);
 	}
 }
 

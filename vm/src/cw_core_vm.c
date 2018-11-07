@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/06 18:08:41 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 14:01:36 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 10:15:56 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -37,12 +37,13 @@ void			add_instruction_to_tab(t_processus *process, int index, unsigned int opc)
 {
 	t_processus 	*tab;
 
-	tab = arena.process_to_exec[index];
-	while (tab->next)
-		tab = tab->next;
 	tab = malloc(sizeof(t_processus));
 	memcpy(tab, process, sizeof(t_processus));
 	tab->opcode = opc;
+	if (!arena.process_to_exec[index])
+		arena.process_to_exec[index] = tab;
+	else
+		cw_insert_process(&arena.process_to_exec[index], tab);
 }
 
 static void		cw_exec_instructions(int index)
@@ -55,6 +56,7 @@ static void		cw_exec_instructions(int index)
 	process = arena.process_to_exec[index];
 	while (process)
 	{
+		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
 		process = process->next;
 		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(process)));
@@ -68,19 +70,12 @@ void		cw_read_processus_opc(int index, int ctd)
 	unsigned int	opc_tmp;
 
 	lst_process = arena.process;
-	while (lst_process)
+	while (lst_process && ((t_processus *)lst_process)->id != 0)
 	{
 		process = (t_processus *)lst_process->content;
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
-		//printf("opc = %u\n", opc_tmp);
-		if (opc_tmp >= 1 && opc_tmp <= 16)
-		{
-			if (op_tab[opc_tmp].cycle <= (ctd - index))
-			{
-				printf("salut a tous\n");
-			//	add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index), opc_tmp); // sinon le processus est kill
-			}
-		}
+		if (opc_tmp >= 1 && opc_tmp <= 16 && op_tab[opc_tmp].cycle <= (ctd - index))
+				add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index), opc_tmp);
 		else
 		{
 			process = (t_processus *)lst_process->content;
@@ -89,9 +84,7 @@ void		cw_read_processus_opc(int index, int ctd)
 		}
 		lst_process = lst_process->next;
 	}
-	ft_lstappend(&lst_process, ft_lstnew("delimiter", sizeof(char) * 10));
-	arena.process = lst_process;
-	print_all_process();
+	ft_lstappend(&arena.process, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 	cw_clean_lst();
 }
 
@@ -100,6 +93,7 @@ int				cw_fight(void)
 	t_list			*process;
 	unsigned int	ctd;
 	int				i;
+	t_processus		*tab;
 
 	process = arena.process;
 	ctd = arena.cycle_to_die;
@@ -107,13 +101,15 @@ int				cw_fight(void)
 	while (1)
 	{
 		cw_read_processus_opc(i, ctd); // execution d'un cycle
-		exit (0);
 		cw_exec_instructions(i);
 		i++;
-		if (i >= ctd)
-		{
-			;
-		}
+//		if (i >= ctd)
+//		{
+//			;
+//		)
+		printf("--\n");
+		if (i > 500)
+			break;
 	}
 	return (1);
 }

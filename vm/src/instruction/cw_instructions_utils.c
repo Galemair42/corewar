@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 13:39:56 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/05 17:47:21 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 13:29:11 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc)
 	
 	diff1 = (former_pc >= new_pc ? former_pc : new_pc) - (former_pc >= new_pc ? new_pc : former_pc);
 	diff2 = (MEM_SIZE) - (former_pc >= new_pc ? former_pc : new_pc) + (former_pc >= new_pc ? new_pc : former_pc);
-	printf ("diff1 = %d\ndiff2= %d\n", diff1, diff2);
 	if (diff1 <= diff2)
 	{
 		if (former_pc >= new_pc)

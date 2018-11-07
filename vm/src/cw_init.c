@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:00:14 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/06 17:41:49 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 13:56:30 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ static t_processus	*cw_init_process_champ(t_champion *champ, int id)
 	new_process->nb_live = 0;
 	new_process->carry = 0;
 	new_process->opcode = 0;
+	new_process->next = NULL;
 	ft_memset(new_process->reg, 0, sizeof(unsigned int) * REG_NUMBER);
 	new_process->reg[1] = champ->id;
-	ft_memset(new_process->params, 0, sizeof(int) * 4);
+	ft_memset(new_process->params, 0, sizeof(int) * 5);
 	return (new_process);
 }
 
