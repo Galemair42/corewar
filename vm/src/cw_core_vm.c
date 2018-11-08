@@ -58,8 +58,8 @@ static void		cw_exec_instructions(int index)
 	{
 		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
-		process = process->next;
 		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(process)));
+		process = process->next;
 	}
 }
 

@@ -7,6 +7,7 @@ void        cw_inst_ld(t_processus *process)
     int     ret;
     int     landing;
 
+printf("fin le pc : %d\n", process->pc);
     if ((ret = get_params(process)) == -1)
     {
         cw_reset_process(process);
@@ -22,4 +23,5 @@ void        cw_inst_ld(t_processus *process)
         process->reg[process->params[1]] = cw_calculate_value_on_ram(process->pc + landing, 4);
     }
     process->pc = ret;
+printf("fin le pc : %d\n", process->pc);
 }
