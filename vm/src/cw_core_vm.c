@@ -6,8 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/07 16:17:36 by jabt             ###   ########.fr       */
-/*   Updated: 2018/11/06 10:15:56 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/07 19:05:25 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +57,11 @@ static void		cw_exec_instructions(int index)
 	{
 		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
+<<<<<<< HEAD
 		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(process)));
+=======
+		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(t_processus)));
+>>>>>>> aae3d192b94eddeeae2de5fbefeae0fa3d8675b7
 		process = process->next;
 	}
 }
@@ -80,7 +83,7 @@ void		cw_read_processus_opc(int index, int ctd)
 		{
 			process = (t_processus *)lst_process->content;
 			process->pc++;
-			ft_lstappend(&lst_process, ft_lstnew(process, sizeof(process)));
+			ft_lstappend(&lst_process, ft_lstnew(process, sizeof(t_processus)));
 		}
 		lst_process = lst_process->next;
 	}
@@ -99,22 +102,26 @@ int				cw_fight(void)
 	cycle = 0;
 	while (1)
 	{
+		printf("cycle numero: %d\n", cycle);
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
 		cycle++;
-		if (cycle > 1500)
-			break;
-		//if (cycle == ctd)
-		//{
-	//		if (cw_verif_processes() >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1);
-	//		{
-	//			ctd -= CYCLE_DELTA;
-	//			cycle_decrementation = 0;
-	//		}
-	//		else
-	//			cycle_decrementation++ ;
-	//		cycle = 0;
-		//}
+		if (cycle == ctd)
+		{
+			if (cw_verif_processes() >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
+			{
+				ctd -= CYCLE_DELTA;
+				cycle_decrementation = 0;
+			}
+			else
+				cycle_decrementation++;
+			cycle = 0;
+			if (!arena.process)
+			{
+				printf("Nous avons un winner !\n");
+				return (1);
+			}
+		}
 	}
 	return (1);
 }

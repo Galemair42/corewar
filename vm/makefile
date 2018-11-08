@@ -41,6 +41,7 @@ SRC = \
 		src/parsing/cw_parse_varg.c \
 		src/process/cw_exec_process.c \
 		src/process/cw_init_process.c \
+		src/process/cw_verif_processes.c \
 		src/process_lst_utils.c \
 		src/utils/cw_clear_process.c \
 		src/utils/cw_list.c \

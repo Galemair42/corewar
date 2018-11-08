@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cw_inst_ld.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/07 18:10:34 by galemair          #+#    #+#             */
+/*   Updated: 2018/11/07 18:42:18 by galemair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 void        cw_inst_ld(t_processus *process)
@@ -23,5 +35,5 @@ printf("fin le pc : %d\n", process->pc);
         process->reg[process->params[1]] = cw_calculate_value_on_ram(process->pc + landing, 4);
     }
     process->pc = ret;
-printf("fin le pc : %d\n", process->pc);
+    cw_reset_process(process);
 }
