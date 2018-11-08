@@ -1,5 +1,5 @@
 FT_PATH=../libft/
-FLAGS=
+FLAGS=-ggdb
 NAME = corewar
 FT_NAME = $(FT_PATH)libft.a
 LIB = $(FT_PATH)libft.a
@@ -122,13 +122,13 @@ FT_OBJS := $(FT_SRC:.c=.o)
 
 all : $(NAME)
 	@gcc $(FLAGS) -o $(NAME) $(addprefix -I , $(INC)) $(OBJS) $(LIB)
-	@echo "\033[32mCOREWAR COMPILED\n"
+	@echo "COREWAR COMPILED\n"
 
 $(NAME): $(OBJS) $(FT_OBJS)
 
 $(OBJ_DIR)%.o: %.c
 	@gcc $(FLAGS) -o $@ -c $< $(addprefix -I , $(INC))
-	@printf '▒'
+	@printf ' 🖥  '
 
 $(FT_PATH)%.o: $(FT_PATH)%.c
 	@make -C $(FT_PATH)
@@ -138,6 +138,7 @@ clean:
 	@rm -f $(OBJS)
 
 fclean: clean
+	@make fclean -C $(FT_PATH)
 	@rm -f $(NAME)
 
 re: fclean all

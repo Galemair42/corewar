@@ -10,8 +10,8 @@ void    cw_inst_lldi(t_processus *process)
         cw_reset_process(process);
         return ;
     }
-    landing = MEM_MASK(process->params[0] + process->params[1]);
-    process->reg[process->params[2]] = arena.memory[landing];
-    process->pc = (process->pc + ret) & 0xFFF; // c'est ok ca ?
+    landing = MEM_MASK(process->params[0] + process->params[1] + process->pc);
+    process->reg[process->params[2]] = cw_calculate_value_on_ram(landing, 4);
     cw_reset_process(process);
+    process->pc = ret;
 }

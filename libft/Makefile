@@ -1,24 +1,25 @@
+## all the FT_... variables are declared in the parent makefile
+## $(info $$var is [${var}])
+
 SRC=$(wildcard *.c)
-FLAGS=-Wall -Wextra -Werror
 NAME=libft.a
 OBJS=$(SRC:.c=.o)
 
-all: $(NAME)
+all: $(NAME) 
 
 $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 	@echo "\n\033[32mLIBFT COMPILED\n"
 
-%.o : %.c
-	@printf "|"
+$(FT_PATH)%.o : $(FT_PATH)%.c
+	@printf " 📱 "
 	@gcc -o $@ -c $< $(FLAGS) -I includes/
 
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(FT_PATH)$(OBJS)
 
-fclean:clean
-	@rm -f $(NAME)
+fclean: clean
+	@rm -f $(FT_PATH)$(NAME)
 
-re:fclean all
-
+re: fclean all

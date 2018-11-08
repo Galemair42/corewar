@@ -24,6 +24,6 @@ void        cw_inst_or(t_processus *process)
         process->carry = 1;
     else
         process->carry = 0;
-    process->pc = (process->pc + ret) & 0xFFF; // c'est ok ca ?
+    process->pc = MEM_MASK(ret);
     cw_reset_process(process);
 }

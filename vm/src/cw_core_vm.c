@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/08 14:42:00 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 14:48:40 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		cw_read_processus_opc(int index, int ctd)
 		else
 		{
 			process = (t_processus *)lst_process->content;
-			process->pc++;
+			process->pc = MEM_MASK(process->pc + 1);
 			ft_lstappend(&lst_process, ft_lstnew(process, sizeof(t_processus)));
 		}
 		lst_process = lst_process->next;

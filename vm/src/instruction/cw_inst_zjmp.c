@@ -12,8 +12,9 @@ void    cw_inst_zjmp(t_processus *process)
     if (process->carry == 1)
     {
         process->pc = apply_IDX_MOD(process->pc,
-        (process->pc + process->params[0]) % MEM_SIZE);
+        MEM_MASK(process->pc + process->params[0]));
     }
-    process->pc = (process->pc + ret) & 0xFFF; // c'est ok ca ?
+    else
+        process->pc = MEM_MASK(process->pc + 1);
     cw_reset_process(process);
 }
