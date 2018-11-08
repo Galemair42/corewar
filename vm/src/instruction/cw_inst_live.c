@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-
 // ici je dois allez chercher a opcode + 1 4 octets
 
 void    cw_inst_live(t_processus *process)
@@ -27,16 +26,8 @@ void    cw_inst_live(t_processus *process)
     }
     memory = arena.memory;
     process->nb_live++;
-    id_champ = memory[(process->pc) +1] << 24;
-    id_champ += memory[(process->pc + 2)] << 16;
-    id_champ += memory[(process->pc + 3)] << 8;
-    id_champ += memory[process->pc + 4];
+    id_champ = cw_calculate_value_on_ram(MEM_MASK(process->pc + 1), 4);
     cw_update_champ_live(id_champ);
-    process->pc = (process->pc + ret) & 0xFFF; // c'est ok ca ?
+    process->pc = MEM_MASK(ret);
     cw_reset_process(process);
 }
-
-// augmenter le nb_live du proc current
-// augmenter le nb_live du champ present a op + 1 si ca correspond a un champ
-// qui existe
-// et changer le last champ qui live

@@ -57,11 +57,7 @@ static void		cw_exec_instructions(int index)
 	{
 		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
-<<<<<<< HEAD
-		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(process)));
-=======
 		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(t_processus)));
->>>>>>> aae3d192b94eddeeae2de5fbefeae0fa3d8675b7
 		process = process->next;
 	}
 }
@@ -82,7 +78,7 @@ void		cw_read_processus_opc(int index, int ctd)
 		else
 		{
 			process = (t_processus *)lst_process->content;
-			process->pc++;
+			process->pc = MEM_MASK(process->pc + 1);
 			ft_lstappend(&lst_process, ft_lstnew(process, sizeof(t_processus)));
 		}
 		lst_process = lst_process->next;
