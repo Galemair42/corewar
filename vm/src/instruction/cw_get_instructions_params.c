@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/08 14:59:16 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:15:04 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -23,7 +23,7 @@
 **		!! STILL HAVE TO MANAGE DIRECT PARAMETERS !! CARE IF IT STANDS FOR AN ADDRESS OR AN INTEGER	**
 */
 
-static int		get_params1(unsigned int ocp, unsigned int *current_pc)
+static int		get_params1(unsigned int ocp, unsigned int *current_pc, int flag_chelou)
 {
 	int	value;
 	int i;
@@ -36,18 +36,18 @@ static int		get_params1(unsigned int ocp, unsigned int *current_pc)
 		printf("Parameters is non existant, how do we handle it ?\n");
 		exit(0);
 	}
-	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp));
-	*current_pc = MEM_MASK(*current_pc + get_size(ocp));
+	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp, flag_chelou));
+	*current_pc = MEM_MASK(*current_pc + get_size(ocp, flag_chelou));
 	return (value);
 }
 
-unsigned int		get_size(unsigned int ocp)
+unsigned int		get_size(unsigned int ocp, int flag_chelou)
 {
 	if (ocp == 1)
 		return (1);
-	if (ocp == 2)
+	if (ocp == 2 && flag_chelou == 0)
 		return (4);
-	if (ocp == 3)
+	if (ocp == 3 || flag_chelou == 1)
 		return (2);
 	return (0);
 }
@@ -58,7 +58,7 @@ unsigned int		get_size(unsigned int ocp)
 **		params of the structure t_processus
 */
 
-int		get_params(t_processus *process)
+int		get_params(t_processus *process, int flag_chelou)
 {
 	unsigned int ocp;
 	int	i;
@@ -74,7 +74,7 @@ int		get_params(t_processus *process)
 	ocp = ocp << 24;
 	while (i < op_tab[process->opcode - 1].nb_args)
 	{
-		process->params[i] = get_params1(ocp, &current_pc);
+		process->params[i] = get_params1(ocp, &current_pc, flag_chelou);
 		i++;
 		ocp = ocp << 2;
 	}

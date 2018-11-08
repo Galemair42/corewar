@@ -12,7 +12,7 @@ void        cw_inst_or(t_processus *process)
     int     reg_3;
     int     ret;
 
-    if ((ret = get_params(process)) == -1)
+    if ((ret = get_params(process, 0)) == -1)
     {
         cw_reset_process(process);
         return ;

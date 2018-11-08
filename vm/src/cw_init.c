@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:00:14 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/07 13:56:30 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:48:22 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,13 @@ t_list				*cw_init_process(void)
 	t_list			*new_proc_lst;
 	t_list			*tmp;
 	t_processus		*cur_process;
-	int				id_proc;
 
-	id_proc = 1;
 	new_proc_lst = NULL;
 	cur_lst = arena.champion;
 	while (cur_lst)
 	{
 		if (!(cur_process = cw_init_process_champ((t_champion *)cur_lst->content,
-				id_proc)))
+				arena.current_process_id)))
 			return (NULL); // les procedure de free encore et encore
 		tmp = new_proc_lst;
 		if (!(new_proc_lst = ft_lstnew(NULL,
@@ -53,7 +51,7 @@ t_list				*cw_init_process(void)
 		new_proc_lst->content = (void *)cur_process;
 		new_proc_lst->next = tmp;
 		cur_lst = cur_lst->next;
-		id_proc++;
+		arena.current_process_id++;
 	}
 	arena.process = new_proc_lst;
 	return (new_proc_lst);
@@ -71,4 +69,5 @@ void		cw_init_processeur(void)
 	arena.max_cycle = ~0;
 	arena.cur_cycle = 0;
 	arena.cycle_to_dump = ~0;
+	arena.current_process_id = 1;
 }

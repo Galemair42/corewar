@@ -2,17 +2,13 @@
 
 void    cw_inst_zjmp(t_processus *process)
 {
-    int     ret;
+	unsigned int	param;
 
-    if ((ret = get_params(process)) == -1)
-    {
-        cw_reset_process(process);
-        return ;
-    }
+	param = cw_calculate_value_on_ram(process->pc + 1, 4);
     if (process->carry == 1)
     {
         process->pc = apply_IDX_MOD(process->pc,
-        MEM_MASK(process->pc + process->params[0]));
+        MEM_MASK(process->pc + param));
     }
     else
         process->pc = MEM_MASK(process->pc + 1);

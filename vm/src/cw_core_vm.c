@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/08 15:32:44 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:08:37 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void		cw_exec_instructions(int index)
 	{
 		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
+		print_process(process);
 		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(t_processus)));
 		process = process->next;
 	}
@@ -76,8 +77,8 @@ void		cw_read_processus_opc(int index, int ctd)
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
-			if (op_tab[opc_tmp].cycle <= (ctd - index))
-				add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index), opc_tmp);
+			if (op_tab[opc_tmp - 1].cycle <= (ctd - index))
+				add_instruction_to_tab(process, (op_tab[opc_tmp - 1].cycle + index), opc_tmp);
 		}
 		else
 		{
@@ -102,6 +103,7 @@ int				cw_fight(void)
 	while (1)
 	{
 		printf("cycle numero: %d\n", cycle);
+		print_all_process();
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
 		cycle++;

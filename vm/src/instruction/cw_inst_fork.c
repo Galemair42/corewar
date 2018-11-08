@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 13:14:06 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/07 18:11:07 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:50:01 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ void    cw_inst_fork(t_processus *process)
 
 	param = cw_calculate_value_on_ram(process->pc + 1, 2);
 	pc = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + param));
-
 	new_processus = malloc(sizeof(t_processus));
 	memcpy(new_processus, process, sizeof(t_processus));
 	new_processus->pc = pc;
+	new_processus->id = arena.current_process_id;
+	arena.current_process_id++;
 	ft_lstappend(&arena.process, ft_lstnew(new_processus, sizeof(t_processus)));
 	free(new_processus);
 	process->pc = MEM_MASK(process->pc + 3);
+	print_all_process();
+	//exit (0);
 }

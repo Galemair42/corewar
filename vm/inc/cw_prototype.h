@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/07 18:09:12 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:39:05 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		cw_inst_lfork(t_processus *process);
 void		cw_inst_aff(t_processus *process);
 
 void		cw_read_instru(void);
-int			get_params(t_processus *process);
+int			get_params(t_processus *process, int flag_chelou);
 
 /*
 ** 		debug
@@ -94,7 +94,7 @@ unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc);
 
 void			cw_put_four_octet(unsigned int index, unsigned int four_octet);
 unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length);
-unsigned int	get_size(unsigned int ocp);
+unsigned int	get_size(unsigned int ocp, int flag_chelou);
 void			cw_insert_process(t_processus **process_tab, t_processus *process);
 int				cw_verif_processes(void);
 void			cw_free_content(void *content, __unused size_t size);

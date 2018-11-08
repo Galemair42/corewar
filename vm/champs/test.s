@@ -1,3 +1,3 @@
-.name    "corrup_wall"
+.name    "Bonjour a tous"
 .comment "Wai"
-ld %42,r1
+ldi r1,%2,r2

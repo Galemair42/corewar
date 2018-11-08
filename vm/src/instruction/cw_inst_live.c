@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 17:06:24 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/30 19:15:27 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:31:46 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,10 @@ void    cw_inst_live(t_processus *process)
     unsigned char   *memory;
     int             ret;
 
-    if ((ret = get_params(process)) == -1)
-    {
-        cw_reset_process(process);
-        return ;
-    }
     memory = arena.memory;
     process->nb_live++;
     id_champ = cw_calculate_value_on_ram(MEM_MASK(process->pc + 1), 4);
     cw_update_champ_live(id_champ);
-    process->pc = MEM_MASK(ret);
+    process->pc = MEM_MASK(process->pc + 5);
     cw_reset_process(process);
 }

@@ -1,0 +1,2 @@
+CHECK process id sur long fork;
+FIX segfault after fork

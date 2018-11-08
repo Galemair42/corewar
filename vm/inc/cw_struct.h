@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/07 15:51:09 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 17:45:25 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_processeur
 	unsigned int 	   	cycle_to_die;
 	unsigned int 	   	max_check;
 	int			 	   	id_last_player_alive;
+	int					current_process_id;
 	unsigned int		max_cycle;
 	unsigned int		cur_cycle;
 	unsigned int		cycle_to_dump;

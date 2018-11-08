@@ -7,7 +7,7 @@ void        cw_inst_lld(t_processus *process)
     int     ret;
     int     landing;
     
-    if ((ret = get_params(process)) == -1)
+    if ((ret = get_params(process, 0)) == -1)
     {
         cw_reset_process(process);
         return ;
