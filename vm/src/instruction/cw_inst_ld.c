@@ -18,8 +18,6 @@ void        cw_inst_ld(t_processus *process)
     int     reg_2;
     int     ret;
     int     landing;
-    print_buffer_in_hexa(arena.memory, MEM_SIZE);
-    exit(5);
 
     if ((ret = get_params(process)) == -1)
     {
