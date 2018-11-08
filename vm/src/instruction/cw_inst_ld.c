@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:10:34 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/07 18:42:18 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:18:04 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void        cw_inst_ld(t_processus *process)
     int     reg_2;
     int     ret;
     int     landing;
-    print_buffer_in_hexa(arena.memory, MEM_SIZE);
-    exit(5);
 
     if ((ret = get_params(process)) == -1)
     {

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/07 18:54:21 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:18:15 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,15 @@ void	print_process(t_processus *process)
 	printf("process PC : %d\n", process->pc);
 	printf("process carry : %u\n", process->carry);
 	//printf("process id_player : %d\n", process->id_player);
-	for (int i = 0; i < REG_NUMBER; i++)
-	{
-		printf("REG[%d] : %u\n", i, process->reg[i]);
-	}
-	printf("Params Value :\n");
-	for (int i = 0; i < 5; i++)
-	{
-		printf("Params[%d] : %u\n", i, process->params[i]);
-	}
+//	for (int i = 0; i < REG_NUMBER; i++)
+//	{
+//		printf("REG[%d] : %u\n", i, process->reg[i]);
+//	}
+//	printf("Params Value :\n");
+//	for (int i = 0; i < 5; i++)
+//	{
+//		printf("Params[%d] : %u\n", i, process->params[i]);
+//	}
 }
 
 void	print_all_process(void)

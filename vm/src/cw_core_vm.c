@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/08 14:48:40 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:32:44 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ static void		cw_exec_instructions(int index)
 	while (process)
 	{
 		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
-		print_process(process);
 		(*ptr[process->opcode - 1])(process);
-		print_process(process);
 		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(t_processus)));
 		process = process->next;
 	}
@@ -70,26 +68,25 @@ void		cw_read_processus_opc(int index, int ctd)
 	t_processus		*process;
 	unsigned int	opc_tmp;
 
+	ft_lstappend(&arena.process, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 	lst_process = arena.process;
-	while (lst_process && ((t_processus *)lst_process)->id != 0)
+	while (lst_process && ((t_processus *)lst_process->content)->id != 0)
 	{
 		process = (t_processus *)lst_process->content;
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
 			if (op_tab[opc_tmp].cycle <= (ctd - index))
-
 				add_instruction_to_tab(process, (op_tab[opc_tmp].cycle + index), opc_tmp);
 		}
 		else
 		{
 			process = (t_processus *)lst_process->content;
-			process->pc = MEM_MASK(process->pc + 1);
+			process->pc++;
 			ft_lstappend(&lst_process, ft_lstnew(process, sizeof(t_processus)));
 		}
 		lst_process = lst_process->next;
 	}
-	ft_lstappend(&arena.process, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 	cw_clean_lst();
 }
 
