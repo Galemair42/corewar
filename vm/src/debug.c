@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 17:56:17 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 20:05:08 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ void	print_process(t_processus *process)
 {
 	printf("process id : %d\n", process->id);
 	printf("process PC : %d\n", process->pc);
+	printf("process opc : %d\n", process->opcode);
 	printf("process carry : %u\n", process->carry);
+	printf("next adress : %p\n", process->next);
 	//printf("process id_player : %d\n", process->id_player);
 //	for (int i = 0; i < REG_NUMBER; i++)
 //	{
@@ -103,7 +105,19 @@ void	print_all_process(void)
 	}
 }
 
-//void	print_exec_tab(void)
-//{
-//	t_processus *cur_process
-//}
+void	print_exec_tab(void)
+{
+	t_processus *cur_process;
+	
+	for (int i=0; i < CYCLE_TO_DIE;i++)
+	{
+		cur_process = arena.process_to_exec[i];
+		while (cur_process)
+		{
+			printf("\ni = %d\n", i);
+			print_process(cur_process);
+			cur_process = cur_process->next;
+		}
+	}
+
+}

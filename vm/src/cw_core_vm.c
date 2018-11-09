@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 18:20:33 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 20:15:12 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,16 @@ void			add_instruction_to_tab(t_processus *process, int index, unsigned int opc)
 {
 	t_processus 	*tab;
 
+
 	tab = malloc(sizeof(t_processus));
 	memcpy(tab, process, sizeof(t_processus));
 	tab->opcode = opc;
+	tab->next = NULL;
 	if (!arena.process_to_exec[index])
 		arena.process_to_exec[index] = tab;
 	else
 		cw_insert_process(&arena.process_to_exec[index], tab);
 }
-
 static void		cw_exec_instructions(int index)
 {
 	static void		(*ptr[16]) (t_processus *);
@@ -57,7 +58,7 @@ static void		cw_exec_instructions(int index)
 	while (process)
 	{
 		tmp = process->next;
-		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
+		//printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
 		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(t_processus)));
 		free(process);
@@ -105,15 +106,12 @@ int				cw_fight(void)
 	cycle = 0;
 	while (1)
 	{
-		printf("cycle numero: %d\n", cycle);
-		print_all_process();
+		//printf("cycle numero: %d\n", cycle);
 		cw_read_processus_opc(cycle, ctd);
-		printf("\n");
 		cw_exec_instructions(cycle);
 		cycle++;
 		if (cycle == ctd)
 		{
-			exit (0);
 			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
 			{
 				ctd -= CYCLE_DELTA;
