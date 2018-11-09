@@ -24,7 +24,7 @@ void		cw_clear_exec_tab(void)
 			free(to_free);
 			to_free = tmp;
 		}
-//		ft_bzero(arena.process_to_exec[i], sizeof(t_processus *));
+		arena.process_to_exec[i] = NULL;
 		i++;
 	}
 }

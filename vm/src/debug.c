@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/08 15:18:15 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 17:56:17 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,3 +102,8 @@ void	print_all_process(void)
 		printf("\n");
 	}
 }
+
+//void	print_exec_tab(void)
+//{
+//	t_processus *cur_process
+//}
