@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 16:54:30 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/18 18:01:13 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 16:12:49 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int		cw_update_champ_live(int id_champ)
 		if (champ->id == id_champ)
 		{
 			champ->nb_live++;
+			arena.id_last_player_alive = id_champ;
+			arena.cycle_live++;
 			printf("Player 1 (%s) is said to be alive\n", champ->name);
 			return (1);
 		}

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/08 17:39:05 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 15:05:53 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ unsigned int	get_size(unsigned int ocp, int flag_chelou);
 void			cw_insert_process(t_processus **process_tab, t_processus *process);
 int				cw_verif_processes(void);
 void			cw_free_content(void *content, __unused size_t size);
+void			cw_clear_exec_tab(void);
 
 #endif

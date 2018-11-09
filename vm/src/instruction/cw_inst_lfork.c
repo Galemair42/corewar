@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:10:49 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/08 17:13:02 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 10:40:05 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void    cw_inst_lfork(t_processus *process)
 	new_processus = malloc(sizeof(t_processus));
 	memcpy(new_processus, process, sizeof(t_processus));
 	new_processus->pc = pc;
+	new_processus->id = arena.current_process_id;
+	arena.current_process_id++;
 	ft_lstappend(&arena.process, ft_lstnew(new_processus, sizeof(t_processus)));
 	free(new_processus);
 	process->pc = MEM_MASK(process->pc + 3);
+	cw_reset_process(process);
 }

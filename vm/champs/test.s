@@ -1,3 +1,5 @@
 .name    "Bonjour a tous"
 .comment "Wai"
-ldi r1,%2,r2
+live %13
+fork %12
+live %13

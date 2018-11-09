@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/08 17:08:37 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 16:12:56 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static void		cw_exec_instructions(int index)
 	{
 		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
-		print_process(process);
 		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(t_processus)));
 		process = process->next;
 	}
@@ -102,26 +101,30 @@ int				cw_fight(void)
 	cycle = 0;
 	while (1)
 	{
-		printf("cycle numero: %d\n", cycle);
-		print_all_process();
+		//printf("cycle numero: %d\n", cycle);
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
 		cycle++;
 		if (cycle == ctd)
 		{
-			if (cw_verif_processes() >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
+			exit (0);
+			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
 			{
 				ctd -= CYCLE_DELTA;
 				cycle_decrementation = 0;
 			}
 			else
 				cycle_decrementation++;
-			cycle = 0;
-			if (!arena.process)
+			cw_verif_processes();
+			cw_clear_exec_tab();
+			printf("%d\n", arena.cycle_live);
+			if (arena.cycle_live == 0)
 			{
 				printf("Nous avons un winner !\n");
 				return (1);
 			}
+			arena.cycle_live = 0;
+			cycle = 0;
 		}
 	}
 	return (1);
