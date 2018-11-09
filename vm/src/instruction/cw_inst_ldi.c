@@ -14,5 +14,8 @@ void    cw_inst_ldi(t_processus *process)
     landing = apply_IDX_MOD(process->pc, MEM_MASK(landing));
     process->reg[process->params[2]] = cw_calculate_value_on_ram(landing, 4);
     cw_reset_process(process);
+    if (arena.visu_fight)
+        cw_visu_incr_process(process, ret);
     process->pc = ret;
+    cw_reset_process(process);
 }

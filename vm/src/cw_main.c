@@ -26,13 +26,10 @@ int				main(int argc, char **argv)
 		printf("sa\n");
 		return (42);
 	}
-	
-//	print_all_champ();
-	//print_all_process();
-
-//	process = arena.process;
-
 	cw_fight();
+	
+	getch();	
+	// attention a bien free ton ncurse a la fin;
 
 	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
 }

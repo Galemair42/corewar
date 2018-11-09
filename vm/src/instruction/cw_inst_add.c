@@ -19,6 +19,8 @@ void cw_inst_add(t_processus *process)
         process->carry = 1;
     else
         process->carry = 0;
+    if (arena.visu_fight)
+        cw_visu_incr_process(process, ret);
     process->pc = MEM_MASK(ret);
     cw_reset_process(process);
 }

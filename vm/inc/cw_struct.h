@@ -34,7 +34,7 @@ struct		s_processus
 	unsigned int	reg[REG_NUMBER];
 	int				params[4];
 	t_processus		*next;
-//	int				id_player;
+	WINDOW			*win;
 };
 
 typedef struct		s_champion
@@ -60,6 +60,8 @@ typedef struct		s_processeur
 	unsigned int		max_cycle;
 	unsigned int		cur_cycle;
 	unsigned int		cycle_to_dump;
+	WINDOW				*visu_score;
+	WINDOW				*visu_fight;
 }					t_processeur;
 
 typedef struct		s_cw_op_tab

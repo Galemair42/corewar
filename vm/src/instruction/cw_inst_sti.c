@@ -28,6 +28,8 @@ void    cw_inst_sti(t_processus *process)
     landing = MEM_MASK(landing);
     apply_IDX_MOD(process->pc, MEM_MASK(landing));
     cw_put_four_octet(landing, process->reg[process->params[0]]);
+    if (arena.visu_fight)
+        cw_visu_incr_process(process, ret);
     process->pc = ret; 
     cw_reset_process(process);
 }

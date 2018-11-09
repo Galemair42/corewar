@@ -55,9 +55,10 @@ static void		cw_exec_instructions(int index)
 	process = arena.process_to_exec[index];
 	while (process)
 	{
-		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
+		getch();
+//		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
-		print_process(process);
+		//print_process(process);
 		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(t_processus)));
 		process = process->next;
 	}
@@ -83,6 +84,9 @@ void		cw_read_processus_opc(int index, int ctd)
 		else
 		{
 			process = (t_processus *)lst_process->content;
+			if (arena.visu_fight)
+				cw_visu_incr_process(process, process->pc + 1);
+			//printf("lol");
 			process->pc++;
 			ft_lstappend(&lst_process, ft_lstnew(process, sizeof(t_processus)));
 		}
@@ -102,8 +106,6 @@ int				cw_fight(void)
 	cycle = 0;
 	while (1)
 	{
-		printf("cycle numero: %d\n", cycle);
-		print_all_process();
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
 		cycle++;

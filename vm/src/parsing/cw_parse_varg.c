@@ -62,6 +62,11 @@ static int			cw_parse_flag(char **argv, int cur)
 		printf("fais ton atoi bizarre\n");
 		exit(5);
 	}
+	else if (ft_strequ(arg, "d"))
+	{
+		cw_init_visu();		
+		return (1);
+	}
 	return (0);
 }
 

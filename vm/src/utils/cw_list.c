@@ -45,5 +45,5 @@ void        cw_insert_process(t_processus **process_tab, t_processus *process)
         lst_iter = lst_iter->next;
     }
     process->next = NULL; // ajouter un node a la toute fin
-    lst_iter->next = process;
+    before->next = process;
 }
