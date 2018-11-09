@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:00:14 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/08 17:48:22 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 14:53:00 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ t_list				*cw_init_process(void)
 	return (new_proc_lst);
 }
 
+//void		cw_init_processeur(void)
+//{
+//	ft_bzero(&arena, sizeof(t_processeur));
+//	ft_bzero(arena.memory, MEM_SIZE);
+//	ft_bzero(arena.process_to_exec, sizeof(t_processus *) * CYCLE_TO_DIE);
+//	arena.max_check = MAX_CHECKS;
+//	arena.max_cycle = ~0;
+//	arena.cycle_to_dump = ~0;
+//	arena.current_process_id = 1;
+//}
 void		cw_init_processeur(void)
 {
 	ft_bzero(arena.memory, MEM_SIZE);
@@ -73,6 +83,7 @@ void		cw_init_processeur(void)
 	arena.cycle_to_die = CYCLE_TO_DIE;	
 	arena.max_check = MAX_CHECKS;
 	arena.id_last_player_alive = 0;
+	arena.cycle_live = 0;
 	arena.max_cycle = ~0;
 	arena.cur_cycle = 0;
 	arena.cycle_to_dump = ~0;

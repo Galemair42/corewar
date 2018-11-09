@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 13:14:06 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/08 17:50:01 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 11:48:55 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void    cw_inst_fork(t_processus *process)
 	ft_lstappend(&arena.process, ft_lstnew(new_processus, sizeof(t_processus)));
 	free(new_processus);
 	process->pc = MEM_MASK(process->pc + 3);
-	print_all_process();
+	cw_reset_process(process);
+	//print_all_process();
 	//exit (0);
 }
