@@ -3,6 +3,8 @@
 void        cw_put_four_octet_visu(unsigned int index,
         unsigned int four_octet, WINDOW *win)
 {
+    wmove(win, 0, 0);
+    refresh();
     arena.memory[index] = four_octet >> 24;
     arena.memory[MEM_MASK(index + 1)] = (four_octet >> 16) & 0xFF;
     arena.memory[MEM_MASK(index + 2)] = (four_octet >> 8) & 0xFF;

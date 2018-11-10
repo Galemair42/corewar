@@ -13,13 +13,23 @@
 #ifndef 	CW_PROTOTYPE_H
 # define	CW_PROTOTYPE_H
 
+
+/*
+*               core
+*/
+
+int             cw_fight_visu();
+int		cw_fight(void);
+void		cw_exec_instructions(int index);
+void		cw_init_funtab(void (**ptr)(t_processus *));
+void		cw_read_processus_opc(int index, int ctd);
+
 /*
 **		processeur, c'est la struct globale qui represente l'arene
 */
 
-void		cw_init_processeur(void);
-int			cw_parse_arg(char **argv, int argc);
-int			cw_fight(void);
+void	        cw_init_processeur(void);
+int		cw_parse_arg(char **argv, int argc);
 
 /*
 ** 		memory's arena
@@ -75,12 +85,16 @@ int			get_params(t_processus *process, int flag_chelou);
 *		visu
 */
 
-void			cw_init_visu(void);
+void	        cw_init_visu(void);
 void            cw_init_proces_visu(t_processus *process);
 void        	cw_display_champ_on_ram(t_champion *champ, WINDOW *win, unsigned int pc);
 void        	cw_visu_incr_process(t_processus *process, int next_pc);
 void        	cw_put_four_octet_visu(unsigned int index,
         unsigned int four_octet, WINDOW *win);
+void            cw_key_space(void);
+void            cw_key_speed(int c);
+void            cw_update_cycle(void);
+void            cw_manage_getch(int c);
 
 /*
 ** 		debug
@@ -92,6 +106,7 @@ void		print_all_champ(void);
 void		print_all_process(void);
 void		print_process(t_processus *process);
 void 		print_register(t_processus *process);
+void		debug_visu_process_orgin(t_list *lst_process);
 
 /*
 **		cw_instructions_utils.c
@@ -107,7 +122,7 @@ void			cw_put_four_octet(unsigned int index, unsigned int four_octet);
 unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length);
 unsigned int	get_size(unsigned int ocp, int flag_chelou);
 void			cw_insert_process(t_processus **process_tab, t_processus *process);
-int				cw_verif_processes(void);
+int			cw_verif_processes(void);
 void			cw_free_content(void *content, __unused size_t size);
 void			cw_clear_exec_tab(void);
 

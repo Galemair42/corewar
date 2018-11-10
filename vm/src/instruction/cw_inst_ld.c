@@ -35,8 +35,13 @@ void        cw_inst_ld(t_processus *process)
         process->carry = 1;
     else
         process->carry = 0;
+    
+   // wprintw(process->win, "ici cur_pc : %d, ret : %d", process->pc, MEM_MASK(ret));
+    //wrefresh(process->win);
+    
+//    printf("le ret : %d\n", ret);
     if (arena.visu_fight)
-        cw_visu_incr_process(process, ret);
+        cw_visu_incr_process(process, MEM_MASK(ret));
     process->pc = ret;
     cw_reset_process(process);
 }

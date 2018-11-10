@@ -107,3 +107,19 @@ void	print_all_process(void)
 //{
 //	t_processus *cur_process
 //}
+
+
+void		debug_visu_process_orgin(t_list *lst_process)
+{
+	t_processus *process;
+	
+	while (lst_process)
+	{
+		process = (t_processus *)lst_process->content;
+		mvwprintw(process->win, 0, 0, "je suis actuelemnt en 00");
+		box(process->win, ACS_VLINE, ACS_HLINE);
+		wrefresh(process->win);
+		getch();
+		lst_process = lst_process->next;
+	}
+}

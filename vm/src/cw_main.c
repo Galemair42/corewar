@@ -23,10 +23,12 @@ int				main(int argc, char **argv)
 	//print_buffer_in_hexa(arena.memory, 4096);
 	if (!(arena.process = cw_init_process()))
 	{
-		printf("sa\n");
 		return (42);
 	}
-	cw_fight();
+	if (arena.visu_fight)
+		cw_fight_visu();
+	else
+		cw_fight(); 
 	
 	getch();	
 	// attention a bien free ton ncurse a la fin;
