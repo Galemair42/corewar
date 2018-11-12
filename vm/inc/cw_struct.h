@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 19:47:54 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 10:57:10 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct		s_processeur
 	unsigned char		memory[MEM_SIZE];
 	t_list	 	   		*champion;
 	t_list				*process;
-	t_processus		*process_to_exec[CYCLE_TO_DIE];
+	t_list			*process_to_exec[CYCLE_TO_DIE];
 	size_t				nb_champ;
 	unsigned int 	   	cycle_to_die;//
 	unsigned int 	   	max_check;//

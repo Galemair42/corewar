@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:00:14 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 19:14:45 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 14:26:58 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_list				*cw_init_process(void)
 	t_processus		*cur_process;
 
 	new_proc_lst = NULL;
-	ft_lstappend(&new_proc_lst, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 	cur_lst = arena.champion;
 	while (cur_lst)
 	{
@@ -54,6 +53,7 @@ t_list				*cw_init_process(void)
 		cur_lst = cur_lst->next;
 		arena.current_process_id++;
 	}
+	ft_lstadd(&new_proc_lst, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 	arena.process = new_proc_lst;
 	return (new_proc_lst);
 }

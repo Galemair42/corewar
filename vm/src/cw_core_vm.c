@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 20:15:12 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 14:27:43 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,36 +32,41 @@ static void		cw_init_funtab(void (**ptr)(t_processus *))
 	ptr[15] = &cw_inst_aff;
 }
 
-void			add_instruction_to_tab(t_processus *process, int index, unsigned int opc)
+t_list			*add_instruction_to_tab(t_list *process, int index, unsigned int opc)
 {
-	t_processus 	*tab;
+	t_processus 	*tmp;
+	t_list			*to_return;
 
-	tab = malloc(sizeof(t_processus));
-	memcpy(tab, process, sizeof(t_processus));
-	tab->opcode = opc;
-	tab->next = NULL;
+	to_return = process->next;
+	process->next = NULL;
+	tmp = (t_processus *)process->content;
+	tmp->opcode = opc;
 	if (!arena.process_to_exec[index])
-		arena.process_to_exec[index] = tab;
+		arena.process_to_exec[index] = process;
 	else
-		cw_insert_process(&arena.process_to_exec[index], tab);
+		cw_insert_process(&arena.process_to_exec[index], process);
+	return (to_return);
 }
+
 static void		cw_exec_instructions(int index)
 {
 	static void		(*ptr[16]) (t_processus *);
 	t_processus		*process;
-	t_processus		*tmp;
+	t_list			*tmp;
+	t_list			*lst;
 
 	if (!*ptr)
 		cw_init_funtab(ptr);
-	process = arena.process_to_exec[index];
-	while (process)
+	lst = arena.process_to_exec[index];
+	while (lst)
 	{
-		tmp = process->next;
-		//printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
+		process = (t_processus *)(lst->content);
+		tmp = lst->next;
+		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
-		ft_lstappend(&arena.process, ft_lstnew(process, sizeof(t_processus)));
-		free(process);
-		process = tmp;
+		lst->next = NULL;
+		ft_lstappend(&arena.process, lst);
+		lst = tmp;
 	}
 	arena.process_to_exec[index] = NULL;
 }
@@ -71,8 +76,10 @@ void		cw_read_processus_opc(int index, int ctd)
 	t_list			*lst_process;
 	t_processus		*process;
 	unsigned int	opc_tmp;
+	t_list			*tmp;
 
-	ft_lstappend(&arena.process, lst_process); // A TESTER
+	tmp = arena.process;
+	ft_lstappend(&arena.process, arena.process);
 	lst_process = arena.process;
 	while (lst_process && ((t_processus *)lst_process->content)->id != 0)
 	{
@@ -81,16 +88,21 @@ void		cw_read_processus_opc(int index, int ctd)
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
 			if (!(op_tab[opc_tmp - 1].cycle > (ctd - index) && process->nb_live == 0))
-				add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index) % ctd, opc_tmp);
+				lst_process = add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index) % ctd, opc_tmp);
+			else
+				lst_process = free_list_elem(lst_process);			
 		}
 		else
 		{
 			process->pc++;
 			lst_process->next = NULL;
 			ft_lstappend(&arena.process, lst_process);
+			lst_process = lst_process->next;
 		}
-		lst_process = lst_process->next;
 	}
+	arena.process = tmp;
+//	printf("after\n");
+//	print_all_process();
 }
 
 int				cw_fight(void)
@@ -104,9 +116,10 @@ int				cw_fight(void)
 	cycle = 0;
 	while (1)
 	{
-		//printf("cycle numero: %d\n", cycle);
+		printf("cycle numero: %d\n", cycle);
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
+		//print_all_process();
 		cycle++;
 		if (cycle == ctd)
 		{
@@ -125,6 +138,7 @@ int				cw_fight(void)
 				printf("Nous avons un winner !\n");
 				return (1);
 			}
+			ft_lstadd(&arena.process, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 			arena.cycle_live = 0;
 			cycle = 0;
 		}
