@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/11/12 16:02:54 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/12 17:52:43 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	set_dir(t_asm_file *fl, char *str, t_op *op, unsigned i)
 		op->params[i].type = T_DIR;
 		if (str[1] == LABEL_CHAR && ft_strisonly(str + 2, LABEL_CHARS))
 		{
-			if (!(op->params[i].label = ft_memalloc(ft_strlen(str + 2))))
+			if (!(op->params[i].label = ft_memalloc(ft_strlen(str + 2) + 1)))
 				return (exit_parsing(fl, E_MALLOC));
 			op->params[i].label = ft_strcpyto(op->params[i].label,
 					str + 2, SEPAR_CHAR);

@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 22:37:35 by femaury           #+#    #+#             */
-/*   Updated: 2018/11/12 15:41:09 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/12 18:05:50 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	write_instructions(t_asm_file *fl, int fd)
 		write(fd, &curr->info.opcode, 1);
 		if (curr->info.ocp)
 			write_ocp(curr, fd);
-		while (curr->params[i].type && i < 3)
+		while (i < 3 && curr->params[i].type)
 		{
 			write_params(sizeto_op(&fl->bd.op, curr),
 					get_label_size(&fl->bd.label, curr->params[i].label),
