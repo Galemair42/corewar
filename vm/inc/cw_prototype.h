@@ -96,6 +96,8 @@ void            cw_key_space(void);
 void            cw_key_speed(int c);
 void            cw_update_cycle(void);
 void            cw_manage_getch(int c);
+void            cw_highlight(unsigned int index);
+
 
 /*
 ** 		debug
