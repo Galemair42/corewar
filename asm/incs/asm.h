@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 15:49:58 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/25 18:00:42 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/12 15:57:48 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,10 @@ t_label				*new_label(char *label, unsigned int size);
 void				add_label(t_label **head, t_label *new);
 int					get_label_size(t_label **head, char *label);
 int					check_labels(t_asm_file *fl, t_op **ophd, t_label **labhd);
+
+int					free_params(int ret, char **params, size_t size);
+void				free_labels(t_label **lst);
+void				free_ops(t_op **lst);
 
 extern t_op_tab		g_op_tab[17];
 

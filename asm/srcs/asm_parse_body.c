@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/11/07 16:32:43 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/12 16:02:52 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,19 @@ static int	parse_instruction(t_asm_file *fl, char *ln, t_op *op)
 		if (get_label(fl, table[0]) && find_operation(fl, table[1], op)
 				&& get_params(fl, prepare_params(ln, 2),
 				ft_strcountc(ln, SEPAR_CHAR), op))
+		{
+			ft_tabdel((void **)table, ft_strtabsize(table));
 			return (1);
+		}
 	}
 	else
 	{
 		if (find_operation(fl, table[0], op) && get_params(fl,
 				prepare_params(ln, 1), ft_strcountc(ln, SEPAR_CHAR), op))
+		{
+			ft_tabdel((void **)table, ft_strtabsize(table));
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -157,6 +163,7 @@ int			parse_body(t_asm_file *fl, int fd)
 			{
 				if (!get_label(fl, tmp))
 					return (0);
+				ft_strdel(&tmp);
 			}
 			else
 			{
@@ -164,8 +171,7 @@ int			parse_body(t_asm_file *fl, int fd)
 					return (0);
 			}
 		}
-		ft_strdel(&ln);
-		fl->ln++;
+		fl->ln++ ? ft_strdel(&ln) : ft_strdel(&ln);
 	}
 	fl->bd.op_size = ft_revbits(size_op(&fl->bd.op));
 	return (1);

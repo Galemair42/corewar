@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 18:35:34 by femaury           #+#    #+#             */
-/*   Updated: 2018/11/07 16:19:40 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/12 15:57:59 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ int			parse_file(char *file_name)
 		return (exit_parsing(&fl, E_BODY_LB_CALL));
 	create_binary(&fl, file_name);
 	close(fd);
+	free_labels(&fl.bd.label);
+	free_ops(&fl.bd.op);
 	return (1);
 }

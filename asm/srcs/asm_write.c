@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 22:37:35 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/25 16:42:59 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/12 15:41:09 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ static char	*modify_name(char *file_name)
 {
 	char			*new;
 	size_t			len;
-	unsigned int	i;
 
-	i = 0;
 	len = ft_strlen(file_name);
-	if (!(new = (char *)malloc(len + 2)))
+	if (!(new = ft_strnew(len + 2, '\0')))
 		return (NULL);
 	new = ft_strcpy(new, file_name);
 	new[len - 1] = 'c';
@@ -124,4 +122,5 @@ void		create_binary(t_asm_file *fl, char *file_name)
 	write_instructions(fl, fd);
 	ft_dprintf(1, "Writing output program to %s\n", name);
 	close(fd);
+	ft_strdel(&name);
 }

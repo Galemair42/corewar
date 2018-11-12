@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/10/17 17:21:32 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/12 16:02:54 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,23 +148,23 @@ int			get_params(t_asm_file *fl, char **params, int count, t_op *op)
 	if (op->info.p_count == 1 && ft_strtabsize(params) == 1 && !count)
 	{
 		if (!set_dir(fl, params[0], op, 0))
-			return (0);
+			return (free_params(0, params, 1));
 		set_reg(fl, params[0], &op->params[0], op->info.p_type[0]);
 		op->size = op->params[0].size + (op->info.ocp ? 2 : 1);
 		if (fl->status == 1)
-			return (1);
+			return (free_params(1, params, 1));
 	}
 	else if (op->info.p_count == 2 && ft_strtabsize(params) == 2 && count == 1)
 	{
 		if (!set_params(fl, params, op, 2) || fl->status != 2)
-			return (0);
-		return (1);
+			return (free_params(0, params, 2));
+		return (free_params(1, params, 2));
 	}
 	else if (ft_strtabsize(params) == 3 && count == 2)
 	{
 		if (!set_params(fl, params, op, 3) || fl->status != 3)
-			return (0);
-		return (1);
+			return (free_params(0, params, 3));
+		return (free_params(1, params, 3));
 	}
 	return (exit_parsing(fl, E_BODY_PARAM));
 }
