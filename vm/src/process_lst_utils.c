@@ -34,3 +34,16 @@ void	cw_clean_lst()
 		ft_lstdelone(&tmp, free_ptr);
 	}
 }
+
+/* FREE elem and iterate to the next list elem */
+
+t_list	*free_list_elem(t_list *to_free)
+{
+	t_list *to_return;
+	void	(*free_ptr)(void *, size_t);
+
+	to_return = to_free->next;
+	ft_lstdelone(&to_free, free_ptr);
+	return (to_return);
+
+}

@@ -100,5 +100,6 @@ void			cw_insert_process(t_processus **process_tab, t_processus *process);
 int				cw_verif_processes(void);
 void			cw_free_content(void *content, __unused size_t size);
 void			cw_clear_exec_tab(void);
+t_list		*free_list_elem(t_list *to_free);
 
 #endif

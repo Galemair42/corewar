@@ -36,7 +36,6 @@ void			add_instruction_to_tab(t_processus *process, int index, unsigned int opc)
 {
 	t_processus 	*tab;
 
-
 	tab = malloc(sizeof(t_processus));
 	memcpy(tab, process, sizeof(t_processus));
 	tab->opcode = opc;
@@ -73,7 +72,7 @@ void		cw_read_processus_opc(int index, int ctd)
 	t_processus		*process;
 	unsigned int	opc_tmp;
 
-	ft_lstappend(&arena.process, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
+	ft_lstappend(&arena.process, lst_process); // A TESTER
 	lst_process = arena.process;
 	while (lst_process && ((t_processus *)lst_process->content)->id != 0)
 	{
@@ -82,17 +81,16 @@ void		cw_read_processus_opc(int index, int ctd)
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
 			if (!(op_tab[opc_tmp - 1].cycle > (ctd - index) && process->nb_live == 0))
-				add_instruction_to_tab(process, (op_tab[opc_tmp - 1].cycle + index) % ctd, opc_tmp);
+				add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index) % ctd, opc_tmp);
 		}
 		else
 		{
-			process = (t_processus *)lst_process->content;
 			process->pc++;
-			ft_lstappend(&arena.process, ft_lstnew(process, sizeof(t_processus)));
+			lst_process->next = NULL;
+			ft_lstappend(&arena.process, lst_process);
 		}
 		lst_process = lst_process->next;
 	}
-	cw_clean_lst();
 }
 
 int				cw_fight(void)

@@ -29,6 +29,4 @@ void    cw_inst_fork(t_processus *process)
 	free(new_processus);
 	process->pc = MEM_MASK(process->pc + 3);
 	cw_reset_process(process);
-	//print_all_process();
-	//exit (0);
 }

@@ -38,6 +38,7 @@ t_list				*cw_init_process(void)
 	t_processus		*cur_process;
 
 	new_proc_lst = NULL;
+	ft_lstappend(&new_proc_lst, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 	cur_lst = arena.champion;
 	while (cur_lst)
 	{
