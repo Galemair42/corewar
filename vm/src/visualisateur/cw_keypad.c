@@ -6,7 +6,7 @@ void    cw_key_space()
 
     wmove(arena.visu_score, 0, 0);
     refresh();
-    mvwprintw(arena.visu_score, SC_PAUSE_HEIGHT, SC_PAUSE_WIDTH, "**PAUSED**");// refresh ??
+    mvwprintw(arena.visu_score, SC_HEIGHT, SC_FIRST_COL, "**PAUSED**");// refresh ??
     wrefresh(arena.visu_score);
     while (1)
     {
@@ -16,7 +16,7 @@ void    cw_key_space()
         else 
             cw_manage_getch(c);
     }
-    mvwprintw(arena.visu_score, SC_PAUSE_HEIGHT, SC_PAUSE_WIDTH, "**RUNNING**");
+    mvwprintw(arena.visu_score, SC_HEIGHT, SC_FIRST_COL, "**RUNNING**");
     wrefresh(arena.visu_score);
 }
 
@@ -45,6 +45,6 @@ void    cw_key_speed(int c)
             speed += 10;
     }
     timeout(505 - speed);
-    mvwprintw(arena.visu_score, SC_SPEED_HEIGHT + 2, SC_SPEED_WIDTH, "%02d", speed);
+    mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "%02d", speed);
     wrefresh(arena.visu_score);
 }

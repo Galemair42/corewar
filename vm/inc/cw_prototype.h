@@ -85,12 +85,12 @@ int			get_params(t_processus *process, int flag_chelou);
 *		visu
 */
 
-void	        cw_init_visu(void);
+int	        cw_init_visu(void);
 void            cw_init_proces_visu(t_processus *process);
-void        	cw_display_champ_on_ram(t_champion *champ, WINDOW *win, unsigned int pc);
+void               cw_display_champ_on_ram(t_champion *champ, t_processus *process);
 void        	cw_visu_incr_process(t_processus *process, int next_pc);
 void        	cw_put_four_octet_visu(unsigned int index,
-        unsigned int four_octet, WINDOW *win);
+        unsigned int four_octet, int color_pair);
 void            cw_key_space(void);
 void            cw_key_speed(int c);
 void            cw_update_cycle(void);

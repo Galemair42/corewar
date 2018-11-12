@@ -33,8 +33,9 @@ struct		s_processus
 	unsigned int	carry;
 	unsigned int	reg[REG_NUMBER];
 	int				params[4];
+//	int				color_pair;
 	t_processus		*next;
-	WINDOW			*win;
+//	WINDOW			*win;
 };
 
 typedef struct		s_champion
@@ -49,6 +50,7 @@ typedef struct		s_champion
 typedef struct		s_processeur
 {
 	unsigned char		memory[MEM_SIZE];
+	unsigned char		*mem_color;
 	t_list	 	   		*champion;
 	t_list				*process;
 	t_processus			*process_to_exec[CYCLE_TO_DIE];

@@ -5,7 +5,7 @@ static void     cw_set_score_win(void)
     arena.visu_score = subwin(stdscr, 15, COLS - 2,
     WIN_HEIGHT + 2, 1);
     box(arena.visu_score, ACS_VLINE, ACS_HLINE);
-    mvwprintw(arena.visu_score, SC_HEIGHT, SC_FIRST_COL, "cycle : 0");
+    mvwprintw(arena.visu_score, SC_HEIGHT + 2 , SC_FIRST_COL, "cycle : 0");
     mvwprintw(arena.visu_score, SC_HEIGHT, SC_SECOND_COL, "LIVE:");
     mvwprintw(arena.visu_score, SC_HEIGHT, SC_THIRD_COL, "KEY :");
     mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_THIRD_COL, "-play/pause : space");
@@ -47,24 +47,23 @@ static void     cw_init_color(void)
 /*
 *         
 */
-
+/*
 void            cw_init_proces_visu(t_processus *process)
 {
     static int  i;
 
-    process->win = subwin(arena.visu_fight, WIN_HEIGHT, COLS - 2, 1, 1);
     if (i == 0)
-        wattron(process->win, COLOR_PAIR(CW_GREEN));
+        process->color_pair = CW_GREEN;
     else if (i == 1)
-        wattron(process->win, COLOR_PAIR(CW_BLUE));
+        process->color_pair = CW_BLUE;
     else if (i == 2)
-        wattron(process->win, COLOR_PAIR(CW_RED));
+        process->color_pair = CW_RED;
     else if (i == 3)
-        wattron(process->win, COLOR_PAIR(CW_CYAN));
+        process->color_pair = CW_CYAN;
     i++;
 }
-
-void 		    cw_init_visu(void)
+*/
+int             cw_init_visu(void)
 {
 	int i;
 
@@ -76,4 +75,8 @@ void 		    cw_init_visu(void)
     cw_init_color();
     cw_set_score_win();
     cw_set_fight_window();
+    if (!(arena.mem_color = malloc(sizeof(arena.mem_color) * MEM_SIZE)))
+        return (-1);
+    ft_bzero(arena.mem_color, sizeof(arena.mem_color) * MEM_SIZE);
+    return (1);
 }
