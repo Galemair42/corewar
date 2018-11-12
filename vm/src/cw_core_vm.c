@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 14:27:43 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 15:05:06 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,10 @@ int				cw_fight(void)
 			printf("%d\n", arena.cycle_live);
 			if (arena.cycle_live == 0)
 			{
-				printf("Nous avons un winner !\n");
+				if (arena.id_last_player_alive == 0)
+					printf("No Winner");
+				else
+					printf("The winner is %s!\n", get_champs_name_by_id(arena.id_last_player_alive));
 				return (1);
 			}
 			ft_lstadd(&arena.process, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 11:36:48 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 15:03:32 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			cw_add_new_champ(unsigned char *buffer, size_t size_buf,
 		char *champ_name, int id);
 void		cw_insert_champion(t_list *new_lst, t_champion *new_champ);
 int			cw_header_verif_null_byte(unsigned char *buf_file);
+char		*get_champs_name_by_id(int id);
 
 /*
 ** 		process
