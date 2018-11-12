@@ -10,7 +10,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@echo "\n\033[32mLIBFT COMPILED\n"
+	@echo "\nLIBFT COMPILED\n"
 
 $(FT_PATH)%.o : $(FT_PATH)%.c
 	@printf " 📱 "

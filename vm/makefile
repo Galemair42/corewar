@@ -4,12 +4,18 @@ NAME = corewar
 FT_NAME = $(FT_PATH)libft.a
 LIB = $(FT_PATH)libft.a
 OBJ_DIR = obj/
-SRC_DIR = src/:src/champion/:src/instruction/:src/parsing/:src/process/:src/utils/
+SRC_DIR = src/:src/champion/:src/instruction/:src/parsing/:src/process/:src/utils/:src/visualisateur
 vpath %.c $(SRC_DIR)
 
-INC = \
+DIR_INC = \
 		inc/ \
 		$(FT_PATH)includes/
+
+INC= \
+		inc/corewar.h \
+		inc/cw_op.h \
+		inc/cw_prototype.h \
+		inc/cw_struct.h \
 
 SRC = \
 		src/champion/cw_add_champ.c \
@@ -40,13 +46,17 @@ SRC = \
 		src/instruction/cw_instructions_utils.c \
 		src/parsing/cw_parse_varg.c \
 		src/process/cw_exec_process.c \
-		src/process/cw_init_process.c \
 		src/process/cw_verif_processes.c \
 		src/process_lst_utils.c \
 		src/utils/cw_clear_process.c \
 		src/utils/cw_list.c \
 		src/utils/cw_write_in_memory.c \
-		src/utils.c 
+		src/utils.c \
+		src/visualisateur/cw_core_visu.c \
+		src/visualisateur/cw_init_visu.c \
+		src/visualisateur/cw_display.c \
+		src/visualisateur/cw_keypad.c \
+		src/visualisateur/cw_score.c
 
 OBJS = $(SRC:.c=.o)
 OBJS := $(notdir $(OBJS))
@@ -120,14 +130,14 @@ FT_SRC = ft_atoi.c \
 FT_SRC := $(addprefix $(FT_PATH), $(FT_SRC))
 FT_OBJS := $(FT_SRC:.c=.o)
 
-all : $(NAME)
-	@gcc $(FLAGS) -o $(NAME) $(addprefix -I , $(INC)) $(OBJS) $(LIB)
+all : $(NAME) $(INC)
+	@gcc $(FLAGS) -o $(NAME) $(addprefix -I , $(DIR_INC)) $(OBJS) $(LIB) -lncurses -fsanitize=address
 	@echo "COREWAR COMPILED\n"
 
 $(NAME): $(OBJS) $(FT_OBJS)
 
 $(OBJ_DIR)%.o: %.c
-	@gcc $(FLAGS) -o $@ -c $< $(addprefix -I , $(INC))
+	@gcc $(FLAGS) -o $@ -c $< $(addprefix -I , $(DIR_INC))
 	@printf ' 🖥  '
 
 $(FT_PATH)%.o: $(FT_PATH)%.c
