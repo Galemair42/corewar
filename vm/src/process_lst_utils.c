@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:34:40 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/09 18:19:59 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 19:06:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,17 @@ void	cw_clean_lst()
 		arena.process = arena.process->next;
 		ft_lstdelone(&tmp, free_ptr);
 	}
+}
+
+/* FREE elem and iterate to the next list elem */
+
+t_list	*free_list_elem(t_list *to_free)
+{
+	t_list *to_return;
+	void	(*free_ptr)(void *, size_t);
+
+	to_return = to_free->next;
+	ft_lstdelone(&to_free, free_ptr);
+	return (to_return);
+
 }

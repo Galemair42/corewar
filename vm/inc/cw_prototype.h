@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 15:05:53 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 11:36:48 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void		print_all_process(void);
 void		print_process(t_processus *process);
 void 		print_register(t_processus *process);
 void		debug_visu_process_orgin(t_list *lst_process);
+void		print_exec_tab(void);
 
 /*
 **		cw_instructions_utils.c
@@ -121,9 +122,10 @@ unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc);
 void			cw_put_four_octet(unsigned int index, unsigned int four_octet);
 unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length);
 unsigned int	get_size(unsigned int ocp, int flag_chelou);
-void			cw_insert_process(t_processus **process_tab, t_processus *process);
-int			cw_verif_processes(void);
+void			cw_insert_process(t_list **process_tab, t_list *process);
+int				cw_verif_processes(void);
 void			cw_free_content(void *content, __unused size_t size);
 void			cw_clear_exec_tab(void);
+t_list		*free_list_elem(t_list *to_free);
 
 #endif
