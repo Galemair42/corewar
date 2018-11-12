@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/08 17:39:05 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 15:03:32 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			cw_add_new_champ(unsigned char *buffer, size_t size_buf,
 		char *champ_name, int id);
 void		cw_insert_champion(t_list *new_lst, t_champion *new_champ);
 int			cw_header_verif_null_byte(unsigned char *buf_file);
+char		*get_champs_name_by_id(int id);
 
 /*
 ** 		process
@@ -92,6 +93,7 @@ void		print_all_champ(void);
 void		print_all_process(void);
 void		print_process(t_processus *process);
 void 		print_register(t_processus *process);
+void		print_exec_tab(void);
 
 /*
 **		cw_instructions_utils.c
@@ -106,8 +108,10 @@ unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc);
 void			cw_put_four_octet(unsigned int index, unsigned int four_octet);
 unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length);
 unsigned int	get_size(unsigned int ocp, int flag_chelou);
-void			cw_insert_process(t_processus **process_tab, t_processus *process);
+void			cw_insert_process(t_list **process_tab, t_list *process);
 int				cw_verif_processes(void);
 void			cw_free_content(void *content, __unused size_t size);
+void			cw_clear_exec_tab(void);
+t_list		*free_list_elem(t_list *to_free);
 
 #endif

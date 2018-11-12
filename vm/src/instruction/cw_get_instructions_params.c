@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/08 17:15:04 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 20:14:37 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -32,10 +32,7 @@ static int		get_params1(unsigned int ocp, unsigned int *current_pc, int flag_che
 	value = 0;
 	ocp = ocp >> 30;
 	if (ocp == 0)
-	{
-		printf("Parameters is non existant, how do we handle it ?\n");
-		exit(0);
-	}
+		return (-1);
 	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp, flag_chelou));
 	*current_pc = MEM_MASK(*current_pc + get_size(ocp, flag_chelou));
 	return (value);
@@ -74,7 +71,11 @@ int		get_params(t_processus *process, int flag_chelou)
 	ocp = ocp << 24;
 	while (i < op_tab[process->opcode - 1].nb_args)
 	{
-		process->params[i] = get_params1(ocp, &current_pc, flag_chelou);
+		if ((process->params[i] = get_params1(ocp, &current_pc, flag_chelou)) == -1)
+		{
+			process->pc = current_pc;
+			return (-1);
+		}
 		i++;
 		ocp = ocp << 2;
 	}
