@@ -31,7 +31,6 @@ void            cw_display_champ_on_ram(t_champion *champ, t_processus *process)
     mvwprintw(arena.visu_fight, (pc / 64) + 1, ((pc % 64) * 3) + 3, "%.2X", arena.memory[pc]);
     wattroff(arena.visu_fight, WA_STANDOUT);
 
-
     ft_memset(&arena.mem_color[pc], color_pair, champ->header.prog_size);
     i++;
     pc++;
