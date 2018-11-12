@@ -1,24 +1,48 @@
 #include "corewar.h"
 
-void        cw_display_champ_on_ram(t_champion *champ, WINDOW *win, unsigned int pc)
+static int      cw_champ_color(void)
 {
-    int     i;
+    static int      color;
 
+    color++;
+    if (color == 1)
+        return (CW_GREEN);
+    else if (color == 2)
+        return (CW_BLUE);
+    else if (color == 3)
+        return (CW_RED);
+    else
+        return (CW_CYAN);
+}
+
+void            cw_display_champ_on_ram(t_champion *champ, t_processus *process)
+{
+    int             i;
+    unsigned int    pc;
+    int             color_pair;
+    static int      stop;
+    stop++;
+
+    color_pair = cw_champ_color();
+    pc = process->pc;
     i = 0;
-    wattron(win, WA_STANDOUT);
-    mvwprintw(win, (pc / 64) + 1, ((pc % 64) * 3) + 3, "%.2X", arena.memory[pc]);
-    wattroff(win, WA_STANDOUT);
-    mvwprintw(win, (pc / 64) + 1, ((pc % 64) * 3) + 5, " ", arena.memory[pc]);
+    wattron(arena.visu_fight, COLOR_PAIR(color_pair));
+    wattron(arena.visu_fight, WA_STANDOUT);
+    mvwprintw(arena.visu_fight, (pc / 64) + 1, ((pc % 64) * 3) + 3, "%.2X", arena.memory[pc]);
+    wattroff(arena.visu_fight, WA_STANDOUT);
+
+    ft_memset(&arena.mem_color[pc], color_pair, champ->header.prog_size);
     i++;
     pc++;
+
     while (i < champ->header.prog_size)
     {
-        mvwprintw(win, (pc / 64) + 1, ((pc % 64) * 3) + 3, "%.2X ", arena.memory[pc]);
+        mvwprintw(arena.visu_fight, (pc / 64) + 1, ((pc % 64) * 3) + 3, "%.2X ", arena.memory[pc]);
         pc++;
         i++;
-        
     }
-    wrefresh(win);
+    wrefresh(arena.visu_fight);
+    wattroff(arena.visu_fight, COLOR_PAIR(color_pair));
 }
 
 void        cw_visu_incr_process(t_processus *process, int next_pc)
@@ -26,12 +50,24 @@ void        cw_visu_incr_process(t_processus *process, int next_pc)
     int     cur_pc;
 
     cur_pc = process->pc;
-    mvwprintw(process->win, (cur_pc / 64) + 1, ((cur_pc % 64) * 3) + 3,
+   // wmove(process->win, 0, 0);
+    //refresh();
+    //bon jenleve ce truc mais si jamais ya un beug du type 
+    ///ca affichage n'importequoi a des endroits completement illogique faut remettre ca
+    
+    // desouligner de la bonne couleur
+
+    wattron(arena.visu_fight, COLOR_PAIR(arena.mem_color[cur_pc]));
+    mvwprintw(arena.visu_fight, (cur_pc / 64) + 1, ((cur_pc % 64) * 3) + 3,
     "%.2X", arena.memory[cur_pc]);
-    wattron(process->win, WA_STANDOUT);
-    mvwprintw(process->win, (next_pc / 64) + 1, ((next_pc % 64) * 3) + 3,
+    wattroff(arena.visu_fight, COLOR_PAIR(arena.mem_color[cur_pc]));
+
+    wattron(arena.visu_fight, COLOR_PAIR(arena.mem_color[next_pc]));
+    wattron(arena.visu_fight, WA_STANDOUT);
+    mvwprintw(arena.visu_fight, (next_pc / 64) + 1, ((next_pc % 64) * 3) + 3,
     "%.2X", arena.memory[next_pc]);
-    wattroff(process->win, WA_STANDOUT);
-    wrefresh(process->win);
-    getch();
+    wattroff(arena.visu_fight, WA_STANDOUT);
+    wattroff(arena.visu_fight, COLOR_PAIR(arena.mem_color[next_pc]));
+
+    wrefresh(arena.visu_fight);
 }

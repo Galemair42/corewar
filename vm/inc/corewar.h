@@ -43,6 +43,22 @@
 # define COLOR_GREY 15
 # define WIN_HEIGHT 66
 
+# define SC_HEIGHT          2
+# define SC_FIRST_COL       4
+# define SC_SECOND_COL      65
+# define SC_THIRD_COL       110
+# define SC_FOURTH_COL      165
+
+/*
+**      keypad
+*/
+
+# define CW_KEY_SPACE   32
+# define CW_KEY_Q       113
+# define CW_KEY_W       119
+# define CW_KEY_E       101
+# define CW_KEY_R       114
+
 /*
 **		global var
 */
