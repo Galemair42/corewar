@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 10:57:10 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/09 13:46:09 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ struct		s_processus
 	unsigned int	carry;
 	unsigned int	reg[REG_NUMBER];
 	int				params[4];
-	t_processus	*next;
 //	int				id_player;
 };
 
@@ -49,6 +48,7 @@ typedef struct		s_champion
 typedef struct		s_processeur
 {
 	unsigned char		memory[MEM_SIZE];
+	unsigned char		*mem_color;
 	t_list	 	   		*champion;
 	t_list				*process;
 	t_list			*process_to_exec[CYCLE_TO_DIE];
@@ -61,6 +61,8 @@ typedef struct		s_processeur
 	unsigned int		max_cycle;//
 	unsigned int		cur_cycle;
 	unsigned int		cycle_to_dump;
+	WINDOW				*visu_score;
+	WINDOW				*visu_fight;
 }					t_processeur;
 
 typedef struct		s_cw_op_tab

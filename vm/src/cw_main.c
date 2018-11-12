@@ -23,16 +23,15 @@ int				main(int argc, char **argv)
 	//print_buffer_in_hexa(arena.memory, 4096);
 	if (!(arena.process = cw_init_process()))
 	{
-		printf("sa\n");
 		return (42);
 	}
+	if (arena.visu_fight)
+		cw_fight_visu();
+	else
+		cw_fight(); 
 	
-//	print_all_champ();
-	//print_all_process();
-
-//	process = arena.process;
-
-	cw_fight();
+	getch();	
+	// attention a bien free ton ncurse a la fin;
 
 	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji
 }

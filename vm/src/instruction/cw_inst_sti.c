@@ -29,7 +29,13 @@ void    cw_inst_sti(t_processus *process)
         landing += process->reg[process->params[2]];
     landing = MEM_MASK(landing);
     landing = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + landing));
-    cw_put_four_octet(landing, process->reg[process->params[0]]);
+    if (arena.visu_fight)
+    {
+        cw_put_four_octet_visu(landing, process->reg[process->params[0]], arena.mem_color[process->pc]);
+        cw_visu_incr_process(process, ret);
+    }
+    else
+        cw_put_four_octet(landing, process->reg[process->params[0]]);
     process->pc = ret; 
     cw_reset_process(process);
 }

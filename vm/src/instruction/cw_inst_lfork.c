@@ -27,6 +27,12 @@ void    cw_inst_lfork(t_processus *process)
 	arena.current_process_id++;
 	ft_lstappend(&arena.process, ft_lstnew(new_processus, sizeof(t_processus)));
 	free(new_processus);
+	if (arena.visu_fight)
+	{
+		cw_visu_incr_process(process, MEM_MASK(process->pc + 3));
+		cw_highlight(pc);
+		wrefresh(arena.visu_fight);
+	}
 	process->pc = MEM_MASK(process->pc + 3);
 	cw_reset_process(process);
 }

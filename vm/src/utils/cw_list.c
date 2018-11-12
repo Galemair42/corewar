@@ -44,6 +44,5 @@ void        cw_insert_process(t_list **process_tab, t_list *process)
         before = lst_iter;
         lst_iter = lst_iter->next;
     }
-    process->next = NULL;
     before->next = process;
 }

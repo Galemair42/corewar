@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static void		cw_init_funtab(void (**ptr)(t_processus *))
+/*
+void			cw_init_funtab(void (**ptr)(t_processus *))
 {
 	ptr[0] = &cw_inst_live;
 	ptr[1] = &cw_inst_ld;
@@ -30,7 +30,7 @@ static void		cw_init_funtab(void (**ptr)(t_processus *))
 	ptr[13] = &cw_inst_lldi; 
 	ptr[14] = &cw_inst_lfork;
 	ptr[15] = &cw_inst_aff;
-}
+}*/
 
 t_list			*add_instruction_to_tab(t_list *process, int index, unsigned int opc)
 {
@@ -48,7 +48,7 @@ t_list			*add_instruction_to_tab(t_list *process, int index, unsigned int opc)
 	return (to_return);
 }
 
-static void		cw_exec_instructions(int index)
+void			cw_exec_instructions(int index)
 {
 	static void		(*ptr[16]) (t_processus *);
 	t_processus		*process;
@@ -62,7 +62,7 @@ static void		cw_exec_instructions(int index)
 	{
 		process = (t_processus *)(lst->content);
 		tmp = lst->next;
-		printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
+	///	printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
 		(*ptr[process->opcode - 1])(process);
 		lst->next = NULL;
 		ft_lstappend(&arena.process, lst);
@@ -94,6 +94,10 @@ void		cw_read_processus_opc(int index, int ctd)
 		}
 		else
 		{
+			process = (t_processus *)lst_process->content;
+			if (arena.visu_fight)
+				cw_visu_incr_process(process, process->pc + 1);
+			//printf("lol");
 			process->pc++;
 			lst_process->next = NULL;
 			ft_lstappend(&arena.process, lst_process);
@@ -110,6 +114,7 @@ int				cw_fight(void)
 	unsigned int	ctd;
 	int				cycle;
 	int				cycle_decrementation;
+
 
 	ctd = arena.cycle_to_die;
 	cycle_decrementation = 0;
