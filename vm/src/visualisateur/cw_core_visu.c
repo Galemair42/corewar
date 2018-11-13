@@ -14,17 +14,18 @@ static void            cw_print_live(t_list *lst_champ)
     t_processus     *process;
     int            i;
 
-    i = 1;
+    i = 0;
     while (lst_champ)
     {
         champ = (t_champion *)lst_champ->content;       
         mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + i, SC_SECOND_COL, "champion : %s :", champ->header.prog_name);
         mvwprintw(arena.visu_score, (SC_HEIGHT + (i * 2)) + 1 + i, SC_SECOND_COL, "current_live : 0");
-        mvwprintw(arena.visu_score, (SC_HEIGHT + (i * 2)) + 1 + i, SC_SECOND_COL, "total_live : 0");
+        mvwprintw(arena.visu_score, (SC_HEIGHT + (i * 2)) + 2 + i, SC_SECOND_COL, "total_live : 0");
         lst_champ = lst_champ->next;
         i++;
     }
     wrefresh(arena.visu_score);
+	//while (1);
 }
 
 int				cw_fight_visu(void)
@@ -35,7 +36,7 @@ int				cw_fight_visu(void)
     int             c;
 
     cw_key_space();
-    //cw_print_live(arena.champion); // a tester !!!!
+    cw_print_live(arena.champion); // a tester !!!!
 	ctd = arena.cycle_to_die;
 	cycle_decrementation = 0;
 	cycle = 0;

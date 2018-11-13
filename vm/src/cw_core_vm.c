@@ -9,7 +9,7 @@
 /*   Updated: 2018/11/12 15:05:06 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+int c = 0;
 #include "corewar.h"
 /*
 void			cw_init_funtab(void (**ptr)(t_processus *))
@@ -62,7 +62,7 @@ void			cw_exec_instructions(int index)
 	{
 		process = (t_processus *)(lst->content);
 		tmp = lst->next;
-	///	printf("*Execution de l'instruction -%s-*\n", op_tab[process->opcode - 1].name);
+		printf("*Execution de l'instruction -%s-*, au cycle : %d\n", op_tab[process->opcode - 1].name, c);
 		(*ptr[process->opcode - 1])(process);
 		lst->next = NULL;
 		ft_lstappend(&arena.process, lst);
@@ -124,6 +124,12 @@ int				cw_fight(void)
 		printf("cycle numero: %d\n", cycle);
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
+		c++;
+		if (c == 32)
+		{
+			print_buffer_in_hexa(arena.memory, MEM_SIZE);
+			exit(5);
+		}
 		//print_all_process();
 		cycle++;
 		if (cycle == ctd)
@@ -137,7 +143,7 @@ int				cw_fight(void)
 				cycle_decrementation++;
 			cw_verif_processes();
 			//cw_clear_exec_tab();
-			printf("%d\n", arena.cycle_live);
+			printf("nb_live : %d\n", arena.cycle_live);
 			if (arena.cycle_live == 0)
 			{
 				if (arena.id_last_player_alive == 0)
