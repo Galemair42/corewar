@@ -20,7 +20,6 @@ void    cw_inst_lldi(t_processus *process)
     {
         ;//cw_put_four_octet_visu(landing, process->reg[process->params[0]], arena.mem_color[process->pc]);
         //cw_visu_incr_process(process, ret);
-        // faire ca
     }
     else
         process->reg[process->params[2]] = cw_calculate_value_on_ram(landing, 4);
