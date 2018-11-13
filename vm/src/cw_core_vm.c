@@ -6,10 +6,10 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 15:05:06 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 20:19:46 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int c = 0;
+int c=1;
 #include "corewar.h"
 /*
 void			cw_init_funtab(void (**ptr)(t_processus *))
@@ -40,6 +40,7 @@ t_list			*add_instruction_to_tab(t_list *process, int index, unsigned int opc)
 	to_return = process->next;
 	process->next = NULL;
 	tmp = (t_processus *)process->content;
+	//printf("*Ajout de l'instruction -%s-* a la case %d cycle %d by processus : %d\n", op_tab[opc - 1].name, index, c, tmp->id);
 	tmp->opcode = opc;
 	if (!arena.process_to_exec[index])
 		arena.process_to_exec[index] = process;
@@ -73,6 +74,9 @@ void			cw_exec_instructions(int index)
 
 void		cw_read_processus_opc(int index, int ctd)
 {
+
+
+
 	t_list			*lst_process;
 	t_processus		*process;
 	unsigned int	opc_tmp;
@@ -81,6 +85,7 @@ void		cw_read_processus_opc(int index, int ctd)
 	tmp = arena.process;
 	ft_lstappend(&arena.process, arena.process);
 	lst_process = arena.process;
+
 	while (lst_process && ((t_processus *)lst_process->content)->id != 0)
 	{
 		process = (t_processus *)lst_process->content;
@@ -88,7 +93,7 @@ void		cw_read_processus_opc(int index, int ctd)
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
 			if (!(op_tab[opc_tmp - 1].cycle > (ctd - index) && process->nb_live == 0))
-				lst_process = add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index) % ctd, opc_tmp);
+				lst_process = add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index - 1) % ctd, opc_tmp);
 			else
 				lst_process = free_list_elem(lst_process);			
 		}
@@ -111,6 +116,8 @@ void		cw_read_processus_opc(int index, int ctd)
 
 int				cw_fight(void)
 {
+	static int 		stop;
+
 	unsigned int	ctd;
 	int				cycle;
 	int				cycle_decrementation;
@@ -121,19 +128,15 @@ int				cw_fight(void)
 	cycle = 0;
 	while (1)
 	{
-		printf("cycle numero: %d\n", cycle);
+
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
-		c++;
-		if (c == 32)
-		{
-			print_buffer_in_hexa(arena.memory, MEM_SIZE);
-			exit(5);
-		}
-		//print_all_process();
 		cycle++;
+		c++;
+
 		if (cycle == ctd)
 		{
+			stop++;
 			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
 			{
 				ctd -= CYCLE_DELTA;
