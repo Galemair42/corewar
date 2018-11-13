@@ -133,7 +133,6 @@ int				cw_fight(void)
 		cw_exec_instructions(cycle);
 		cycle++;
 		c++;
-
 		if (cycle == ctd)
 		{
 			stop++;

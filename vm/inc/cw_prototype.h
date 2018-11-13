@@ -81,6 +81,7 @@ void		cw_inst_aff(t_processus *process);
 
 void		cw_read_instru(void);
 int			get_params(t_processus *process, int flag_chelou);
+unsigned int     cw_get_one_params(t_processus *process, int number, _Bool apply_modulo);
 
 /*
 *		visu

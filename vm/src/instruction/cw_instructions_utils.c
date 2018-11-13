@@ -12,6 +12,10 @@
 
 #include "corewar.h"
 
+/*
+**		prend le pc et l'endroit ou ca doit atterir
+*/
+
 unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc)
 {
 	int diff1;
