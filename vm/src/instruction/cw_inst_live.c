@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/15 17:06:24 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 16:12:37 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 18:04:12 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    cw_inst_live(t_processus *process)
 {
-    int             id_champ;
+    unsigned int	id_champ;
     unsigned char   *memory;
 
     memory = arena.memory;

@@ -5,7 +5,7 @@ void    cw_inst_zjmp(t_processus *process)
 	unsigned int	param;
     int             new_pc;
 
-	param = cw_calculate_value_on_ram(process->pc + 1, 4);
+	param = cw_calculate_value_on_ram(process->pc + 1, 2);
     if (process->carry == 1)
     {
         new_pc = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + param)); 

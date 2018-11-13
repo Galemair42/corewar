@@ -13,8 +13,9 @@ void cw_inst_st(t_processus *process)
     }
     if (((process->ocp >> 4) & 3) == IND_CODE)
     {
-        landing = apply_IDX_MOD(process->pc, process->pc + process->params[1]);
-        landing = MEM_MASK(landing);
+        landing = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + process->params[1]));
+        //landing = MEM_MASK(landing);
+		//printf("wesh landing : %d\n", landing);
         if (arena.visu_fight)
             cw_put_four_octet_visu(landing, process->reg[process->params[0]], arena.mem_color[process->pc]);
         else
