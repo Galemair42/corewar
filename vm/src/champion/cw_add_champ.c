@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 10:54:56 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/30 19:30:45 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 17:51:12 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int		cw_add_header(unsigned char *buff_file, size_t size, t_champion *cha
 	buf_iter += 4;
 	ft_memcpy(champ->header.comment, buf_iter, COMMENT_LENGTH);
 	ft_memcpy(champ->instruction, &buf_iter[COMMENT_LENGTH + 4], champ_size);
-	cw_print_init_champ(&champ->header);	
+	//cw_print_init_champ(&champ->header);	
 	return (1);
 }
 

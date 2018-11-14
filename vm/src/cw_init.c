@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:00:14 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 14:53:00 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 14:26:58 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static t_processus	*cw_init_process_champ(t_champion *champ, int id)
 	new_process->nb_live = 0;
 	new_process->carry = 0;
 	new_process->opcode = 0;
-	new_process->next = NULL;
 	ft_memset(new_process->reg, 0, sizeof(unsigned int) * REG_NUMBER);
 	new_process->reg[1] = champ->id;
 	ft_memset(new_process->params, 0, sizeof(int) * 5);
@@ -60,10 +59,21 @@ t_list				*cw_init_process(void)
 		cur_lst = cur_lst->next;
 		arena.current_process_id++;
 	}
+	ft_lstadd(&new_proc_lst, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 	arena.process = new_proc_lst;
 	return (new_proc_lst);
 }
 
+//void		cw_init_processeur(void)
+//{
+//	ft_bzero(&arena, sizeof(t_processeur));
+//	ft_bzero(arena.memory, MEM_SIZE);
+//	ft_bzero(arena.process_to_exec, sizeof(t_processus *) * CYCLE_TO_DIE);
+//	arena.max_check = MAX_CHECKS;
+//	arena.max_cycle = ~0;
+//	arena.cycle_to_dump = ~0;
+//	arena.current_process_id = 1;
+//}
 void		cw_init_processeur(void)
 {
 	ft_bzero(arena.memory, MEM_SIZE);

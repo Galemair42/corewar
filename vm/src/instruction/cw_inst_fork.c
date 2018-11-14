@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 13:14:06 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 11:48:55 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/12 16:28:18 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void    cw_inst_fork(t_processus *process)
 
 	param = cw_calculate_value_on_ram(MEM_MASK(process->pc + 1), 2);
 	pc = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + param));
+	//print_all_process();
 	new_processus = malloc(sizeof(t_processus));
 	memcpy(new_processus, process, sizeof(t_processus)); // euh waii ??
 	new_processus->pc = pc;
