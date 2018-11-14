@@ -43,7 +43,7 @@ void			cw_exec_instructions(int index)
 	{
 		process = (t_processus *)(lst->content);
 		tmp = lst->next;
-		printf("*Execution de l'instruction -%s-*, au cycle : %d\n", op_tab[process->opcode - 1].name, c);
+		//printf("*Execution de l'instruction -%s-*, au cycle : %d\n", op_tab[process->opcode - 1].name, c);
 		(*ptr[process->opcode - 1])(process);
 		lst->next = NULL;
 		ft_lstappend(&arena.process, lst);

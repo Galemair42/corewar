@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 13:46:09 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 16:13:41 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ struct		s_processus
 	unsigned int	pc;
 	unsigned int	nb_live;
 	unsigned int	carry;
-	unsigned int	reg[REG_NUMBER];
+	unsigned int	reg[REG_NUMBER + 1];
 	int				params[4];
 //	int				id_player;
 };
