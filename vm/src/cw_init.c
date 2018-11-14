@@ -23,9 +23,9 @@ static t_processus	*cw_init_process_champ(t_champion *champ, int id)
 	new_process->nb_live = 0;
 	new_process->carry = 0;
 	new_process->opcode = 0;
-	ft_memset(new_process->reg, 0, sizeof(unsigned int) * REG_NUMBER);
+	ft_memset(new_process->reg, 0, sizeof(unsigned int) * REG_NUMBER + 1);
 	new_process->reg[1] = champ->id;
-	ft_memset(new_process->params, 0, sizeof(int) * 5);
+	ft_memset(new_process->params, 0, sizeof(int) * 4);
 	if (arena.visu_fight)
 	{
 	//	cw_init_proces_visu(new_process);

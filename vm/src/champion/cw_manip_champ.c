@@ -12,6 +12,12 @@
 
 #include "corewar.h"
 
+static void		cw_update_live_visu(int number, unsigned int cur_live)
+{
+	mvwprintw(arena.visu_score, SC_HEIGHT + (number * 2) + 1 + number, SC_SECOND_COL + 15, "%u", cur_live);
+	wrefresh(arena.visu_score);
+}
+
 int		cw_get_new_champ_id(void)
 {
 	int				id;
@@ -55,7 +61,7 @@ int		cw_update_champ_live(int id_champ)
 	t_champion 		*champ;
 	int				i;
 
-
+	i = 0;
 	while (lst_champ)
 	{
 		champ = (t_champion *)lst_champ->content;
@@ -66,8 +72,10 @@ int		cw_update_champ_live(int id_champ)
 			arena.cycle_live++;
 			if (!arena.visu_fight)
 				printf("Player 1 (%s) is said to be alive\n", champ->name);
-			//else
-			//	cw_update_live_visu(i);
+			else
+			{
+				cw_update_live_visu(i, champ->nb_live);
+			}
 			return (1);
 		}
 		i++;
