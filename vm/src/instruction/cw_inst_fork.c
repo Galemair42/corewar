@@ -15,20 +15,29 @@
 void    cw_inst_fork(t_processus *process)
 {
 	unsigned int	param;
+	static int		stop;
+	stop ++;
 	unsigned int	pc;
 	t_processus		*new_processus;
+	/*if (stop == 3)
+	{
+		while (1);
+	}*/
 
-	param = cw_calculate_value_on_ram(process->pc + 1, 2);
+	param = cw_calculate_value_on_ram(MEM_MASK(process->pc + 1), 2);
 	pc = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + param));
 	new_processus = malloc(sizeof(t_processus));
-	memcpy(new_processus, process, sizeof(t_processus));
+	memcpy(new_processus, process, sizeof(t_processus)); // euh waii ??
 	new_processus->pc = pc;
 	new_processus->id = arena.current_process_id;
 	arena.current_process_id++;
 	ft_lstappend(&arena.process, ft_lstnew(new_processus, sizeof(t_processus)));
 	free(new_processus);
+	if (arena.visu_fight)
+	{
+		cw_highlight_octet(pc, arena.mem_color[process->pc]);
+		cw_visu_incr_process(process, MEM_MASK(process->pc + 3));
+	}
 	process->pc = MEM_MASK(process->pc + 3);
 	cw_reset_process(process);
-	//print_all_process();
-	//exit (0);
 }

@@ -34,7 +34,7 @@ static int		get_params1(unsigned int ocp, unsigned int *current_pc, int flag_che
 	if (ocp == 0)
 	{
 		printf("Parameters is non existant, how do we handle it ?\n");
-		exit(0);
+		return (-1);
 	}
 	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp, flag_chelou));
 	*current_pc = MEM_MASK(*current_pc + get_size(ocp, flag_chelou));

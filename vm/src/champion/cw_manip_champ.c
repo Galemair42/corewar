@@ -62,7 +62,8 @@ int		cw_update_champ_live(int id_champ)
 			champ->nb_live++;
 			arena.id_last_player_alive = id_champ;
 			arena.cycle_live++;
-			printf("Player 1 (%s) is said to be alive\n", champ->name);
+			if (!arena.visu_fight)
+				printf("Player 1 (%s) is said to be alive\n", champ->name);
 			return (1);
 		}
 		lst_champ = lst_champ->next;
