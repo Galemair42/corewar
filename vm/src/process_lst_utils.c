@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:34:40 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/13 15:50:23 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:08:30 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_list	*free_list_elem(t_list *to_free)
 	t_list *to_return;
 	void	(*free_ptr)(void *, size_t);
 
+	free_ptr = &cw_free_content;
 	to_return = to_free->next;
 	ft_lstdelone(&to_free, free_ptr);
 	return (to_return);

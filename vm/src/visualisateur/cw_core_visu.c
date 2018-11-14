@@ -58,7 +58,7 @@ int				cw_fight_visu(void)
 			}
 			else
 				cycle_decrementation++;
-			cw_verif_processes();
+			cw_reset_live();
 			if (arena.cycle_live == 0)
 			{
 				if (arena.id_last_player_alive == 0)
