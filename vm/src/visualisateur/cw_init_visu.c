@@ -6,7 +6,7 @@ static void     cw_set_score_win(void)
     WIN_HEIGHT + 2, 1);
     box(arena.visu_score, ACS_VLINE, ACS_HLINE);
     mvwprintw(arena.visu_score, SC_HEIGHT + 2 , SC_FIRST_COL, "cycle : 0");
-    mvwprintw(arena.visu_score, SC_HEIGHT, SC_SECOND_COL, "LIVE:");
+    mvwprintw(arena.visu_score, SC_HEIGHT - 1, SC_SECOND_COL, "LIVE:");
     mvwprintw(arena.visu_score, SC_HEIGHT, SC_THIRD_COL, "KEY :");
     mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_THIRD_COL, "-play/pause : space");
     mvwprintw(arena.visu_score, SC_HEIGHT + 3, SC_THIRD_COL, "-speedup : q or w");
@@ -44,25 +44,7 @@ static void     cw_init_color(void)
     init_pair(CW_PROCESS_CYAN, COLOR_BLACK, COLOR_CYAN);
 }
 
-/*
-*         
-*/
-/*
-void            cw_init_proces_visu(t_processus *process)
-{
-    static int  i;
 
-    if (i == 0)
-        process->color_pair = CW_GREEN;
-    else if (i == 1)
-        process->color_pair = CW_BLUE;
-    else if (i == 2)
-        process->color_pair = CW_RED;
-    else if (i == 3)
-        process->color_pair = CW_CYAN;
-    i++;
-}
-*/
 int             cw_init_visu(void)
 {
 	int i;

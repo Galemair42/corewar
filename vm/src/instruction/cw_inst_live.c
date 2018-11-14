@@ -16,6 +16,8 @@ void    cw_inst_live(t_processus *process)
 {
     unsigned int	id_champ;
     unsigned char   *memory;
+    static int      stop;
+    stop++;
 
     memory = arena.memory;
     process->nb_live++;

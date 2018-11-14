@@ -6,31 +6,11 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 20:19:46 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 12:48:26 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 int c=1;
 #include "corewar.h"
-/*
-void			cw_init_funtab(void (**ptr)(t_processus *))
-{
-	ptr[0] = &cw_inst_live;
-	ptr[1] = &cw_inst_ld;
-	ptr[2] = &cw_inst_st;
-	ptr[3] = &cw_inst_add;
-	ptr[4] = &cw_inst_sub;
-	ptr[5] = &cw_inst_and;
-	ptr[6] = &cw_inst_or;
-	ptr[7] = &cw_inst_xor;
-	ptr[8] = &cw_inst_zjmp;
-	ptr[9] = &cw_inst_ldi;
-	ptr[10] = &cw_inst_sti;
-	ptr[11] = &cw_inst_fork;
-	ptr[12] = &cw_inst_lld;
-	ptr[13] = &cw_inst_lldi; 
-	ptr[14] = &cw_inst_lfork;
-	ptr[15] = &cw_inst_aff;
-}*/
 
 t_list			*add_instruction_to_tab(t_list *process, int index, unsigned int opc)
 {
@@ -63,7 +43,7 @@ void			cw_exec_instructions(int index)
 	{
 		process = (t_processus *)(lst->content);
 		tmp = lst->next;
-		//printf("*Execution de l'instruction -%s-* au cycle %d by processus : %d\n", op_tab[process->opcode - 1].name, c, process->id);
+		printf("*Execution de l'instruction -%s-*, au cycle : %d\n", op_tab[process->opcode - 1].name, c);
 		(*ptr[process->opcode - 1])(process);
 		lst->next = NULL;
 		ft_lstappend(&arena.process, lst);
@@ -74,9 +54,6 @@ void			cw_exec_instructions(int index)
 
 void		cw_read_processus_opc(int index, int ctd)
 {
-
-
-
 	t_list			*lst_process;
 	t_processus		*process;
 	unsigned int	opc_tmp;
@@ -85,7 +62,6 @@ void		cw_read_processus_opc(int index, int ctd)
 	tmp = arena.process;
 	ft_lstappend(&arena.process, arena.process);
 	lst_process = arena.process;
-
 	while (lst_process && ((t_processus *)lst_process->content)->id != 0)
 	{
 		process = (t_processus *)lst_process->content;
@@ -122,30 +98,28 @@ int				cw_fight(void)
 	int				cycle;
 	int				cycle_decrementation;
 
-
 	ctd = arena.cycle_to_die;
 	cycle_decrementation = 0;
 	cycle = 0;
 	while (1)
 	{
-
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
 		cycle++;
 		c++;
-
 		if (cycle == ctd)
 		{
 			stop++;
 			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
 			{
-				ctd -= CYCLE_DELTA;
+				ctd = (int)(ctd - CYCLE_DELTA) >= 0 ? ctd - CYCLE_DELTA : 1;
 				cycle_decrementation = 0;
 			}
 			else
 				cycle_decrementation++;
 			cw_verif_processes();
 			//cw_clear_exec_tab();
+			printf("nb_live : %d\n", arena.cycle_live);
 			if (arena.cycle_live == 0)
 			{
 				if (arena.id_last_player_alive == 0)

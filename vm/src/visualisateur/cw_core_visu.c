@@ -14,17 +14,18 @@ static void            cw_print_live(t_list *lst_champ)
     t_processus     *process;
     int            i;
 
-    i = 1;
+    i = 0;
     while (lst_champ)
     {
         champ = (t_champion *)lst_champ->content;       
         mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + i, SC_SECOND_COL, "champion : %s :", champ->header.prog_name);
         mvwprintw(arena.visu_score, (SC_HEIGHT + (i * 2)) + 1 + i, SC_SECOND_COL, "current_live : 0");
-        mvwprintw(arena.visu_score, (SC_HEIGHT + (i * 2)) + 1 + i, SC_SECOND_COL, "total_live : 0");
+        mvwprintw(arena.visu_score, (SC_HEIGHT + (i * 2)) + 2 + i, SC_SECOND_COL, "total_live : 0");
         lst_champ = lst_champ->next;
         i++;
     }
     wrefresh(arena.visu_score);
+	//while (1);
 }
 
 int				cw_fight_visu(void)
@@ -35,7 +36,7 @@ int				cw_fight_visu(void)
     int             c;
 
     cw_key_space();
-    //cw_print_live(arena.champion); // a tester !!!!
+    cw_print_live(arena.champion); // a tester !!!!
 	ctd = arena.cycle_to_die;
 	cycle_decrementation = 0;
 	cycle = 0;
@@ -47,11 +48,12 @@ int				cw_fight_visu(void)
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
 		cycle++;
+		c++;
 		if (cycle == ctd)
 		{
 			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
 			{
-				ctd -= CYCLE_DELTA;
+				ctd = (int)(ctd - CYCLE_DELTA) >= 0 ? ctd - CYCLE_DELTA : 1;
 				cycle_decrementation = 0;
 			}
 			else
@@ -59,9 +61,13 @@ int				cw_fight_visu(void)
 			cw_verif_processes();
 			if (arena.cycle_live == 0)
 			{
-				printf("Nous avons un winner !\n");
+				if (arena.id_last_player_alive == 0)
+					printf("No Winner");
+				else
+					printf("The winner is %s!\n", get_champs_name_by_id(arena.id_last_player_alive));
 				return (1);
 			}
+			ft_lstadd(&arena.process, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
 			arena.cycle_live = 0;
 			cycle = 0;
         }

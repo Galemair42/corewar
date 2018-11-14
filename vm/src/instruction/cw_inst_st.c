@@ -5,7 +5,7 @@ void cw_inst_st(t_processus *process)
     int     param_2;
     int     ret;
     int     landing;
-    
+   
     if ((ret = get_params(process, 0)) == -1)
     {
         cw_reset_process(process);

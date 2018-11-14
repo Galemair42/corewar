@@ -30,7 +30,7 @@ void    cw_inst_lfork(t_processus *process)
 	if (arena.visu_fight)
 	{
 		cw_visu_incr_process(process, MEM_MASK(process->pc + 3));
-		cw_highlight(pc);
+		cw_highlight_octet(pc, arena.mem_color[pc]);
 		wrefresh(arena.visu_fight);
 	}
 	process->pc = MEM_MASK(process->pc + 3);
