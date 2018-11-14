@@ -14,7 +14,8 @@
 
 static void		cw_print_init_champ(header_t *header_champ)
 {
-	printf("* Player 1, weighing %u bytes, \"%s\" (\"%s\") !\n",
+	if (!arena.visu_fight)
+		printf("* Player 1, weighing %u bytes, \"%s\" (\"%s\") !\n",
 			header_champ->prog_size, header_champ->prog_name,
 			header_champ->comment);
 }

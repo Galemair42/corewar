@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/13 15:15:35 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 12:49:22 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void		cw_inst_aff(t_processus *process);
 
 void		cw_read_instru(void);
 int			get_params(t_processus *process, int flag_chelou);
+unsigned int     cw_get_one_params(t_processus *process, int number, _Bool apply_modulo);
 
 /*
 *		visu
@@ -91,7 +92,7 @@ void            cw_init_proces_visu(t_processus *process);
 void               cw_display_champ_on_ram(t_champion *champ, t_processus *process);
 void        	cw_visu_incr_process(t_processus *process, int next_pc);
 void        	cw_put_four_octet_visu(unsigned int index,
-        unsigned int four_octet, int color_pair);
+unsigned int 	four_octet, int color_pair);
 void            cw_key_space(void);
 void            cw_key_speed(int c);
 void            cw_update_cycle(void);

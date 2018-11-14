@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/14 12:38:15 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 12:48:26 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 int c=1;
@@ -43,7 +43,7 @@ void			cw_exec_instructions(int index)
 	{
 		process = (t_processus *)(lst->content);
 		tmp = lst->next;
-		//printf("*Execution de l'instruction -%s-* au cycle %d by processus : %d\n", op_tab[process->opcode - 1].name, c, process->id);
+		printf("*Execution de l'instruction -%s-*, au cycle : %d\n", op_tab[process->opcode - 1].name, c);
 		(*ptr[process->opcode - 1])(process);
 		lst->next = NULL;
 		ft_lstappend(&arena.process, lst);
@@ -119,6 +119,7 @@ int				cw_fight(void)
 				cycle_decrementation++;
 			cw_verif_processes();
 			//cw_clear_exec_tab();
+			printf("nb_live : %d\n", arena.cycle_live);
 			if (arena.cycle_live == 0)
 			{
 				if (arena.id_last_player_alive == 0)

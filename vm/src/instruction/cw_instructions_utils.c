@@ -6,11 +6,15 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 13:39:56 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/13 14:26:01 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 12:48:02 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+/*
+**		prend le pc et l'endroit ou ca doit atterir
+*/
 
 unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc)
 {

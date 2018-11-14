@@ -81,3 +81,26 @@ int		get_params(t_processus *process, int flag_chelou)
 	}
 	return (current_pc);
 }
+
+
+unsigned int     cw_get_one_params(t_processus *process, int number, _Bool apply_modulo)
+{
+    unsigned int     ret;
+	int				padding;
+    unsigned int     landing;
+
+	padding = 8 - (number * 2);
+    if (((process->ocp >> padding) & 3) == DIR_CODE)
+        ret = process->params[number - 1];
+    else if (((process->ocp >> padding) & 3) == REG_CODE)
+        ret = process->reg[process->params[number - 1]];
+    else if (((process->ocp >> padding) & 3) == IND_CODE)
+    {
+		if (apply_modulo)
+        	landing = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + process->params[number - 1]));
+		else
+			landing = MEM_MASK(process->pc + process->params[number - 1]);
+        ret = cw_calculate_value_on_ram(landing, 4);
+    }
+    return (ret);
+}
