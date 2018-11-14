@@ -2,6 +2,8 @@
 
 void        cw_inst_lld(t_processus *process)
 {
+    static int i;
+    i++;
     int     dir_1;
     int     reg_2;
     int     ret;
@@ -12,6 +14,8 @@ void        cw_inst_lld(t_processus *process)
         cw_reset_process(process);
         return ;
     }
+   /* mvwprintw(arena.visu_fight, 0, 0, "ret : %d\n", ret);
+    wrefresh(arena.visu_fight);*/
     if (((process->ocp >> 6) & 3) == DIR_CODE)
         process->reg[process->params[1]] = process->params[0];
     else if (((process->ocp >> 6) & 3) == IND_CODE)

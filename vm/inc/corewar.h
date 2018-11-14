@@ -43,6 +43,7 @@
 # define CW_INVERSE_COLOR(x) x + 1
 # define COLOR_GREY 15
 # define WIN_HEIGHT 66
+# define SC_HEIGHT_PROC SC_HEIGHT + 8
 
 # define SC_HEIGHT          2
 # define SC_FIRST_COL       4

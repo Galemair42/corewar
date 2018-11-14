@@ -77,7 +77,7 @@ void		cw_read_processus_opc(int index, int ctd)
 		{
 			process = (t_processus *)lst_process->content;
 			if (arena.visu_fight)
-				cw_visu_incr_process(process, process->pc + 1);
+				cw_visu_incr_process(process, MEM_MASK(process->pc + 1));
 			//printf("lol");
 			process->pc++;
 			lst_process->next = NULL;

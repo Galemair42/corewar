@@ -9,10 +9,11 @@ static void     cw_set_score_win(void)
     mvwprintw(arena.visu_score, SC_HEIGHT - 1, SC_SECOND_COL, "LIVE:");
     mvwprintw(arena.visu_score, SC_HEIGHT, SC_THIRD_COL, "KEY :");
     mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_THIRD_COL, "-play/pause : space");
-    mvwprintw(arena.visu_score, SC_HEIGHT + 3, SC_THIRD_COL, "-speedup : q or w");
-    mvwprintw(arena.visu_score, SC_HEIGHT + 4, SC_THIRD_COL, "-slow down : e or r");
+    mvwprintw(arena.visu_score, SC_HEIGHT + 3, SC_THIRD_COL, "-speedup : e or r");
+    mvwprintw(arena.visu_score, SC_HEIGHT + 4, SC_THIRD_COL, "-slow down : q or w");
     mvwprintw(arena.visu_score, SC_HEIGHT, SC_FOURTH_COL, "Speed :");
     mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "20");
+    mvwprintw(arena.visu_score, SC_HEIGHT_PROC, SC_FOURTH_COL, "Processus :");
     wrefresh(arena.visu_score);
 }
 
