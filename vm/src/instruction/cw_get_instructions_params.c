@@ -73,6 +73,8 @@ int		get_params(t_processus *process, int flag_chelou)
 	{
 		if ((process->params[i] = get_params1(ocp, &current_pc, flag_chelou)) == -1)
 		{
+			if (arena.visu_fight)
+				cw_visu_incr_process(process, current_pc);
 			process->pc = current_pc;
 			return (-1);
 		}

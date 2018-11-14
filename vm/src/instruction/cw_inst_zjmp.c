@@ -16,8 +16,8 @@ void    cw_inst_zjmp(t_processus *process)
     else
     {
         if (arena.visu_fight) 
-            cw_visu_incr_process(process, MEM_MASK(process->pc + 1));
-        process->pc = MEM_MASK(process->pc + 1);
+            cw_visu_incr_process(process, MEM_MASK(process->pc + 3));
+        process->pc = MEM_MASK(process->pc + 3);
     }
     cw_reset_process(process);
 }

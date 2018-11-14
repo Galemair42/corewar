@@ -44,7 +44,7 @@ void    cw_key_speed(int c)
         else
             speed += 10;
     }
-    timeout(505 - speed);
+    timeout(502 - speed);
     mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "%02d", speed);
     wrefresh(arena.visu_score);
 }
