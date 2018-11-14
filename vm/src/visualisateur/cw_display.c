@@ -15,6 +15,18 @@ static int      cw_champ_color(void)
         return (CW_CYAN);
 }
 
+void			cw_highlight_octet(unsigned int index, int color_pair)
+{
+    wattron(arena.visu_fight, COLOR_PAIR(color_pair));
+    wattron(arena.visu_fight, A_STANDOUT);
+
+    mvwprintw(arena.visu_fight, 1 + (index / 64), 3 + (3 * (index % 64)), "%.2x", arena.memory[index]);
+    wrefresh(arena.visu_fight);
+
+    wattroff(arena.visu_fight, COLOR_PAIR(color_pair));
+    wattroff(arena.visu_fight, A_STANDOUT);
+}
+
 void            cw_display_champ_on_ram(t_champion *champ, t_processus *process)
 {
     int             i;

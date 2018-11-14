@@ -49,7 +49,6 @@ int				cw_fight_visu(void)
 		cycle++;
 		if (cycle == ctd)
 		{
-			exit (0);
 			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
 			{
 				ctd -= CYCLE_DELTA;
