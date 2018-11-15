@@ -19,9 +19,9 @@ void    cw_inst_lldi(t_processus *process)
     if (arena.visu_fight)
     {
         ;//cw_put_four_octet_visu(landing, process->reg[process->params[0]], arena.mem_color[process->pc]);
-        //cw_visu_incr_process(process, ret);
+        cw_visu_incr_process(process, ret);
     }
-    else
+    //else
         process->reg[process->params[2]] = cw_calculate_value_on_ram(landing, 4);
     process->pc = ret;
     cw_reset_process(process); 
