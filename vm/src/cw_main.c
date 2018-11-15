@@ -30,7 +30,13 @@ int				main(int argc, char **argv)
 	else
 		cw_fight(); 
 	
-	getch();	
+	printf("finis ");
+	free(arena.visu_fight);
+	free(arena.visu_score);
+	while(1);
+	
+	
+	
 	// attention a bien free ton ncurse a la fin;
 
 	// allez c'est parti pour la giga boucle de l'enfer ha ouiouiouji

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/14 16:13:41 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/14 17:28:11 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct		s_processeur
 	int					cycle_live;	
 	int			 	   	id_last_player_alive;
 	int					current_process_id;
+	unsigned int		cur_processus;
 	unsigned int		max_cycle;//
 	unsigned int		cur_cycle;
 	unsigned int		cycle_to_dump;

@@ -25,7 +25,7 @@ char				*get_champs_name_by_id(int id)
 	{
 		champ = (t_champion *)lst_champ->content;
 		if (champ->id == id)
-			return (champ->name);
+			return (champ->header.prog_name);
 		lst_champ = lst_champ->next;
 	}
 	return (NULL);

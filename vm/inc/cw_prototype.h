@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/14 12:49:22 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:18:52 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ unsigned int     cw_get_one_params(t_processus *process, int number, _Bool apply
 *		visu
 */
 
-int	        cw_init_visu(void);
+int	        	cw_init_visu(void);
 void            cw_init_proces_visu(t_processus *process);
-void               cw_display_champ_on_ram(t_champion *champ, t_processus *process);
+void            cw_display_champ_on_ram(t_champion *champ, t_processus *process);
 void        	cw_visu_incr_process(t_processus *process, int next_pc);
 void        	cw_put_four_octet_visu(unsigned int index,
 unsigned int 	four_octet, int color_pair);
@@ -98,6 +98,7 @@ void            cw_key_speed(int c);
 void            cw_update_cycle(void);
 void            cw_manage_getch(int c);
 void			cw_highlight_octet(unsigned int index, int color_pair);
+void            cw_print_winner_visu(void);
 
 /*
 ** 		debug
@@ -126,7 +127,7 @@ void			cw_put_four_octet(unsigned int index, unsigned int four_octet);
 unsigned int	cw_calculate_value_on_ram(unsigned int starting_pc, unsigned int length);
 unsigned int	get_size(unsigned int ocp, int flag_chelou);
 void			cw_insert_process(t_list **process_tab, t_list *process);
-int				cw_verif_processes(void);
+void			cw_reset_live(void);
 void			cw_free_content(void *content, __unused size_t size);
 void			cw_clear_exec_tab(void);
 t_list		*free_list_elem(t_list *to_free);

@@ -6,18 +6,18 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 16:54:30 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 20:20:08 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 17:53:18 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
+/*
 static void		cw_update_live_visu(int number, unsigned int cur_live)
 {
 	mvwprintw(arena.visu_score, SC_HEIGHT + (number * 2) + 1 + number, SC_SECOND_COL + 15, "%u", cur_live);
 	wrefresh(arena.visu_score);
 }
-
+*/
 int		cw_get_new_champ_id(void)
 {
 	int				id;
@@ -73,17 +73,12 @@ int		cw_update_champ_live(int id_champ)
 			if (!arena.visu_fight)
 				printf("Player 1 (%s) is said to be alive\n", champ->name);
 			else
-			{
-				cw_update_live_visu(i, champ->nb_live);
-			}
+				mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i, SC_SECOND_COL + 15, "%u", champ->nb_live);
 			return (1);
 		}
 		i++;
 		lst_champ = lst_champ->next;
 	}
-	mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + i, SC_SECOND_COL, "champion : %s :", champ->header.prog_name);
-    mvwprintw(arena.visu_score, (SC_HEIGHT + (i * 2)) + 1 + i, SC_SECOND_COL, "current_live : 0");
-    mvwprintw(arena.visu_score, (SC_HEIGHT + (i * 2)) + 2 + i, SC_SECOND_COL, "total_live : 0");
 	return (0);
 }
 

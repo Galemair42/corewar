@@ -4,8 +4,6 @@ void    cw_key_space()
 {
     int     c;
 
-    wmove(arena.visu_score, 0, 0);
-    refresh();
     mvwprintw(arena.visu_score, SC_HEIGHT, SC_FIRST_COL, "**PAUSED**");// refresh ??
     wrefresh(arena.visu_score);
     while (1)
@@ -25,26 +23,36 @@ void    cw_key_speed(int c)
     static int      speed;
 
     if (!speed)
-        speed = 20;
-    if (c == CW_KEY_Q && speed > 1)
+        speed = 2;
+    if (c == CW_KEY_Q)
     {
-        if (speed <= 10)
-            speed = 1;
-        else
-            speed -= 10;
+        if (speed > 1)
+            speed--;
     }
-    else if (c == CW_KEY_W && speed > 1)
-        speed -= 1;
-    else if (c == CW_KEY_E && speed < 500)
-        speed += 1;
-    else if (c == CW_KEY_R && speed < 500)
+    else if (c == CW_KEY_R)
     {
-        if (speed >= 491)
-            speed = 500;
-        else
-            speed += 10;
+        if (speed < 4)
+            speed++;
     }
-    timeout(502 - speed);
-    mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "%02d", speed);
+    if (speed == 1)
+    {
+        mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "slow        ");
+        timeout(100);
+    }
+    else if (speed == 2)
+    {
+        mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "normal      ");
+        timeout(10);
+    }
+    else if (speed == 3)
+    {
+        mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "fast      ");
+        timeout(1);
+    }
+    else
+    {
+        mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "ultra fast  ");
+        timeout(0);
+    }
     wrefresh(arena.visu_score);
 }

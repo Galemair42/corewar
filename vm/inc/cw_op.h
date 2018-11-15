@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:31:34 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/09 13:40:56 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:17:06 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ typedef struct	s_op
 	char		*cool;
 	int			c;
 	int			f;
-
 }				t_op;
 
 static	t_op    op_tab[OP_TAB_SIZE] =

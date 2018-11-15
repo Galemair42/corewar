@@ -6,21 +6,57 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:26:15 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/12 14:29:21 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:23:44 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		cw_verif_processes(void)
+void	cw_reset_tab_live(void)
+{
+	int			i;
+	t_list		*lst;
+	t_processus *processus;
+
+	i = 0;
+	while (i < CYCLE_TO_DIE)
+	{
+		lst = arena.process_to_exec[i];
+		while (lst)
+		{
+			processus = (t_processus *)(lst->content);
+			processus->nb_live = 0;
+			lst = lst->next;
+		}
+		i++;
+	}
+}
+
+void	cw_reset_champs_live(void)
+{
+	t_list		*champs;
+	t_champion	*champion;
+	int			i;
+
+	i = 0;
+	champs = arena.champion;
+	while (champs)
+	{
+		champion = (t_champion *)champs;
+		champion->nb_live = 0;
+		if (arena.visu_fight)
+			mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i, SC_SECOND_COL + 15, "0          ");
+		champs = champs->next;
+	}
+}
+
+void	cw_verif_processes(void)
 {
 	t_list			*lst;
 	t_list			*tmp;
-	int				live_total;
 	void			(*free_ptr)(void *, size_t);
 	
-	free_ptr = &cw_free_content;	
-	live_total = 0;
+	free_ptr = &cw_free_content;
 	while (arena.process && ((t_processus *)(arena.process)->content)->nb_live <= 0)
 	{
 		tmp = (arena.process)->next;
@@ -28,16 +64,23 @@ int		cw_verif_processes(void)
 		arena.process = tmp;
 	}
 	lst = arena.process;
-	while (lst && lst->next)
+	while (lst)
 	{
-		live_total += ((t_processus *)lst->content)->nb_live;
-		if (((t_processus *)lst->next->content)->nb_live <= 0)
+		((t_processus *)lst->content)->nb_live = 0;
+		if (lst->next && ((t_processus *)lst->next->content)->nb_live <= 0)
 		{
 			tmp	= lst->next->next;
 			ft_lstdelone(&lst->next, free_ptr);
 			lst->next = tmp;
 		}
-		lst = lst->next;
+		else
+			lst = lst->next;
 	}
-	return (live_total);
+}
+
+void	cw_reset_live()
+{
+	cw_verif_processes();
+	cw_reset_champs_live();
+	cw_reset_tab_live();
 }

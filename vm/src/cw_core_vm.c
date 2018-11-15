@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/14 12:48:26 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:23:47 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 int c=1;
@@ -115,9 +115,9 @@ int				cw_fight(void)
 			}
 			else
 				cycle_decrementation++;
-			cw_verif_processes();
-			//cw_clear_exec_tab();
-			printf("nb_live : %d\n", arena.cycle_live);
+			printf("ctd = %d\n", ctd);
+			cw_reset_live();
+			//printf("nb_live : %d\n", arena.cycle_live);
 			if (arena.cycle_live == 0)
 			{
 				if (arena.id_last_player_alive == 0)
