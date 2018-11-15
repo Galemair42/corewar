@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/14 17:37:22 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/15 17:00:08 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -23,6 +23,11 @@
 **		!! STILL HAVE TO MANAGE DIRECT PARAMETERS !! CARE IF IT STANDS FOR AN ADDRESS OR AN INTEGER	**
 */
 
+static int		manage_error(unsigned int pc, t_processus *process)
+{
+	process->pc = pc;
+	return (-1);
+}
 static int		get_params1(unsigned int ocp, unsigned int *current_pc, int flag_chelou)
 {
 	int	value;
@@ -60,14 +65,16 @@ int		get_params(t_processus *process, int flag_chelou)
 	unsigned int ocp;
 	int	i;
 	unsigned int current_pc;
+	unsigned int error_pc;
 
 	i = 0;
 	current_pc = MEM_MASK(process->pc + 1);
 	ocp = cw_calculate_value_on_ram(current_pc, 1);
 	process->ocp = ocp;
 	current_pc = MEM_MASK(current_pc + 1);
+	error_pc = current_pc;
 	if (ocp > 0xFC || process->opcode > 16)
-		return (-1);
+		return (manage_error(error_pc, process));
 	ocp = ocp << 24;
 	while (i < op_tab[process->opcode - 1].nb_args)
 	{
@@ -76,14 +83,13 @@ int		get_params(t_processus *process, int flag_chelou)
 			if (arena.visu_fight)
 				cw_visu_incr_process(process, current_pc);
 			process->pc = current_pc;
-			return (-1);
+			return (manage_error(error_pc, process));
 		}
 		i++;
 		ocp = ocp << 2;
 	}
 	return (current_pc);
 }
-
 
 unsigned int     cw_get_one_params(t_processus *process, int number, _Bool apply_modulo)
 {
