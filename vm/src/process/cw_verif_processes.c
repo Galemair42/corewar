@@ -36,17 +36,21 @@ void	cw_reset_champs_live(void)
 {
 	t_list		*champs;
 	t_champion	*champion;
+	int			i;
 
+	i = 0;
 	champs = arena.champion;
 	while (champs)
 	{
 		champion = (t_champion *)champs;
 		champion->nb_live = 0;
+		if (arena.visu_fight)
+			mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i, SC_SECOND_COL + 15, "0          ");
 		champs = champs->next;
 	}
 }
 
-void	cw_verif_processes()
+void	cw_verif_processes(void)
 {
 	t_list			*lst;
 	t_list			*tmp;
@@ -65,7 +69,6 @@ void	cw_verif_processes()
 		((t_processus *)lst->content)->nb_live = 0;
 		if (lst->next && ((t_processus *)lst->next->content)->nb_live <= 0)
 		{
-			//printf("del\n");
 			tmp	= lst->next->next;
 			ft_lstdelone(&lst->next, free_ptr);
 			lst->next = tmp;

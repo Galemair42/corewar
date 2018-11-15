@@ -27,12 +27,7 @@ static t_processus	*cw_init_process_champ(t_champion *champ, int id)
 	new_process->reg[1] = champ->id;
 	ft_memset(new_process->params, 0, sizeof(int) * 4);
 	if (arena.visu_fight)
-	{
-	//	cw_init_proces_visu(new_process);
 		cw_display_champ_on_ram(champ, new_process);
-	}
-	//else
-		//new_process->color_pair = -1;
 	return (new_process);
 }
 
@@ -88,6 +83,7 @@ void		cw_init_processeur(void)
 	arena.cur_cycle = 0;
 	arena.cycle_to_dump = ~0;
 	arena.current_process_id = 1;
+	arena.cur_processus = 0;
 	arena.visu_score = NULL;
 	arena.visu_fight = NULL;
 }

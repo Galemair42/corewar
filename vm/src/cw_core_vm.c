@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/15 15:06:17 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/15 15:22:49 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 int c=1;
@@ -69,7 +69,6 @@ void		cw_read_processus_opc(int index, int ctd)
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
-			printf("salut\n");
 			if (!(op_tab[opc_tmp - 1].cycle > (ctd - index) && process->nb_live == 0))
 				lst_process = add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index - 1) % ctd, opc_tmp);
 			else
@@ -88,8 +87,6 @@ void		cw_read_processus_opc(int index, int ctd)
 		}
 	}
 	arena.process = tmp;
-//	printf("after\n");
-//	print_all_process();
 }
 
 int				cw_fight(void)

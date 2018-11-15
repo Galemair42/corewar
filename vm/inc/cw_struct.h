@@ -58,6 +58,7 @@ typedef struct		s_processeur
 	int					cycle_live;	
 	int			 	   	id_last_player_alive;
 	int					current_process_id;
+	unsigned int		cur_processus;
 	unsigned int		max_cycle;//
 	unsigned int		cur_cycle;
 	unsigned int		cycle_to_dump;

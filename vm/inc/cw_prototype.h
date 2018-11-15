@@ -87,9 +87,9 @@ unsigned int     cw_get_one_params(t_processus *process, int number, _Bool apply
 *		visu
 */
 
-int	        cw_init_visu(void);
+int	        	cw_init_visu(void);
 void            cw_init_proces_visu(t_processus *process);
-void               cw_display_champ_on_ram(t_champion *champ, t_processus *process);
+void            cw_display_champ_on_ram(t_champion *champ, t_processus *process);
 void        	cw_visu_incr_process(t_processus *process, int next_pc);
 void        	cw_put_four_octet_visu(unsigned int index,
 unsigned int 	four_octet, int color_pair);
@@ -98,6 +98,7 @@ void            cw_key_speed(int c);
 void            cw_update_cycle(void);
 void            cw_manage_getch(int c);
 void			cw_highlight_octet(unsigned int index, int color_pair);
+void            cw_print_winner_visu(void);
 
 /*
 ** 		debug

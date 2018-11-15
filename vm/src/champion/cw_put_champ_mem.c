@@ -34,6 +34,7 @@ void				cw_put_champion_in_memory(void)
 	size_t			nb_champ;
 	size_t			loc_champ;
 
+	
 	loc_champ = 0;
 	nb_champ = cw_get_nb_champ();
 	lst = arena.champion;

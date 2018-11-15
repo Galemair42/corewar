@@ -125,7 +125,7 @@ FT_SRC := $(addprefix $(FT_PATH), $(FT_SRC))
 FT_OBJS := $(FT_SRC:.c=.o)
 
 all : obj_dir $(NAME)
-	@gcc $(FLAGS) -o $(NAME) $(addprefix -I , $(INC)) $(OBJS) $(LIB) -lncurses -ggdb
+	@gcc $(FLAGS) -o $(NAME) $(addprefix -I , $(INC)) $(OBJS) $(LIB) -lncurses
 	@echo "COREWAR COMPILED\n"
 
 $(NAME): $(OBJS) $(FT_OBJS)
