@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/14 18:23:47 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/15 15:06:17 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 int c=1;
@@ -58,6 +58,7 @@ void		cw_read_processus_opc(int index, int ctd)
 	t_processus		*process;
 	unsigned int	opc_tmp;
 	t_list			*tmp;
+	t_list			*tmp2;
 
 	tmp = arena.process;
 	ft_lstappend(&arena.process, arena.process);
@@ -68,6 +69,7 @@ void		cw_read_processus_opc(int index, int ctd)
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
+			printf("salut\n");
 			if (!(op_tab[opc_tmp - 1].cycle > (ctd - index) && process->nb_live == 0))
 				lst_process = add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index - 1) % ctd, opc_tmp);
 			else
@@ -78,11 +80,11 @@ void		cw_read_processus_opc(int index, int ctd)
 			process = (t_processus *)lst_process->content;
 			if (arena.visu_fight)
 				cw_visu_incr_process(process, MEM_MASK(process->pc + 1));
-			//printf("lol");
 			process->pc++;
+			tmp2 = lst_process->next;
 			lst_process->next = NULL;
-			ft_lstappend(&arena.process, lst_process);
-			lst_process = lst_process->next;
+			ft_lstappend(&tmp, lst_process);
+			lst_process = tmp2;
 		}
 	}
 	arena.process = tmp;
@@ -117,7 +119,6 @@ int				cw_fight(void)
 			}
 			else
 				cycle_decrementation++;
-			printf("ctd = %d\n", ctd);
 			cw_reset_live();
 			//printf("nb_live : %d\n", arena.cycle_live);
 			if (arena.cycle_live == 0)
