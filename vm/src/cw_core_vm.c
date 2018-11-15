@@ -86,8 +86,6 @@ void		cw_read_processus_opc(int index, int ctd)
 		}
 	}
 	arena.process = tmp;
-//	printf("after\n");
-//	print_all_process();
 }
 
 int				cw_fight(void)
