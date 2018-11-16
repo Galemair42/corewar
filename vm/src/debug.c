@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/14 17:58:53 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 14:47:02 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,11 @@ void	print_process(t_processus *process)
 //	}
 }
 
-void	print_all_process(void)
+int		print_all_process(void)
 {
 	t_processus		*cur_process;
 	t_list			*process;
+	int				ret=0;
 
 	process = arena.process;
 	while (process)
@@ -102,22 +103,28 @@ void	print_all_process(void)
 		print_process(cur_process);
 		process = process->next;
 		printf("\n");
+		ret++;
 	}
+	return (ret - 1);
 }
 
-//void	print_exec_tab(void)
-//{
-//	t_processus *cur_process;
-//	
-//	for (int i=0; i < CYCLE_TO_DIE;i++)
-//	{
-//		cur_process = arena.process_to_exec[i];
-//		while (cur_process)
-//		{
-//			printf("\ni = %d\n", i);
-//			print_process(cur_process);
-//			cur_process = cur_process->next;
-//		}
-//	}
-//
-//}
+int		print_exec_tab(void)
+{
+	t_list *list;
+	t_processus *cur_process;
+	int ret=0;
+	
+	for (int i=0; i < CYCLE_TO_DIE;i++)
+	{
+		list = arena.process_to_exec[i];
+		while (list)
+		{
+			cur_process = (t_processus *)list->content;
+			printf("\ni = %d\n", i);
+			print_process(cur_process);
+			list = list->next;
+			ret++;
+		}
+	}
+	return (ret);
+}

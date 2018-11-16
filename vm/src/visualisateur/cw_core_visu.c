@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:59:07 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 11:05:54 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/16 13:27:07 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int					cw_fight_visu(void)
 			cw_manage_getch(c);
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
+		arena.cur_cycle++;
 		cycle++;
 		c++;
 		if (cycle == ctd)

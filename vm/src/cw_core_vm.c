@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 11:57:37 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/16 15:45:24 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,32 @@ void			cw_read_processus_opc(int index, int ctd)
 	tmp = arena.process;
 	ft_lstappend(&arena.process, arena.process);
 	lst_process = arena.process;
+//	if (arena.cur_cycle == 2362)
+//	{
+//		print_exec_tab();
+//		printf("\n-----\n");
+//		print_all_process();
+//		exit (0);
+//	}
 	while (lst_process && ((t_processus *)lst_process->content)->id != 0)
 	{
 		process = (t_processus *)lst_process->content;
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 		{
+//			if (opc_tmp == 10)
+//			{
+//				printf("gregewgrewrg\n");
+//				exit(4);
+//			}
 			if (!(op_tab[opc_tmp - 1].cycle > (ctd - index) && process->nb_live == 0))
 				lst_process = add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index - 1) % ctd, opc_tmp);
 			else
 			{
+//				//printf("Cycle %d died at cycle %d\n", process->id, arena.cur_cycle);
 				arena.cur_processus--;
-				cw_unhighlight_octet(process->pc, arena.mem_color[process->pc]);
+				if (arena.visu_fight)
+					cw_unhighlight_octet(process->pc, arena.mem_color[process->pc]);
 				lst_process = free_list_elem(lst_process);			
 			}
 		}
@@ -105,10 +119,27 @@ int				cw_fight(void)
 	cycle = 0;
 	while (1)
 	{
+	//	if (arena.cur_cycle > 2356)
+	//	{
+	//		if (print_exec_tab() + print_all_process() < 4)
+	//		{
+	//			printf("cycle %d?\n", arena.cur_cycle);
+	//			exit (0);
+	//		}
+	//	}
+//		if (arena.cur_cycle == 2362)
+//		{
+//			printf("cycle = %d\n", cycle);
+//			print_exec_tab();
+//			printf("\n-----\n");
+//			print_all_process();
+//			exit (0);
+//		}
+
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
 		cycle++;
-		c++;
+		arena.cur_cycle++;
 		if (cycle == ctd)
 		{
 			stop++;
@@ -121,6 +152,9 @@ int				cw_fight(void)
 				cycle_decrementation++;
 			cw_reset_live();
 			//printf("nb_live : %d\n", arena.cycle_live);
+		//	print_exec_tab();
+		//	printf("\n-----\n");
+		//	print_all_process();
 			if (arena.cycle_live == 0)
 			{
 				if (arena.id_last_player_alive == 0)

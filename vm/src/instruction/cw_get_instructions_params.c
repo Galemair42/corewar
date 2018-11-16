@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 09:55:32 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/16 15:44:44 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -29,7 +29,7 @@ static int		manage_error(unsigned int pc, t_processus *process)
 	return (-1);
 }
 
-static int		get_params1(unsigned int ocp, unsigned int *current_pc, int flag_chelou)
+static int		get_params1(unsigned int ocp, unsigned int *current_pc, int opc, int index)
 {
 	int	value;
 	int i;
@@ -37,10 +37,14 @@ static int		get_params1(unsigned int ocp, unsigned int *current_pc, int flag_che
 	i = 0;
 	value = 0;
 	ocp = ocp >> 30;
+	if ((ocp == REG_CODE && !(op_tab[opc].types[index] & T_REG)) ||
+		(ocp == DIR_CODE && !(op_tab[opc].types[index] & T_DIR)) ||
+		(ocp == IND_CODE && !(op_tab[opc].types[index] & T_IND)))
+		return (-1);
 	if (ocp == 0)
 		return (-1);
-	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp, flag_chelou));
-	*current_pc = MEM_MASK(*current_pc + get_size(ocp, flag_chelou));
+	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp, op_tab[opc].f));
+	*current_pc = MEM_MASK(*current_pc + get_size(ocp, op_tab[opc].f));
 	return (value);
 }
 
@@ -61,7 +65,7 @@ unsigned int		get_size(unsigned int ocp, int flag_chelou)
 **		params of the structure t_processus
 */
 
-int		get_params(t_processus *process, int flag_chelou)
+int		get_params(t_processus *process)
 {
 	unsigned int ocp;
 	int	i;
@@ -75,15 +79,11 @@ int		get_params(t_processus *process, int flag_chelou)
 	current_pc = MEM_MASK(current_pc + 1);
 	error_pc = current_pc;
 	if (ocp > 0xFC || process->opcode > 16)
-	{
-		mvwprintw(arena.visu_score, 1, 0, "ret getparams up : %u", manage_error(error_pc, process));
-		wrefresh(arena.visu_score);
 		return (manage_error(error_pc, process));
-	}
 	ocp = ocp << 24;
 	while (i < op_tab[process->opcode - 1].nb_args)
 	{
-		if ((process->params[i] = get_params1(ocp, &current_pc, flag_chelou)) == -1)
+		if ((process->params[i] = get_params1(ocp, &current_pc, process->opcode - 1, i)) == -1)
 		{
 			if (arena.visu_fight)
 				cw_visu_incr_process(process, current_pc);

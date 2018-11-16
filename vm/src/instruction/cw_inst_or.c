@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:09:02 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 10:09:47 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/16 15:31:25 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		cw_inst_or(t_processus *process)
 	int		reg_3;
 	int		ret;
 
-	if ((ret = get_params(process, 0)) == -1)
+	if ((ret = get_params(process)) == -1)
 	{
 		cw_reset_process(process);
 		return ;

@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:26:15 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 10:48:35 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/16 15:33:13 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ void	cw_verif_processes(void)
 	while (arena.process &&
 			((t_processus *)(arena.process)->content)->nb_live <= 0)
 	{
+		if (((t_processus *)arena.process->content)->id != 0)
+		{
+			arena.cur_processus--;
+			if (arena.visu_fight)
+				cw_unhighlight_octet( ((t_processus *)(arena.process)->next->content)->pc, arena.mem_color[((t_processus *)(arena.process)->next->content)->pc]);
+		}
 		tmp = (arena.process)->next;
 		ft_lstdelone(&arena.process, free_ptr);
 		arena.process = tmp;
@@ -71,6 +77,9 @@ void	cw_verif_processes(void)
 		((t_processus *)lst->content)->nb_live = 0;
 		if (lst->next && ((t_processus *)lst->next->content)->nb_live <= 0)
 		{
+			arena.cur_processus--;
+			if (arena.visu_fight)
+				cw_unhighlight_octet( ((t_processus *)lst->next->content)->pc, arena.mem_color[((t_processus *)(arena.process)->next->content)->pc]);
 			tmp = lst->next->next;
 			ft_lstdelone(&lst->next, free_ptr);
 			lst->next = tmp;

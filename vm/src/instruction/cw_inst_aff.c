@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:56:57 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 09:57:25 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/16 15:30:05 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		cw_inst_aff(t_processus *process)
 	char	c;
 	int		ret;
 
-	if ((ret = get_params(process, 0)) == -1)
+	if ((ret = get_params(process)) == -1)
 	{
 		cw_reset_process(process);
 		return ;
@@ -28,5 +28,8 @@ void		cw_inst_aff(t_processus *process)
 		process->carry = 1;
 	else
 		process->carry = 0;
+	if (arena.visu_fight)
+		cw_visu_incr_process(process, ret);
+	process->pc = ret;
 	cw_reset_process(process);
 }

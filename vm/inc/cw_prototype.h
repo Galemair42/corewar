@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/14 18:18:52 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 15:38:42 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		cw_inst_lfork(t_processus *process);
 void		cw_inst_aff(t_processus *process);
 
 void		cw_read_instru(void);
-int			get_params(t_processus *process, int flag_chelou);
+int			get_params(t_processus *process);
 unsigned int     cw_get_one_params(t_processus *process, int number, _Bool apply_modulo);
 
 /*
@@ -108,11 +108,11 @@ void            cw_print_winner_visu(void);
 void		print_buffer_in_hexa(unsigned char *buffer, size_t size);
 void		print_one_champ(t_champion *champion);
 void		print_all_champ(void);
-void		print_all_process(void);
+int			print_all_process(void);
 void		print_process(t_processus *process);
 void 		print_register(t_processus *process);
 void		debug_visu_process_orgin(t_list *lst_process);
-void		print_exec_tab(void);
+int			print_exec_tab(void);
 
 /*
 **		cw_instructions_utils.c

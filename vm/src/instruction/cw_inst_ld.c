@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:10:34 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 10:02:27 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/16 15:30:42 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		cw_inst_ld(t_processus *process)
 	int		ret;
 	int		landing;
 
-	if ((ret = get_params(process, 0)) == -1)
+	if ((ret = get_params(process)) == -1)
 	{
 		cw_reset_process(process);
 		return ;
