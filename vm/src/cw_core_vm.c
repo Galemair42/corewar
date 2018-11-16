@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 16:50:25 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 18:50:23 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void			cw_exec_instructions(int index)
 	{
 		process = (t_processus *)(lst->content);
 		tmp = lst->next;
+		//printf("Execution de l'instruction *%s* au cycle %d\n", op_tab[process->opcode - 1].name, arena.cur_cycle);
 		(*ptr[process->opcode - 1])(process);
 		lst->next = NULL;
 		ft_lstappend(&arena.process, lst);
@@ -84,7 +85,7 @@ void			cw_read_processus_opc(int index, int ctd)
 				lst_process = add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index - 1) % ctd, opc_tmp);
 			else
 			{
-//				//printf("Cycle %d died at cycle %d\n", process->id, arena.cur_cycle);
+				//printf("Cycle %d died at cycle %d\n", process->id, arena.cur_cycle);
 				arena.cur_processus--;
 				if (arena.visu_fight)
 					cw_unhighlight_octet(process->pc, arena.mem_color[process->pc]);
@@ -117,14 +118,26 @@ int				cw_fight(void)
 	ctd = arena.cycle_to_die;
 	cycle_decrementation = 0;
 	cycle = 0;
-	print_all_champ();
-	exit (0);
+//	print_all_champ();
+//	exit (0);
 	while (1)
 	{
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
 		cycle++;
 		arena.cur_cycle++;
+//		if (arena.cur_cycle == 36000)
+//		{
+//			print_all_process();
+//			printf("\n---\n");
+//			print_exec_tab();
+//			exit (0);
+//		}
+//		if (print_exec_tab() + print_all_process() > 24)
+//		{
+//			printf("%d\n", arena.cur_cycle);
+//			exit (0);
+//		}
 		if (cycle == ctd)
 		{
 			stop++;
@@ -138,6 +151,7 @@ int				cw_fight(void)
 			cw_reset_live();
 			if (arena.cycle_live == 0)
 			{
+				printf("FINAL CYCLE = %d\n", arena.cur_cycle);
 				if (arena.id_last_player_alive == 0)
 					printf("No Winner");
 				else

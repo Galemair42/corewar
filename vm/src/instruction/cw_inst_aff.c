@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 09:56:57 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 15:30:05 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 18:05:48 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		cw_inst_aff(t_processus *process)
 		return ;
 	}
 	c = process->reg[process->params[0]] % 256;
-	write(1, &c, 1);
+	//write(1, &c, 1);
 	if (c == 0)
 		process->carry = 1;
 	else

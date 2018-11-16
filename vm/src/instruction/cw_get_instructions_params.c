@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 15:44:44 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 18:42:32 by galemair         ###   ########.fr       */
 /*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -44,6 +44,8 @@ static int		get_params1(unsigned int ocp, unsigned int *current_pc, int opc, int
 	if (ocp == 0)
 		return (-1);
 	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp, op_tab[opc].f));
+	if (ocp == REG_CODE && (value < 1 || value > 16))
+		return (-1);
 	*current_pc = MEM_MASK(*current_pc + get_size(ocp, op_tab[opc].f));
 	return (value);
 }

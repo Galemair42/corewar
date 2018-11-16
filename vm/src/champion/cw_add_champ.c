@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 10:54:56 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 10:35:30 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/16 17:26:54 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 static void			cw_print_init_champ(header_t *header_champ)
 {
 	if (!arena.visu_fight)
-		printf("* Player 1, weighing %u bytes, \"%s\" (\"%s\") !\n",
-			header_champ->prog_size, header_champ->prog_name,
-			header_champ->comment);
+	//	printf("* Player 1, weighing %u bytes, \"%s\" (\"%s\") !\n",
+	//		header_champ->prog_size, header_champ->prog_name,
+	//		header_champ->comment);
+		printf("ok ?");
 }
 
 /*
@@ -35,7 +36,7 @@ static int			cw_add_header(unsigned char *buff_file,
 
 	if (size < HEADER_SIZE || !cw_header_verif_null_byte(buff_file))
 	{
-		printf("corewar : Invalid Champion %s\n", champ->name);
+		//printf("corewar : Invalid Champion %s\n", champ->name);
 		return (-1);
 	}
 	champ->header.magic = (buff_file[0] << 24) + (buff_file[1] << 16)
@@ -46,7 +47,7 @@ static int			cw_add_header(unsigned char *buff_file,
 		+ (buf_iter[2] << 8) + buf_iter[3];
 	if (champ_size > CHAMP_MAX_SIZE || size != HEADER_SIZE + champ_size)
 	{
-		printf("corewar : Champion %s too large\n", champ->name);
+		//printf("corewar : Champion %s too large\n", champ->name);
 		return (-1);
 	}
 	champ->header.prog_size = champ_size;

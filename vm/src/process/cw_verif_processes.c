@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:26:15 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 16:47:12 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 18:40:22 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	cw_verif_processes(void)
 		{
 			arena.cur_processus--;
 			if (arena.visu_fight)
-				cw_unhighlight_octet( ((t_processus *)(arena.process)->next->content)->pc, arena.mem_color[((t_processus *)(arena.process)->next->content)->pc]);
+				cw_unhighlight_octet( ((t_processus *)(arena.process)->content)->pc, arena.mem_color[((t_processus *)(arena.process)->content)->pc]);
 		}
 		tmp = (arena.process)->next;
 		ft_lstdelone(&arena.process, free_ptr);
@@ -78,6 +78,7 @@ void	cw_verif_processes(void)
 		if (lst->next && ((t_processus *)lst->next->content)->nb_live <= 0)
 		{
 			arena.cur_processus--;
+			//printf("Processus * verif * %d died at cycle %d\n", ((t_processus *)lst->next->content)->id, arena.cur_cycle);
 			if (arena.visu_fight)
 				cw_unhighlight_octet( ((t_processus *)lst->next->content)->pc, arena.mem_color[((t_processus *)(arena.process)->next->content)->pc]);
 			tmp = lst->next->next;
