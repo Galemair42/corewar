@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 15:45:24 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 16:50:25 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,25 +117,10 @@ int				cw_fight(void)
 	ctd = arena.cycle_to_die;
 	cycle_decrementation = 0;
 	cycle = 0;
+	print_all_champ();
+	exit (0);
 	while (1)
 	{
-	//	if (arena.cur_cycle > 2356)
-	//	{
-	//		if (print_exec_tab() + print_all_process() < 4)
-	//		{
-	//			printf("cycle %d?\n", arena.cur_cycle);
-	//			exit (0);
-	//		}
-	//	}
-//		if (arena.cur_cycle == 2362)
-//		{
-//			printf("cycle = %d\n", cycle);
-//			print_exec_tab();
-//			printf("\n-----\n");
-//			print_all_process();
-//			exit (0);
-//		}
-
 		cw_read_processus_opc(cycle, ctd);
 		cw_exec_instructions(cycle);
 		cycle++;
@@ -151,10 +136,6 @@ int				cw_fight(void)
 			else
 				cycle_decrementation++;
 			cw_reset_live();
-			//printf("nb_live : %d\n", arena.cycle_live);
-		//	print_exec_tab();
-		//	printf("\n-----\n");
-		//	print_all_process();
 			if (arena.cycle_live == 0)
 			{
 				if (arena.id_last_player_alive == 0)

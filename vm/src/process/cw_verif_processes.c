@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:26:15 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 15:33:13 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 16:47:12 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	cw_reset_champs_live(void)
 	champs = arena.champion;
 	while (champs)
 	{
-		champion = (t_champion *)champs;
+		champion = (t_champion *)champs->content;
 		champion->nb_live = 0;
 		if (arena.visu_fight)
 			mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i,

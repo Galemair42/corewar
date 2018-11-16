@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 14:47:02 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 16:50:41 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	print_one_champ(t_champion *champ)
 	printf("comment : %s\n", champ->header.comment);
 	printf("prog_size : %u\n", champ->header.prog_size);
 	printf("id : %d\n", champ->id);
-//	print_buffer_in_hexa(champ->instruction, CHAMP_MAX_SIZE);
+	printf("current_live = %d\n", champ->nb_live);
+	//print_buffer_in_hexa(champ->instruction, CHAMP_MAX_SIZE);
 	printf("\n\n");
 }
 
