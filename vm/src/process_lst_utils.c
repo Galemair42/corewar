@@ -6,18 +6,18 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:34:40 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/14 18:08:30 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 11:57:19 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	cw_free_content(void *content, __unused size_t size)
+void		cw_free_content(void *content, size_t size)
 {
 	free((t_processus *)content);
 }
 
-void	cw_clean_lst()
+void		cw_clean_lst(void)
 {
 	t_list	*tmp;
 	int		delimiter_flag;
@@ -35,16 +35,17 @@ void	cw_clean_lst()
 	}
 }
 
-/* FREE elem and iterate to the next list elem */
+/*
+**			FREE elem and iterate to the next list elem
+*/
 
-t_list	*free_list_elem(t_list *to_free)
+t_list		*free_list_elem(t_list *to_free)
 {
-	t_list *to_return;
-	void	(*free_ptr)(void *, size_t);
+	t_list		*to_return;
+	void		(*free_ptr)(void *, size_t);
 
 	free_ptr = &cw_free_content;
 	to_return = to_free->next;
 	ft_lstdelone(&to_free, free_ptr);
 	return (to_return);
-
 }

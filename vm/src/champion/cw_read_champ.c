@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 17:39:18 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 15:07:49 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 10:41:45 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char				*get_champs_name_by_id(int id)
 		lst_champ = lst_champ->next;
 	}
 	return (NULL);
-
 }
 
 int					cw_header_verif_null_byte(unsigned char *buff_file)
@@ -55,7 +54,7 @@ int					cw_read_champion(char *champ_name, int id)
 	int				max_len_file;
 	unsigned char	*buffer;
 	size_t			ret;
-	
+
 	if (arena.nb_champ >= MAX_PLAYERS)
 	{
 		printf("Corewar : too much champion\n");

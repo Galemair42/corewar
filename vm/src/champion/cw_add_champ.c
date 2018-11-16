@@ -6,13 +6,13 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 10:54:56 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 17:51:12 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 10:35:30 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h" 
+#include "corewar.h"
 
-static void		cw_print_init_champ(header_t *header_champ)
+static void			cw_print_init_champ(header_t *header_champ)
 {
 	if (!arena.visu_fight)
 		printf("* Player 1, weighing %u bytes, \"%s\" (\"%s\") !\n",
@@ -27,7 +27,8 @@ static void		cw_print_init_champ(header_t *header_champ)
 **		wich just has been added
 */
 
-static int		cw_add_header(unsigned char *buff_file, size_t size, t_champion *champ)
+static int			cw_add_header(unsigned char *buff_file,
+		size_t size, t_champion *champ)
 {
 	unsigned char	*buf_iter;
 	unsigned int	champ_size;
@@ -52,7 +53,6 @@ static int		cw_add_header(unsigned char *buff_file, size_t size, t_champion *cha
 	buf_iter += 4;
 	ft_memcpy(champ->header.comment, buf_iter, COMMENT_LENGTH);
 	ft_memcpy(champ->instruction, &buf_iter[COMMENT_LENGTH + 4], champ_size);
-	//cw_print_init_champ(&champ->header);	
 	return (1);
 }
 
@@ -67,7 +67,7 @@ static int		cw_add_header(unsigned char *buff_file, size_t size, t_champion *cha
 **		create a new champ and store it in the processor struct
 */
 
-int			cw_add_new_champ(unsigned char *buffer,
+int					cw_add_new_champ(unsigned char *buffer,
 		size_t size_buf, char *champ_name, int id)
 {
 	t_champion	*champ;
@@ -107,7 +107,7 @@ int			cw_add_new_champ(unsigned char *buffer,
 ** 		is the new_node->champion value
 */
 
-void			cw_insert_champion(t_list *new_lst, t_champion *new_champ)
+void				cw_insert_champion(t_list *new_lst, t_champion *new_champ)
 {
 	t_champion	*cur_champ;
 	t_list		*cur_lst;
@@ -118,7 +118,7 @@ void			cw_insert_champion(t_list *new_lst, t_champion *new_champ)
 	while (cur_lst)
 	{
 		cur_champ = (t_champion *)cur_lst->content;
-		if (new_champ->id < cur_champ->id)//je dois inserer avant le cur_champ
+		if (new_champ->id < cur_champ->id)
 		{
 			new_lst->next = cur_lst;
 			if (cur_lst_tmp == NULL)

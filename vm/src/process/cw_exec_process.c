@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cw_exec_process.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/16 10:45:30 by jabt              #+#    #+#             */
+/*   Updated: 2018/11/16 10:49:22 by jabt             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-void			cw_init_funtab(void (**ptr)(t_processus *))
+void				cw_init_funtab(void (**ptr)(t_processus *))
 {
 	ptr[0] = &cw_inst_live;
 	ptr[1] = &cw_inst_ld;
@@ -15,7 +27,7 @@ void			cw_init_funtab(void (**ptr)(t_processus *))
 	ptr[10] = &cw_inst_sti;
 	ptr[11] = &cw_inst_fork;
 	ptr[12] = &cw_inst_lld;
-	ptr[13] = &cw_inst_lldi; 
+	ptr[13] = &cw_inst_lldi;
 	ptr[14] = &cw_inst_lfork;
 	ptr[15] = &cw_inst_aff;
 }
@@ -23,13 +35,12 @@ void			cw_init_funtab(void (**ptr)(t_processus *))
 void				cw_exec_process(t_list *process)
 {
 	static void (*ptr[16]) (t_processus *);
- 
- 	if (!*ptr)
+
+	if (!*ptr)
 		cw_init_funtab(ptr);
-    
 }
 
-void		cw_reset_process(t_processus *process)
+void				cw_reset_process(t_processus *process)
 {
 	process->ocp = 0;
 	ft_bzero(process->params, sizeof(int) * 4);

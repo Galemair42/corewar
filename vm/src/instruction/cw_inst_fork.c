@@ -6,29 +6,23 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/31 13:14:06 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 16:28:18 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 09:59:19 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void    cw_inst_fork(t_processus *process)
+void		cw_inst_fork(t_processus *process)
 {
 	unsigned int	param;
-	static int		stop;
-	stop ++;
 	unsigned int	pc;
 	t_processus		*new_processus;
-	/*if (stop == 3)
-	{
-		while (1);
-	}*/
 
+	arena.cur_processus++;
 	param = cw_calculate_value_on_ram(MEM_MASK(process->pc + 1), 2);
 	pc = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + param));
-	//print_all_process();
 	new_processus = malloc(sizeof(t_processus));
-	memcpy(new_processus, process, sizeof(t_processus)); // euh waii ??
+	memcpy(new_processus, process, sizeof(t_processus));
 	new_processus->pc = pc;
 	new_processus->id = arena.current_process_id;
 	arena.current_process_id++;

@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/15 17:00:08 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 09:55:32 by jabt             ###   ########.fr       */
 /*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -28,6 +28,7 @@ static int		manage_error(unsigned int pc, t_processus *process)
 	process->pc = pc;
 	return (-1);
 }
+
 static int		get_params1(unsigned int ocp, unsigned int *current_pc, int flag_chelou)
 {
 	int	value;
@@ -74,7 +75,11 @@ int		get_params(t_processus *process, int flag_chelou)
 	current_pc = MEM_MASK(current_pc + 1);
 	error_pc = current_pc;
 	if (ocp > 0xFC || process->opcode > 16)
+	{
+		mvwprintw(arena.visu_score, 1, 0, "ret getparams up : %u", manage_error(error_pc, process));
+		wrefresh(arena.visu_score);
 		return (manage_error(error_pc, process));
+	}
 	ocp = ocp << 24;
 	while (i < op_tab[process->opcode - 1].nb_args)
 	{
@@ -88,6 +93,8 @@ int		get_params(t_processus *process, int flag_chelou)
 		i++;
 		ocp = ocp << 2;
 	}
+	mvwprintw(arena.visu_score, 0, 0, "ret getparams down : %u", MEM_MASK(current_pc));
+		wrefresh(arena.visu_score);
 	return (current_pc);
 }
 

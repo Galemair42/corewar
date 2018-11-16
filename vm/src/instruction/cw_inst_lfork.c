@@ -6,13 +6,13 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:10:49 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/12 15:07:57 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 10:03:34 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void    cw_inst_lfork(t_processus *process)
+void		cw_inst_lfork(t_processus *process)
 {
 	unsigned int	param;
 	unsigned int	pc;

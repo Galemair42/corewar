@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 16:59:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/12 20:20:00 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 10:40:06 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void				cw_put_champion_in_memory(void)
 	size_t			nb_champ;
 	size_t			loc_champ;
 
-	
 	loc_champ = 0;
 	nb_champ = cw_get_nb_champ();
 	lst = arena.champion;

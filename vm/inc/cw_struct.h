@@ -51,7 +51,7 @@ typedef struct		s_processeur
 	unsigned char		*mem_color;
 	t_list	 	   		*champion;
 	t_list				*process;
-	t_list			*process_to_exec[CYCLE_TO_DIE];
+	t_list				*process_to_exec[CYCLE_TO_DIE];
 	size_t				nb_champ;
 	unsigned int 	   	cycle_to_die;//
 	unsigned int 	   	max_check;//

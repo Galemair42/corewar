@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:26:15 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/14 18:30:52 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 10:48:35 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	cw_reset_champs_live(void)
 		champion = (t_champion *)champs;
 		champion->nb_live = 0;
 		if (arena.visu_fight)
-			mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i, SC_SECOND_COL + 15, "0          ");
+			mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i,
+					SC_SECOND_COL + 15, "0          ");
 		champs = champs->next;
 	}
 }
@@ -55,9 +56,10 @@ void	cw_verif_processes(void)
 	t_list			*lst;
 	t_list			*tmp;
 	void			(*free_ptr)(void *, size_t);
-	
+
 	free_ptr = &cw_free_content;
-	while (arena.process && ((t_processus *)(arena.process)->content)->nb_live <= 0)
+	while (arena.process &&
+			((t_processus *)(arena.process)->content)->nb_live <= 0)
 	{
 		tmp = (arena.process)->next;
 		ft_lstdelone(&arena.process, free_ptr);
@@ -69,7 +71,7 @@ void	cw_verif_processes(void)
 		((t_processus *)lst->content)->nb_live = 0;
 		if (lst->next && ((t_processus *)lst->next->content)->nb_live <= 0)
 		{
-			tmp	= lst->next->next;
+			tmp = lst->next->next;
 			ft_lstdelone(&lst->next, free_ptr);
 			lst->next = tmp;
 		}
@@ -78,7 +80,7 @@ void	cw_verif_processes(void)
 	}
 }
 
-void	cw_reset_live()
+void	cw_reset_live(void)
 {
 	cw_verif_processes();
 	cw_reset_champs_live();

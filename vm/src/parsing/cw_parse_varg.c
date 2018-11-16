@@ -6,11 +6,11 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:54:40 by jabt              #+#    #+#             */
-/*   Updated: 2018/10/30 19:32:41 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 10:44:32 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "corewar.h"
+#include "corewar.h"
 
 static int			cw_is_valid_id(int id)
 {
@@ -33,7 +33,7 @@ static int			cw_is_valid_id(int id)
 }
 
 /*
-**		INPUT 
+**		INPUT
 **		one string begining by '-'
 **		the goal is to see if its a good flag or not, if it is, then indicate
 **		it in arena->arg flag in question
@@ -52,19 +52,17 @@ static int			cw_parse_flag(char **argv, int cur)
 	}
 	else if (ft_strequ(arg, "dump"))
 	{
-	//	arena.dump_limit = ft_atoi();// enfaite juste gerer ce parsing
 		printf("fais ton atoi bizarre\n");
 		exit(5);
 	}
 	else if (ft_strequ(arg, "s"))
 	{
-		//arena.cycle_to_dump = atoichelou; // faire le atoi chelou
 		printf("fais ton atoi bizarre\n");
 		exit(5);
 	}
 	else if (ft_strequ(arg, "d"))
 	{
-		cw_init_visu();		
+		cw_init_visu();
 		return (1);
 	}
 	return (0);
@@ -76,7 +74,7 @@ static int			cw_parse_flag(char **argv, int cur)
 **		meaning by arg -s or -dump
 */
 
-int			cw_parse_arg(char **argv, int argc)
+int					cw_parse_arg(char **argv, int argc)
 {
 	int		i;
 	int		id;

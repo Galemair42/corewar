@@ -6,21 +6,21 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/15 15:22:49 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/16 11:57:37 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int c=1;
+
 #include "corewar.h"
 
-t_list			*add_instruction_to_tab(t_list *process, int index, unsigned int opc)
+t_list			*add_instruction_to_tab(t_list *process, int index,
+		unsigned int opc)
 {
-	t_processus 	*tmp;
+	t_processus		*tmp;
 	t_list			*to_return;
 
 	to_return = process->next;
 	process->next = NULL;
 	tmp = (t_processus *)process->content;
-	//printf("*Ajout de l'instruction -%s-* a la case %d cycle %d by processus : %d\n", op_tab[opc - 1].name, index, c, tmp->id);
 	tmp->opcode = opc;
 	if (!arena.process_to_exec[index])
 		arena.process_to_exec[index] = process;
@@ -43,7 +43,6 @@ void			cw_exec_instructions(int index)
 	{
 		process = (t_processus *)(lst->content);
 		tmp = lst->next;
-		//printf("*Execution de l'instruction -%s-*, au cycle : %d\n", op_tab[process->opcode - 1].name, c);
 		(*ptr[process->opcode - 1])(process);
 		lst->next = NULL;
 		ft_lstappend(&arena.process, lst);
@@ -52,7 +51,7 @@ void			cw_exec_instructions(int index)
 	arena.process_to_exec[index] = NULL;
 }
 
-void		cw_read_processus_opc(int index, int ctd)
+void			cw_read_processus_opc(int index, int ctd)
 {
 	t_list			*lst_process;
 	t_processus		*process;
@@ -72,7 +71,11 @@ void		cw_read_processus_opc(int index, int ctd)
 			if (!(op_tab[opc_tmp - 1].cycle > (ctd - index) && process->nb_live == 0))
 				lst_process = add_instruction_to_tab(lst_process, (op_tab[opc_tmp - 1].cycle + index - 1) % ctd, opc_tmp);
 			else
+			{
+				arena.cur_processus--;
+				cw_unhighlight_octet(process->pc, arena.mem_color[process->pc]);
 				lst_process = free_list_elem(lst_process);			
+			}
 		}
 		else
 		{

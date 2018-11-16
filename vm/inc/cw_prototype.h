@@ -98,6 +98,7 @@ void            cw_key_speed(int c);
 void            cw_update_cycle(void);
 void            cw_manage_getch(int c);
 void			cw_highlight_octet(unsigned int index, int color_pair);
+void			cw_unhighlight_octet(unsigned int index, int color_pair);
 void            cw_print_winner_visu(void);
 
 /*
