@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 17:27:54 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/17 18:46:44 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,5 @@ typedef struct				s_processeur
 	WINDOW				*visu_score;
 	WINDOW				*visu_fight;
 }							t_processeur;
-
-typedef struct				s_cw_op_tab
-{
-	short unsigned int	nb_instru;
-	unsigned int		param;
-	short unsigned int	opcode;
-	short unsigned int	nb_cycle;
-	short unsigned int	bool_ocp;
-}							t_cw_op_tab;
 
 #endif

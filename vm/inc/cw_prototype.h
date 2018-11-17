@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 17:24:40 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/17 18:30:27 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int				cw_parse_arg(char **argv, int argc);
 
 void			cw_put_champion_in_memory(void);
 int				cw_update_champ_live(int id_champ);
+void			cw_clean_everything(void);
 
 /*
 **		champion
