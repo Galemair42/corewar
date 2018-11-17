@@ -6,24 +6,18 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/14 17:28:11 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/17 17:27:54 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		CW_STRUCT_H
-# define	CW_STRUCT_H
+#ifndef CW_STRUCT_H
+# define CW_STRUCT_H
 
-# include 	"cw_op.h"
+# include "cw_op.h"
 
-typedef struct		s_args
-{
-	int		f_s;
-	int		f_v; // a defnir comment ce truc marche
-}					t_args;
+typedef struct s_processus	t_processus;
 
-typedef	struct		s_processus	t_processus;
-
-struct		s_processus
+struct						s_processus
 {
 	int				opcode;
 	int				id;
@@ -33,46 +27,45 @@ struct		s_processus
 	unsigned int	carry;
 	unsigned int	reg[REG_NUMBER + 1];
 	int				params[4];
-//	int				id_player;
 };
 
-typedef struct		s_champion
+typedef struct				s_champion
 {
 	char				*name;
-	int					id;	
+	int					id;
 	int					nb_live;
 	header_t			header;
 	unsigned char		instruction[CHAMP_MAX_SIZE + 1];
-}					t_champion;
+}							t_champion;
 
-typedef struct		s_processeur
+typedef struct				s_processeur
 {
 	unsigned char		memory[MEM_SIZE];
 	unsigned char		*mem_color;
-	t_list	 	   		*champion;
+	t_list				*champion;
 	t_list				*process;
 	t_list				*process_to_exec[CYCLE_TO_DIE];
 	size_t				nb_champ;
-	unsigned int 	   	cycle_to_die;//
-	unsigned int 	   	max_check;//
-	int					cycle_live;	
-	int			 	   	id_last_player_alive;
+	unsigned int		cycle_to_die;
+	unsigned int		max_check;
+	int					cycle_live;
+	int					id_last_player_alive;
 	int					current_process_id;
 	unsigned int		cur_processus;
-	unsigned int		max_cycle;//
+	unsigned int		max_cycle;
 	unsigned int		cur_cycle;
 	unsigned int		cycle_to_dump;
 	WINDOW				*visu_score;
 	WINDOW				*visu_fight;
-}					t_processeur;
+}							t_processeur;
 
-typedef struct		s_cw_op_tab
+typedef struct				s_cw_op_tab
 {
 	short unsigned int	nb_instru;
 	unsigned int		param;
 	short unsigned int	opcode;
 	short unsigned int	nb_cycle;
 	short unsigned int	bool_ocp;
-}					t_cw_op_tab;
+}							t_cw_op_tab;
 
 #endif
