@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 18:50:23 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/17 17:17:42 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void			cw_read_processus_opc(int index, int ctd)
 			process = (t_processus *)lst_process->content;
 			if (arena.visu_fight)
 				cw_visu_incr_process(process, MEM_MASK(process->pc + 1));
-			process->pc++;
+			process->pc = MEM_MASK(process->pc + 1);
 			tmp2 = lst_process->next;
 			lst_process->next = NULL;
 			ft_lstappend(&tmp, lst_process);
@@ -109,8 +109,6 @@ void			cw_read_processus_opc(int index, int ctd)
 
 int				cw_fight(void)
 {
-	static int 		stop;
-
 	unsigned int	ctd;
 	int				cycle;
 	int				cycle_decrementation;
@@ -118,8 +116,6 @@ int				cw_fight(void)
 	ctd = arena.cycle_to_die;
 	cycle_decrementation = 0;
 	cycle = 0;
-//	print_all_champ();
-//	exit (0);
 	while (1)
 	{
 		cw_read_processus_opc(cycle, ctd);
@@ -140,7 +136,6 @@ int				cw_fight(void)
 //		}
 		if (cycle == ctd)
 		{
-			stop++;
 			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
 			{
 				ctd = (int)(ctd - CYCLE_DELTA) >= 0 ? ctd - CYCLE_DELTA : 1;
@@ -150,6 +145,7 @@ int				cw_fight(void)
 				cycle_decrementation++;
 			cw_reset_live();
 			if (arena.cycle_live == 0)
+			//if (print_exec_tab() + print_all_process() == 0)
 			{
 				printf("FINAL CYCLE = %d\n", arena.cur_cycle);
 				if (arena.id_last_player_alive == 0)

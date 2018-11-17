@@ -1,5 +1,5 @@
 FT_PATH=../libft/
-FLAGS = -fsanitize=address -g
+FLAGS = -g
 NAME = corewar
 FT_NAME = $(FT_PATH)libft.a
 LIB = $(FT_PATH)libft.a
@@ -50,7 +50,8 @@ SRC = \
 		src/visualisateur/cw_display.c	\
 		src/visualisateur/cw_init_visu.c	\
 		src/visualisateur/cw_keypad.c	\
-		src/visualisateur/cw_score.c
+		src/visualisateur/cw_score.c		\
+		src/utils/cw_exit_properly.c		\
 
 OBJS = $(SRC:.c=.o)
 OBJS := $(notdir $(OBJS))

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 17:14:58 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/17 16:48:58 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int		print_all_process(void)
 	while (process)
 	{
 		cur_process = (t_processus *)process->content;
-		print_process(cur_process);
+		//print_process(cur_process);
 		process = process->next;
-		printf("\n");
+		//printf("\n");
 		ret++;
 	}
 	return (ret - 1);
@@ -121,8 +121,8 @@ int		print_exec_tab(void)
 		while (list)
 		{
 			cur_process = (t_processus *)list->content;
-			printf("\ni = %d\n", i);
-			print_process(cur_process);
+		//	printf("\ni = %d\n", i);
+		//	print_process(cur_process);
 			list = list->next;
 			ret++;
 		}
