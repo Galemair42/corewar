@@ -77,6 +77,12 @@ void			cw_visu_incr_process(t_processus *process, int next_pc)
 	int		cur_pc;
 
 	cur_pc = process->pc;
+	if (process->pc > MEM_SIZE)
+	{
+		printw("wai ba wai trou dbal : %u", process->pc);
+		refresh();
+		while (1);
+	}
 	wattron(arena.visu_fight, COLOR_PAIR(arena.mem_color[cur_pc]));
 	mvwprintw(arena.visu_fight, (cur_pc / 64) + 1, ((cur_pc % 64) * 3) + 3,
 			"%.2X", arena.memory[cur_pc]);

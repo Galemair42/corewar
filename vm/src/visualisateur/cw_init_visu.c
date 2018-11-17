@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:17:59 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 13:04:30 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/17 14:23:35 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void			cw_set_score_win(void)
 {
 	arena.visu_score = subwin(stdscr, 15, COLS - 2,
-			WIN_HEIGHT + 2, 1);
+			WIN_HEIGHT, 1);
 	box(arena.visu_score, ACS_VLINE, ACS_HLINE);
 	mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FIRST_COL, "cycle : 0");
 	mvwprintw(arena.visu_score, SC_HEIGHT - 1, SC_SECOND_COL, "LIVE:");
@@ -35,7 +35,7 @@ static void			cw_set_fight_window(void)
 	int		i;
 
 	i = 1;
-	arena.visu_fight = subwin(stdscr, WIN_HEIGHT, COLS - 2, 1, 1);
+	arena.visu_fight = subwin(stdscr, WIN_HEIGHT, COLS - 2, 0, 1);
 	box(arena.visu_fight, ACS_VLINE, ACS_HLINE);
 	while (i <= 64)
 	{

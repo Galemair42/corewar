@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:48:58 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 17:30:23 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/17 17:51:13 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int				main(int argc, char **argv)
 		cw_fight_visu();
 	else
 		cw_fight();
-	//cw_clean_everything();
+	cw_clean_everything();
 	free(arena.visu_fight);
 	free(arena.visu_score);
+	free(arena.mem_color);
 	while (1);
 }

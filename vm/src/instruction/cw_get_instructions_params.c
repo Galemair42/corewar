@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 18:42:32 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/17 13:55:23 by jabt             ###   ########.fr       */
 /*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -95,8 +95,6 @@ int		get_params(t_processus *process)
 		i++;
 		ocp = ocp << 2;
 	}
-	mvwprintw(arena.visu_score, 0, 0, "ret getparams down : %u", MEM_MASK(current_pc));
-		wrefresh(arena.visu_score);
 	return (current_pc);
 }
 

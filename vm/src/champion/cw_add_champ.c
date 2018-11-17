@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 10:54:56 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 17:26:54 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/17 18:04:32 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int					cw_add_new_champ(unsigned char *buffer,
 		free(champ);
 		return (-1);
 	}
+	free(champ);
+	champ = (t_champion *)new_node->content;
 	champ->name = champ_name;
 	champ->id = id;
 	champ->nb_live = 0;

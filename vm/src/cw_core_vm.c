@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 17:17:42 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/17 18:01:40 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,9 @@ int				cw_fight(void)
 	unsigned int	ctd;
 	int				cycle;
 	int				cycle_decrementation;
+	t_processus		delimiter;
 
+	ft_bzero(&delimiter, sizeof(t_processus));
 	ctd = arena.cycle_to_die;
 	cycle_decrementation = 0;
 	cycle = 0;
@@ -154,7 +156,7 @@ int				cw_fight(void)
 					printf("The winner is %s!\n", get_champs_name_by_id(arena.id_last_player_alive));
 				return (1);
 			}
-			ft_lstadd(&arena.process, ft_lstnew(ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
+			ft_lstadd(&arena.process, ft_lstnew(&delimiter, sizeof(t_processus)));
 			arena.cycle_live = 0;
 			cycle = 0;
 		}
