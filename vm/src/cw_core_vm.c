@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 10:56:51 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 11:11:33 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int				cw_fight(void)
 	int				cycle_decrementation;
 	t_processus		*delimiter;
 
-	arena.ctd = arena.cycle_to_die;
 	cycle_decrementation = 0;
 	cycle = 0;
 	while (1)
