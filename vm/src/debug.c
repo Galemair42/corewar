@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 16:48:47 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 17:22:59 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,19 +118,19 @@ void	print_buffer_in_hexa(unsigned char *buffer, size_t size)
 
 	i = 0;
 	line = 0;
-	printf(0x0000 : );
+	printf("0x0000 : ");
 	while (i < size)
 	{
 		j = 0;
 		if (line > 0)
-			printf(%#.4x : , line * 64);
+			printf("%#.4x : ", line * 64);
 		while (j < 64 && i < size) // comme zaz
 		{
-			printf(%02x , buffer[i]);
+			printf("%02x ", buffer[i]);
 			j++;
 			i++;
 		}
-		printf(n);
+		printf("\n");
 		line++;
 	}
 }

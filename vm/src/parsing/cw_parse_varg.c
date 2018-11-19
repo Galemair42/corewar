@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:54:40 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 14:20:36 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 18:01:29 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int			cw_is_valid_id(int id)
 **		it in arena->arg flag in question
 */
 
-static int			cw_parse_flag(char **argv, int cur)
+static int			cw_parse_flag(char **argv, int cur, int *index)
 {
 	int		i;
 	char	*arg;
@@ -47,8 +47,12 @@ static int			cw_parse_flag(char **argv, int cur)
 	arg = &argv[cur][1];
 	if (ft_strequ(arg, "dump"))
 	{
-		printf("fais ton atoi bizarre\n");
-		exit(5);
+		if (argv[cur + 1])
+			arena.cycle_to_dump = ft_atoi(argv[cur + 1]);
+		else
+			return (-1);
+		*index += 1;
+		return (1);
 	}
 	else if (ft_strequ(arg, "d"))
 	{
@@ -68,11 +72,12 @@ int					cw_parse_arg(char **argv, int argc)
 {
 	int		i;
 	int		id;
+	int		ret;
 
 	i = 0;
 	while (++i < argc)
 	{
-		if (argv[i][0] != '-' || !(cw_parse_flag(argv, i)))
+		if ((argv[i][0] != '-' || !(ret = cw_parse_flag(argv, i, &i))) && ret != -1)
 		{
 			if (ft_strequ(&argv[i][1], "n"))
 			{
@@ -88,6 +93,11 @@ int					cw_parse_arg(char **argv, int argc)
 				id = cw_get_new_champ_id();
 			if (cw_read_champion(argv[i], id) == -1)
 				return (0);
+		}
+		if (ret == -1)
+		{
+			printf("Corewar : Error");
+			return (-1);
 		}
 	}
 	return (1);

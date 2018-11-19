@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 10:54:56 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 13:36:40 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 17:45:51 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,3 +132,4 @@ void				cw_insert_champion(t_list *new_lst, t_champion *new_champ)
 	}
 	cur_lst_tmp->next = new_lst;
 }
+

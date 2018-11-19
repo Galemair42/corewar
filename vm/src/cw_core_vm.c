@@ -6,12 +6,12 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 15:07:54 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 17:52:50 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-int g_c = 0;
+
 t_list			*add_instruction_to_tab(t_list *process, int index,
 		unsigned int opc)
 {
@@ -93,10 +93,13 @@ int				cw_fight(void)
 
 	cycle_decrementation = 0;
 	cycle = 0;
-	print_buffer_in_hexa(arena.memory, MEM_SIZE);
-	exit(5);
 	while (1)
 	{
+		if (arena.cur_cycle == arena.cycle_to_dump)
+		{
+			print_buffer_in_hexa(arena.memory, MEM_SIZE);
+			return (1);
+		}
 		if (cycle == arena.ctd)
 		{
 			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
@@ -106,16 +109,16 @@ int				cw_fight(void)
 			}
 			else
 				cycle_decrementation++;
-			cw_clean_process_excedent();
+			//cw_clean_process_excedent();
 			cw_reset_live();
-			cw_clean_process_excedent();
+			//cw_clean_process_excedent();
 			if (arena.cycle_live == 0)
 			{
-				printf("Total cycle : %d\n", arena.cur_cycle);
-				if (arena.id_last_player_alive == 0)
-					printf("No Winner");
-				else
-					printf("The winner is %s!\n", get_champs_name_by_id(arena.id_last_player_alive));
+//				//printf("Total cycle : %d\n", arena.cur_cycle);
+//				if (arena.id_last_player_alive == 0)
+//					//printf("No Winner");
+//				else
+//					printf("The winner is %s!\n", get_champs_name_by_id(arena.id_last_player_alive));
 				return (1);
 			}
 			if (!(delimiter = (t_processus *)ft_memalloc(sizeof(t_processus))))

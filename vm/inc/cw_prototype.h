@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 10:44:23 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 17:21:24 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int				cw_fight_visu();
 int				cw_fight(void);
-void			cw_exec_instructions(int index);
+void			cw_exec_instructions();
 void			cw_init_funtab(void (**ptr)(t_processus *));
 void			cw_read_processus_opc(int index, int ctd);
 
@@ -136,5 +136,6 @@ void			cw_free_content(void *content, __unused size_t size);
 void			cw_clear_exec_tab(void);
 t_list			*free_list_elem(t_list *to_free);
 t_list			*cw_increment_pc(t_processus *process);
+void			cw_clean_process_excedent(void);
 
 #endif
