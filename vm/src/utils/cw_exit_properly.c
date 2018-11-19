@@ -6,22 +6,22 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 16:49:23 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/17 17:21:30 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 15:58:45 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	cw_free_champs_ptr(void	*content, size_t size)
+void	cw_free_champs_ptr(void *content, size_t size)
 {
-	t_champion *to_free;
+	t_champion		*to_free;
 
 	to_free = (t_champion *)content;
 	free(to_free->name);
 	free(to_free);
 }
 
-void	cw_free_process_tab(void(*free_ptr)(void*, size_t))
+void	cw_free_process_tab(void (*free_ptr)(void*, size_t))
 {
 	int			i;
 	t_list		*lst;
@@ -41,7 +41,7 @@ void	cw_free_process_tab(void(*free_ptr)(void*, size_t))
 	}
 }
 
-void	cw_free_processes(void(*free_ptr)(void*, size_t))
+void	cw_free_processes(void (*free_ptr)(void*, size_t))
 {
 	t_list			*lst;
 	t_list			*tmp;
@@ -55,11 +55,11 @@ void	cw_free_processes(void(*free_ptr)(void*, size_t))
 	}
 }
 
-void	cw_free_champs(void(*free_champs_ptr)(void *, size_t))
+void	cw_free_champs(void (*free_champs_ptr)(void *, size_t))
 {
 	t_list *lst;
 	t_list *tmp;
-	
+
 	lst = arena.champion;
 	while (lst)
 	{
@@ -68,6 +68,7 @@ void	cw_free_champs(void(*free_champs_ptr)(void *, size_t))
 		lst = tmp;
 	}
 }
+
 void	cw_clean_everything(void)
 {
 	void			(*free_ptr)(void *, size_t);

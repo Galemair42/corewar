@@ -6,43 +6,37 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:07:03 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 11:17:47 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 13:28:26 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static int		cw_champ_color(void)
+static int		cw_champ_color(t_champion *champ)
 {
 	static int		color;
 
 	color++;
 	if (color == 1)
+	{
+		champ->color = CW_GREEN;
 		return (CW_GREEN);
+	}
 	else if (color == 2)
+	{
+		champ->color = CW_BLUE;
 		return (CW_BLUE);
+	}
 	else if (color == 3)
+	{
+		champ->color = CW_RED;
 		return (CW_RED);
+	}
 	else
+	{
+		champ->color = CW_CYAN;
 		return (CW_CYAN);
-}
-
-void			cw_highlight_octet(unsigned int index, int color_pair)
-{
-	wattron(arena.visu_fight, COLOR_PAIR(color_pair));
-	wattron(arena.visu_fight, A_STANDOUT);
-	mvwprintw(arena.visu_fight, 1 + (index / 64), 3 + (3 * (index % 64)),
-			"%.2x", arena.memory[index]);
-	wattroff(arena.visu_fight, COLOR_PAIR(color_pair));
-	wattroff(arena.visu_fight, A_STANDOUT);
-}
-
-void			cw_unhighlight_octet(unsigned int index, int color_pair)
-{
-	wattron(arena.visu_fight, COLOR_PAIR(color_pair));
-	mvwprintw(arena.visu_fight, 1 + (index / 64), 3 + (3 * (index % 64)),
-			"%.2x", arena.memory[index]);
-	wattroff(arena.visu_fight, COLOR_PAIR(color_pair));
+	}
 }
 
 void			cw_display_champ_on_ram(t_champion *champ, t_processus *process)
@@ -51,7 +45,7 @@ void			cw_display_champ_on_ram(t_champion *champ, t_processus *process)
 	unsigned int	pc;
 	int				color_pair;
 
-	color_pair = cw_champ_color();
+	color_pair = cw_champ_color(champ);
 	pc = process->pc;
 	i = 0;
 	wattron(arena.visu_fight, COLOR_PAIR(color_pair));
@@ -77,12 +71,6 @@ void			cw_visu_incr_process(t_processus *process, int next_pc)
 	int		cur_pc;
 
 	cur_pc = process->pc;
-	if (process->pc > MEM_SIZE)
-	{
-		printw("wai ba wai trou dbal : %u", process->pc);
-		refresh();
-		while (1);
-	}
 	wattron(arena.visu_fight, COLOR_PAIR(arena.mem_color[cur_pc]));
 	mvwprintw(arena.visu_fight, (cur_pc / 64) + 1, ((cur_pc % 64) * 3) + 3,
 			"%.2X", arena.memory[cur_pc]);
@@ -109,19 +97,11 @@ void			cw_print_winner_visu(void)
 		champ = (t_champion *)lst_champ->content;
 		if (champ->id == arena.id_last_player_alive)
 		{
-			if (i == 1)
-				i = CW_GREEN;
-			else if (i == 2)
-				i = CW_BLUE;
-			else if (i == 3)
-				i = CW_RED;
-			else
-				i = CW_CYAN;
-			wattron(arena.visu_score, COLOR_PAIR(i));
+			wattron(arena.visu_score, COLOR_PAIR(champ->color));
 			mvwprintw(arena.visu_score, SC_HEIGHT + 1, SC_FIRST_COL + 25,
 					"Thewinner is %s!\n",
 					get_champs_name_by_id(arena.id_last_player_alive));
-			wattroff(arena.visu_score, COLOR_PAIR(i));
+			wattroff(arena.visu_score, COLOR_PAIR(champ->color));
 			wrefresh(arena.visu_score);
 			return ;
 		}

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:51:14 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 10:53:06 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 15:34:44 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_list		*cw_list_pop(t_list **tab_lst)
 
 void		cw_insert_process(t_list **process_tab, t_list *process)
 {
-	t_list		*lst_iter;
-	t_list		*before;
+	t_list			*lst_iter;
+	t_list			*before;
 
 	lst_iter = *process_tab;
 	if (((t_processus *)lst_iter->content)->id <

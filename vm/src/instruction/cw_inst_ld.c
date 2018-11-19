@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:10:34 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 15:30:42 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:18:09 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ void		cw_inst_ld(t_processus *process)
 		process->reg[process->params[1]] =
 			cw_calculate_value_on_ram(landing, 4);
 	}
-	if (process->reg[process->params[1]] == 0)
-		process->carry = 1;
-	else
-		process->carry = 0;
+	process->carry = (process->reg[process->params[1]] == 0) ? 1 : 0;
 	if (arena.visu_fight)
 		cw_visu_incr_process(process, MEM_MASK(ret));
 	process->pc = ret;

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:54:40 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 10:44:32 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 14:20:36 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,7 @@ static int			cw_parse_flag(char **argv, int cur)
 	char	*arg;
 
 	arg = &argv[cur][1];
-	if (ft_strequ(arg, "v"))
-	{
-		printf("t'as pas encore fait le mode verbose parsing/cw_parsing_args.c\n");
-		exit(8);
-	}
-	else if (ft_strequ(arg, "dump"))
-	{
-		printf("fais ton atoi bizarre\n");
-		exit(5);
-	}
-	else if (ft_strequ(arg, "s"))
+	if (ft_strequ(arg, "dump"))
 	{
 		printf("fais ton atoi bizarre\n");
 		exit(5);
@@ -79,8 +69,8 @@ int					cw_parse_arg(char **argv, int argc)
 	int		i;
 	int		id;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
 		if (argv[i][0] != '-' || !(cw_parse_flag(argv, i)))
 		{
@@ -99,7 +89,6 @@ int					cw_parse_arg(char **argv, int argc)
 			if (cw_read_champion(argv[i], id) == -1)
 				return (0);
 		}
-		i++;
 	}
 	return (1);
 }

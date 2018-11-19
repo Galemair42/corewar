@@ -6,19 +6,19 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 10:54:56 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 18:04:32 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 13:36:40 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void			cw_print_init_champ(header_t *header_champ)
+static void			cw_bzero_champ(t_champion *champ)
 {
-	if (!arena.visu_fight)
-	//	printf("* Player 1, weighing %u bytes, \"%s\" (\"%s\") !\n",
-	//		header_champ->prog_size, header_champ->prog_name,
-	//		header_champ->comment);
-		printf("ok ?");
+	champ->nb_live = 0;
+	champ->color = -1;
+	ft_bzero(champ->instruction, CHAMP_MAX_SIZE + 1);
+	ft_bzero(champ->header.prog_name, PROG_NAME_LENGTH + 1);
+	ft_bzero(champ->header.comment, COMMENT_LENGTH + 1);
 }
 
 /*
@@ -36,7 +36,7 @@ static int			cw_add_header(unsigned char *buff_file,
 
 	if (size < HEADER_SIZE || !cw_header_verif_null_byte(buff_file))
 	{
-		//printf("corewar : Invalid Champion %s\n", champ->name);
+		printf("corewar : Invalid Champion %s\n", champ->name);
 		return (-1);
 	}
 	champ->header.magic = (buff_file[0] << 24) + (buff_file[1] << 16)
@@ -47,7 +47,7 @@ static int			cw_add_header(unsigned char *buff_file,
 		+ (buf_iter[2] << 8) + buf_iter[3];
 	if (champ_size > CHAMP_MAX_SIZE || size != HEADER_SIZE + champ_size)
 	{
-		//printf("corewar : Champion %s too large\n", champ->name);
+		printf("corewar : Champion %s too large\n", champ->name);
 		return (-1);
 	}
 	champ->header.prog_size = champ_size;
@@ -85,10 +85,7 @@ int					cw_add_new_champ(unsigned char *buffer,
 	champ = (t_champion *)new_node->content;
 	champ->name = champ_name;
 	champ->id = id;
-	champ->nb_live = 0;
-	ft_bzero(champ->instruction, CHAMP_MAX_SIZE + 1);
-	ft_bzero(champ->header.prog_name, PROG_NAME_LENGTH + 1);
-	ft_bzero(champ->header.comment, COMMENT_LENGTH + 1);
+	cw_bzero_champ(champ);
 	new_node->content = (void *)champ;
 	new_node->next = NULL;
 	if (!arena.champion)

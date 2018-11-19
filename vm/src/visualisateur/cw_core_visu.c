@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-
+int g_c;
 void				cw_wait_and_quit_properly(void)
 {
 	t_champion		*champ;
@@ -59,7 +59,6 @@ void				cw_manage_getch(int c)
 
 int					cw_fight_visu(void)
 {
-	unsigned int	ctd;
 	int				cycle;
 	int				cycle_decrementation;
 	int				c;
@@ -81,7 +80,7 @@ int					cw_fight_visu(void)
 			if (arena.cycle_live >= NBR_LIVE ||
 					cycle_decrementation == MAX_CHECKS - 1)
 			{
-				ctd = (int)(ctd - CYCLE_DELTA) >= 0 ? ctd - CYCLE_DELTA : 1;
+				arena.ctd = (int)(arena.ctd - CYCLE_DELTA) >= 0 ? arena.ctd - CYCLE_DELTA : 1;
 				cycle_decrementation = 0;
 			}
 			else

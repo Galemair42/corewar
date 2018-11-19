@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-
+int g_c = 0;
 t_list			*add_instruction_to_tab(t_list *process, int index,
 		unsigned int opc)
 {
@@ -93,6 +93,8 @@ int				cw_fight(void)
 
 	cycle_decrementation = 0;
 	cycle = 0;
+	print_buffer_in_hexa(arena.memory, MEM_SIZE);
+	exit(5);
 	while (1)
 	{
 		if (cycle == arena.ctd)

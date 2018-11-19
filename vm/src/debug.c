@@ -101,8 +101,9 @@ int		print_exec_tab(void)
 		while (list)
 		{
 			cur_process = (t_processus *)list->content;
-		//	printf("\ni = %d\n", i);
-		//	print_process(cur_process);
+			printf("\ni = %d\n", i);
+			printf("\ni = %d\n", i);
+			print_process(cur_process);
 			list = list->next;
 			ret++;
 		}
