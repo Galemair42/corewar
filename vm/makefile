@@ -50,6 +50,7 @@ SRC = \
 		src/visualisateur/cw_display.c	\
 		src/visualisateur/cw_init_visu.c	\
 		src/visualisateur/cw_keypad.c	\
+		src/visualisateur/cw_process_visu.c	\
 		src/visualisateur/cw_score.c		\
 		src/utils/cw_exit_properly.c		\
 		src/utils/cw_core_vm_helper.c		\
