@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:59:07 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 09:51:59 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:06:58 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ int					cw_fight_visu(void)
 	int				c;
 	t_processus		*delimiter;
 
+
 	cw_key_space();
 	cw_begin_visu(arena.champion);
-	ctd = arena.cycle_to_die;
+	ctd = CYCLE_TO_DIE;
 	cycle_decrementation = 0;
 	cycle = 0;
 	while (1)
@@ -75,11 +76,6 @@ int					cw_fight_visu(void)
 		c = getch();
 		if (c != -1)
 			cw_manage_getch(c);
-		cw_read_processus_opc(cycle, ctd);
-		cw_exec_instructions(cycle);
-		arena.cur_cycle++;
-		cycle++;
-		c++;
 		if (cycle == ctd)
 		{
 			if (arena.cycle_live >= NBR_LIVE ||
@@ -90,6 +86,7 @@ int					cw_fight_visu(void)
 			}
 			else
 				cycle_decrementation++;
+			//cw_clean_process_excedent();
 			cw_reset_live();
 			if (arena.cycle_live == 0)
 			{
@@ -103,7 +100,12 @@ int					cw_fight_visu(void)
 			arena.cycle_live = 0;
 			cycle = 0;
 		}
-		cw_update_cycle();
+		cw_read_processus_opc(cycle, ctd);
+		cw_exec_instructions();
+		arena.cur_cycle++;
+		cycle++;
+		c++;
+	cw_update_cycle();
 	}
 	return (1);
 }

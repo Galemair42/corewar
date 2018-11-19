@@ -1,5 +1,5 @@
 FT_PATH=../libft/
-FLAGS = -g
+FLAGS = -ggdb -g
 NAME = corewar
 FT_NAME = $(FT_PATH)libft.a
 LIB = $(FT_PATH)libft.a

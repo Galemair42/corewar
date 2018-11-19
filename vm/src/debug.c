@@ -6,31 +6,11 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 09:40:27 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:48:47 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-void	print_buffer_in_hexa(unsigned char *buffer, size_t size)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	printf("sa\n");
-	while (i < size)
-	{
-		j = 0;
-		while (j < 64 && i < size) // comme zaz
-		{
-			printf("%02x ", buffer[i]);
-			j++;
-			i++;
-		}
-		printf("\n");
-	}
-}
 
 void	print_one_champ(t_champion *champ)
 {
@@ -128,4 +108,28 @@ int		print_exec_tab(void)
 		}
 	}
 	return (ret);
+}
+void	print_buffer_in_hexa(unsigned char *buffer, size_t size)
+{
+	size_t	i;
+	size_t	j;
+	unsigned int	line;
+
+	i = 0;
+	line = 0;
+	printf(0x0000 : );
+	while (i < size)
+	{
+		j = 0;
+		if (line > 0)
+			printf(%#.4x : , line * 64);
+		while (j < 64 && i < size) // comme zaz
+		{
+			printf(%02x , buffer[i]);
+			j++;
+			i++;
+		}
+		printf(n);
+		line++;
+	}
 }

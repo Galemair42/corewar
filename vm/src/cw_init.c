@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:00:14 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 11:30:13 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 13:50:46 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void					cw_init_processeur(void)
 	arena.id_last_player_alive = 0;
 	arena.cycle_live = 0;
 	arena.max_cycle = ~0;
+	arena.current_process_to_exec = 0;
 	arena.cur_cycle = 0;
 	arena.cycle_to_dump = ~0;
 	arena.current_process_id = 1;
