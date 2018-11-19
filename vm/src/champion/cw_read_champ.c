@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 17:39:18 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 17:53:04 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 14:10:57 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int					cw_header_verif_null_byte(unsigned char *buff_file)
 int					cw_read_champion(char *champ_name, int id)
 {
 	int				fd;
-	int				max_len_file;
-	unsigned char	*buffer;
+	unsigned char	buffer[MAX_LEN_FILE];
 	size_t			ret;
 
 	if (arena.nb_champ >= MAX_PLAYERS)
@@ -61,22 +60,14 @@ int					cw_read_champion(char *champ_name, int id)
 		return (-1);
 	}
 	arena.nb_champ++;
-	max_len_file = 16 + PROG_NAME_LENGTH + COMMENT_LENGTH + CHAMP_MAX_SIZE;
-	if (!(buffer = ft_memalloc(max_len_file)))
-		return (-1);
 	if ((fd = open(champ_name, O_RDONLY)) == -1 ||
-			(ret = read(fd, buffer, max_len_file)) == -1)
+			(ret = read(fd, buffer, MAX_LEN_FILE)) == -1)
 	{
 		perror("corewar ");
-		free(buffer);
 		return (-1);
 	}
 	if (cw_add_new_champ(buffer, ret, champ_name, id) == -1)
-	{
-		free(buffer);
 		return (-1);
-	}
-	free(buffer);
 	close(fd);
 	return (1);
 }

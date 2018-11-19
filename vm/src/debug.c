@@ -16,12 +16,16 @@ void	print_buffer_in_hexa(unsigned char *buffer, size_t size)
 {
 	size_t	i;
 	size_t	j;
+	unsigned int	line;
 
 	i = 0;
-	printf("sa\n");
+	line = 0;
+	printf("0x0000 : ");
 	while (i < size)
 	{
 		j = 0;
+		if (line > 0)
+			printf("%#.4x : ", line * 64);
 		while (j < 64 && i < size) // comme zaz
 		{
 			printf("%02x ", buffer[i]);
@@ -29,6 +33,7 @@ void	print_buffer_in_hexa(unsigned char *buffer, size_t size)
 			i++;
 		}
 		printf("\n");
+		line++;
 	}
 }
 
@@ -121,8 +126,9 @@ int		print_exec_tab(void)
 		while (list)
 		{
 			cur_process = (t_processus *)list->content;
-		//	printf("\ni = %d\n", i);
-		//	print_process(cur_process);
+			printf("\ni = %d\n", i);
+			printf("\ni = %d\n", i);
+			print_process(cur_process);
 			list = list->next;
 			ret++;
 		}

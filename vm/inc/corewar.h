@@ -27,6 +27,7 @@
 # define HEADER_SIZE	16 + PROG_NAME_LENGTH + COMMENT_LENGTH
 # define MEM_MASK(x) x & 0xFFF
 # define __UNUSED __ATTRIBUTE__((unused))
+# define MAX_LEN_FILE (16 + PROG_NAME_LENGTH + COMMENT_LENGTH + CHAMP_MAX_SIZE)
 
 /*
 **      visu

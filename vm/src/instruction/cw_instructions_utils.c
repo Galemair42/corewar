@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 13:39:56 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/14 12:48:02 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:35:18 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc)
 			return (0xFFF & (former_pc + (diff1 % IDX_MOD)));
 	}
 	else
-	{
 		if (former_pc >= new_pc)
 			return (0xFFF & (former_pc + (diff2 % IDX_MOD)));
 		else
@@ -44,5 +43,4 @@ unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc)
 			else
 				return (0xFFF & (MEM_SIZE - tmp));
 		}
-	}
 }

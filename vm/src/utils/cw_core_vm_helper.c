@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 09:55:19 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/19 11:01:57 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 15:32:06 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_list	*cw_increment_pc(t_processus *process)
 	t_list	*tmp;
 
 	if (arena.visu_fight)
-			cw_visu_incr_process(process, MEM_MASK(process->pc + 1));
+		cw_visu_incr_process(process, MEM_MASK(process->pc + 1));
 	process->pc = MEM_MASK(process->pc + 1);
 	tmp = arena.process->next;
 	arena.process->next = NULL;
 	ft_lstappend(&tmp, arena.process);
-	return(tmp);
+	return (tmp);
 }

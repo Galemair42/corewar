@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cw_get_instructions_params.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/26 14:17:12 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/17 13:55:23 by jabt             ###   ########.fr       */
-/*   Updated: 2018/11/06 11:36:57 by galemair         ###   ########.fr       */
+/*   Created: 2018/11/19 16:00:47 by jabt              #+#    #+#             */
+/*   Updated: 2018/11/19 16:08:20 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +16,21 @@
 **		Receive the OCP and the current PC
 **		First, it will isolate the 2 lightest bits to determine the size of the
 **		parameter
-**		Then it will read on the memory to calculate the value of the 
+**		Then it will read on the memory to calculate the value of the
 **		parameters and will advance the current_PC
 **		Return -1 when an error occurs
-**		!! STILL HAVE TO MANAGE DIRECT PARAMETERS !! CARE IF IT STANDS FOR AN ADDRESS OR AN INTEGER	**
+**		!! STILL HAVE TO MANAGE DIRECT PARAMETERS !! CARE IF IT STANDS FOR
+**		AN ADDRESS OR AN INTEGER	**
 */
 
-static int		manage_error(unsigned int pc, t_processus *process)
+static int			manage_error(unsigned int pc, t_processus *process)
 {
 	process->pc = pc;
 	return (-1);
 }
 
-static int		get_params1(unsigned int ocp, unsigned int *current_pc, int opc, int index)
+static int			get_params1(unsigned int ocp, unsigned int *current_pc,
+		int opc, int index)
 {
 	int	value;
 	int i;
@@ -38,12 +39,13 @@ static int		get_params1(unsigned int ocp, unsigned int *current_pc, int opc, int
 	value = 0;
 	ocp = ocp >> 30;
 	if ((ocp == REG_CODE && !(op_tab[opc].types[index] & T_REG)) ||
-		(ocp == DIR_CODE && !(op_tab[opc].types[index] & T_DIR)) ||
-		(ocp == IND_CODE && !(op_tab[opc].types[index] & T_IND)))
+			(ocp == DIR_CODE && !(op_tab[opc].types[index] & T_DIR)) ||
+			(ocp == IND_CODE && !(op_tab[opc].types[index] & T_IND)))
 		return (-1);
 	if (ocp == 0)
 		return (-1);
-	value = cw_calculate_value_on_ram(*current_pc, get_size(ocp, op_tab[opc].f));
+	value = cw_calculate_value_on_ram(*current_pc,
+			get_size(ocp, op_tab[opc].f));
 	if (ocp == REG_CODE && (value < 1 || value > 16))
 		return (-1);
 	*current_pc = MEM_MASK(*current_pc + get_size(ocp, op_tab[opc].f));
@@ -63,16 +65,16 @@ unsigned int		get_size(unsigned int ocp, int flag_chelou)
 
 /*
 **		If an instruction has an OCP, this function is called
-**		It will read the params in the virtual memory and stock them in the variable 
-**		params of the structure t_processus
+**		It will read the params in the virtual memory and stock
+**		them in the variable params of the structure t_processus
 */
 
-int		get_params(t_processus *process)
+int					get_params(t_processus *process)
 {
-	unsigned int ocp;
-	int	i;
-	unsigned int current_pc;
-	unsigned int error_pc;
+	unsigned int	ocp;
+	int				i;
+	unsigned int	current_pc;
+	unsigned int	error_pc;
 
 	i = 0;
 	current_pc = MEM_MASK(process->pc + 1);
@@ -85,7 +87,8 @@ int		get_params(t_processus *process)
 	ocp = ocp << 24;
 	while (i < op_tab[process->opcode - 1].nb_args)
 	{
-		if ((process->params[i] = get_params1(ocp, &current_pc, process->opcode - 1, i)) == -1)
+		if ((process->params[i] = get_params1(ocp, &current_pc,
+						process->opcode - 1, i)) == -1)
 		{
 			if (arena.visu_fight)
 				cw_visu_incr_process(process, current_pc);
@@ -98,24 +101,26 @@ int		get_params(t_processus *process)
 	return (current_pc);
 }
 
-unsigned int     cw_get_one_params(t_processus *process, int number, _Bool apply_modulo)
+unsigned int		cw_get_one_params(t_processus *process, int number,
+		_Bool apply_modulo)
 {
-    unsigned int     ret;
+	unsigned int	ret;
 	int				padding;
-    unsigned int     landing;
+	unsigned int	landing;
 
 	padding = 8 - (number * 2);
-    if (((process->ocp >> padding) & 3) == DIR_CODE)
-        ret = process->params[number - 1];
-    else if (((process->ocp >> padding) & 3) == REG_CODE)
-        ret = process->reg[process->params[number - 1]];
-    else if (((process->ocp >> padding) & 3) == IND_CODE)
-    {
+	if (((process->ocp >> padding) & 3) == DIR_CODE)
+		ret = process->params[number - 1];
+	else if (((process->ocp >> padding) & 3) == REG_CODE)
+		ret = process->reg[process->params[number - 1]];
+	else if (((process->ocp >> padding) & 3) == IND_CODE)
+	{
 		if (apply_modulo)
-        	landing = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + process->params[number - 1]));
+			landing = apply_IDX_MOD(process->pc, MEM_MASK(process->pc +
+						process->params[number - 1]));
 		else
 			landing = MEM_MASK(process->pc + process->params[number - 1]);
-        ret = cw_calculate_value_on_ram(landing, 4);
-    }
-    return (ret);
+		ret = cw_calculate_value_on_ram(landing, 4);
+	}
+	return (ret);
 }

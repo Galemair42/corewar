@@ -36,6 +36,7 @@ typedef struct				s_champion
 	int					nb_live;
 	header_t			header;
 	unsigned char		instruction[CHAMP_MAX_SIZE + 1];
+	int					color;
 }							t_champion;
 
 typedef struct				s_processeur

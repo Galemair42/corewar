@@ -6,13 +6,64 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:26:15 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/19 11:10:57 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 14:51:01 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	cw_reset_tab_live(void)
+static void		cw_verif_processes(void)
+{
+	t_list			*lst;
+	t_list			*tmp;
+	t_processus		*process;
+	void			(*free_ptr)(void *, size_t);
+
+	free_ptr = &cw_free_content;
+	lst = arena.process;
+	while (lst)
+	{
+		((t_processus *)lst->content)->nb_live = 0;
+		if (lst->next && ((t_processus *)lst->next->content)->nb_live <= 0)
+		{
+			process = (t_processus *)lst->next->content;
+			arena.cur_processus--;
+			if (arena.visu_fight)
+				cw_unhighlight_octet(process->pc, arena.mem_color[process->pc]);
+			tmp = lst->next->next;
+			ft_lstdelone(&lst->next, free_ptr);
+			lst->next = tmp;
+		}
+		else
+			lst = lst->next;
+	}
+}
+
+static void		cw_check_first_process(void)
+{
+	t_list			*lst;
+	t_list			*tmp;
+	t_processus		*process;
+	void			(*free_ptr)(void *, size_t);
+
+	free_ptr = &cw_free_content;
+	while (arena.process &&
+			((t_processus *)(arena.process)->content)->nb_live <= 0)
+	{
+		process = (t_processus *)arena.process->content;
+		if (process->id != 0)
+		{
+			arena.cur_processus--;
+			if (arena.visu_fight)
+				cw_unhighlight_octet(process->pc, arena.mem_color[process->pc]);
+		}
+		tmp = (arena.process)->next;
+		ft_lstdelone(&arena.process, free_ptr);
+		arena.process = tmp;
+	}
+}
+
+static void		cw_reset_tab_live(void)
 {
 	int			i;
 	t_list		*lst;
@@ -32,7 +83,7 @@ void	cw_reset_tab_live(void)
 	}
 }
 
-void	cw_reset_champs_live(void)
+static void		cw_reset_champs_live(void)
 {
 	t_list		*champs;
 	t_champion	*champion;
@@ -51,47 +102,9 @@ void	cw_reset_champs_live(void)
 	}
 }
 
-void	cw_verif_processes(void)
+void			cw_reset_live(void)
 {
-	t_list			*lst;
-	t_list			*tmp;
-	void			(*free_ptr)(void *, size_t);
-
-	free_ptr = &cw_free_content;
-	while (arena.process &&
-			((t_processus *)(arena.process)->content)->nb_live <= 0)
-	{
-		if (((t_processus *)arena.process->content)->id != 0)
-		{
-			arena.cur_processus--;
-			if (arena.visu_fight)
-				cw_unhighlight_octet( ((t_processus *)(arena.process)->content)->pc, arena.mem_color[((t_processus *)(arena.process)->content)->pc]);
-		}
-		tmp = (arena.process)->next;
-		ft_lstdelone(&arena.process, free_ptr);
-		arena.process = tmp;
-	}
-	lst = arena.process;
-	while (lst)
-	{
-		((t_processus *)lst->content)->nb_live = 0;
-		if (lst->next && ((t_processus *)lst->next->content)->nb_live <= 0)
-		{
-			arena.cur_processus--;
-			//printf("Processus * verif * %d died at cycle %d\n", ((t_processus *)lst->next->content)->id, arena.cur_cycle);
-			if (arena.visu_fight)
-				cw_unhighlight_octet( ((t_processus *)lst->next->content)->pc, arena.mem_color[((t_processus *)(arena.process)->next->content)->pc]);
-			tmp = lst->next->next;
-			ft_lstdelone(&lst->next, free_ptr);
-			lst->next = tmp;
-		}
-		else
-			lst = lst->next;
-	}
-}
-
-void	cw_reset_live(void)
-{
+	cw_check_first_process();
 	cw_verif_processes();
 	cw_reset_champs_live();
 	cw_reset_tab_live();
