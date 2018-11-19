@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 18:30:27 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 10:44:23 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,6 @@ void			cw_reset_live(void);
 void			cw_free_content(void *content, __unused size_t size);
 void			cw_clear_exec_tab(void);
 t_list			*free_list_elem(t_list *to_free);
+t_list			*cw_increment_pc(t_processus *process);
 
 #endif

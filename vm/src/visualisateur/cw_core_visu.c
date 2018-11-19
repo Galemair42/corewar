@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:59:07 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 16:39:14 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 09:51:59 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int					cw_fight_visu(void)
 	int				cycle;
 	int				cycle_decrementation;
 	int				c;
+	t_processus		*delimiter;
 
 	cw_key_space();
 	cw_begin_visu(arena.champion);
@@ -95,8 +96,10 @@ int					cw_fight_visu(void)
 				cw_wait_and_quit_properly();
 				return (1);
 			}
-			ft_lstadd(&arena.process, ft_lstnew(
-						ft_memalloc(sizeof(t_processus)), sizeof(t_processus)));
+			if (!(delimiter = (t_processus *)ft_memalloc(sizeof(t_processus))))
+				return (-1);
+			ft_lstadd(&arena.process, ft_lstnew(delimiter, sizeof(t_processus)));
+			free (delimiter);
 			arena.cycle_live = 0;
 			cycle = 0;
 		}

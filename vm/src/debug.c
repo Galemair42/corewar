@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 10:48:17 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 16:48:58 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/19 09:40:27 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int		print_all_process(void)
 	while (process)
 	{
 		cur_process = (t_processus *)process->content;
-		//print_process(cur_process);
+		print_process(cur_process);
 		process = process->next;
-		//printf("\n");
+		printf("\n");
 		ret++;
 	}
 	return (ret - 1);

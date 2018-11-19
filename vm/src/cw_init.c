@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:00:14 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 19:16:19 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 09:51:25 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ t_list					*cw_init_process(void)
 		cur_lst = cur_lst->next;
 		arena.current_process_id++;
 	}
-	cur_process = ft_memalloc(sizeof(t_processus));
+	if (!(cur_process = ft_memalloc(sizeof(t_processus))))
+			exit (-1);
 	ft_lstadd(&new_proc_lst, ft_lstnew(cur_process,
 				sizeof(t_processus)));
 	free(cur_process);

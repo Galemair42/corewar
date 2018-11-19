@@ -52,6 +52,7 @@ SRC = \
 		src/visualisateur/cw_keypad.c	\
 		src/visualisateur/cw_score.c		\
 		src/utils/cw_exit_properly.c		\
+		src/utils/cw_core_vm_helper.c		\
 
 OBJS = $(SRC:.c=.o)
 OBJS := $(notdir $(OBJS))

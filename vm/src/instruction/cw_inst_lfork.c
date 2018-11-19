@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:10:49 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 10:03:34 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 09:50:06 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void		cw_inst_lfork(t_processus *process)
 
 	param = cw_calculate_value_on_ram(process->pc + 1, 2);
 	pc = MEM_MASK(process->pc + param);
-	new_processus = malloc(sizeof(t_processus));
+	if ((new_processus = malloc(sizeof(t_processus))) == NULL)
+		exit (-1);
 	memcpy(new_processus, process, sizeof(t_processus));
 	new_processus->pc = pc;
 	new_processus->id = arena.current_process_id;

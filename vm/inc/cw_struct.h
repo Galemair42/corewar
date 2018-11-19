@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 18:46:44 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/19 10:56:01 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct				s_processeur
 	t_list				*process;
 	t_list				*process_to_exec[CYCLE_TO_DIE];
 	size_t				nb_champ;
+	unsigned int		ctd;
 	unsigned int		cycle_to_die;
 	unsigned int		max_check;
 	int					cycle_live;
