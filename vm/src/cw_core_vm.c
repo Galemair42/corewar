@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 17:52:50 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 14:37:14 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_list			*add_instruction_to_tab(t_list *process, int index,
 	if (!arena.process_to_exec[(index + i) % CYCLE_TO_DIE])
 		arena.process_to_exec[(index + i) % CYCLE_TO_DIE] = process;
 	else
-		cw_insert_process(&arena.process_to_exec[(index + i) % CYCLE_TO_DIE], process);
+		cw_insert_process(&arena.process_to_exec[(index + i) % CYCLE_TO_DIE],
+		process);
 	return (to_return);
 }
 
@@ -45,14 +46,32 @@ void			cw_exec_instructions(void)
 	{
 		process = (t_processus *)(lst->content);
 		tmp = lst->next;
-		//printf("Execution de l'instruction *%s* au cycle %d\n", op_tab[process->opcode - 1].name, arena.cur_cycle);
 		(*ptr[process->opcode - 1])(process);
 		lst->next = NULL;
 		ft_lstappend(&arena.process, lst);
 		lst = tmp;
 	}
 	arena.process_to_exec[arena.current_process_to_exec] = NULL;
-	arena.current_process_to_exec = (arena.current_process_to_exec + 1) % CYCLE_TO_DIE;
+	arena.current_process_to_exec = (arena.current_process_to_exec + 1)
+	% CYCLE_TO_DIE;
+}
+
+void			cw_manage_valide_opc(unsigned int opc_tmp, int index, int ctd,
+		t_processus *process)
+{
+	if (!(op_tab[opc_tmp - 1].cycle >
+		(ctd - index) && process->nb_live == 0) && (((2 * ctd) - index)
+		>= op_tab[opc_tmp - 1].cycle))
+		arena.process = add_instruction_to_tab(arena.process,
+		(op_tab[opc_tmp - 1].cycle - 1), opc_tmp);
+	else
+	{
+		arena.cur_processus--;
+		if (arena.visu_fight)
+			cw_unhighlight_octet(process->pc,
+			arena.mem_color[process->pc]);
+		arena.process = free_list_elem(arena.process);
+	}
 }
 
 void			cw_read_processus_opc(int index, int ctd)
@@ -66,20 +85,7 @@ void			cw_read_processus_opc(int index, int ctd)
 		process = (t_processus *)arena.process->content;
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
-		{
-			if (!(op_tab[opc_tmp - 1].cycle >
-				(ctd - index) && process->nb_live == 0) && (((2 * ctd) - index) >= op_tab[opc_tmp - 1].cycle))
-				arena.process = add_instruction_to_tab(arena.process,
-				(op_tab[opc_tmp - 1].cycle - 1), opc_tmp);
-			else
-			{
-				arena.cur_processus--;
-				if (arena.visu_fight)
-					cw_unhighlight_octet(process->pc,
-					arena.mem_color[process->pc]);
-				arena.process = free_list_elem(arena.process);
-			}
-		}
+			cw_manage_valide_opc(opc_tmp, index, ctd, process);
 		else
 			arena.process = cw_increment_pc(process);
 	}
