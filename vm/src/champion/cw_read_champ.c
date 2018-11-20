@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 17:39:18 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 17:40:03 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 16:59:36 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int					cw_read_champion(char *champ_name, int id)
 {
 	int				fd;
 	unsigned char	buffer[MAX_LEN_FILE];
-	size_t			ret;
+	int				ret;
 
 	if (arena.nb_champ >= MAX_PLAYERS)
 	{

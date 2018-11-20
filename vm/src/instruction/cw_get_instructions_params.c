@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 16:00:47 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 16:08:20 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 17:04:35 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ unsigned int		cw_get_one_params(t_processus *process, int number,
 	int				padding;
 	unsigned int	landing;
 
+	ret = 0;
 	padding = 8 - (number * 2);
 	if (((process->ocp >> padding) & 3) == DIR_CODE)
 		ret = process->params[number - 1];

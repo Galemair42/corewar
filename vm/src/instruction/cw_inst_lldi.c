@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:05:57 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 15:31:15 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 17:06:10 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		cw_inst_lldi(t_processus *process)
 {
 	unsigned int	landing;
-	unsigned int	ret;
+	int				ret;
 
 	if ((ret = get_params(process)) == -1)
 	{

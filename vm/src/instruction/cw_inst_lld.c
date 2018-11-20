@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:04:46 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 16:21:53 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 17:05:47 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void		cw_inst_lld(t_processus *process)
 {
-	int		dir_1;
-	int		reg_2;
 	int		ret;
 	int		landing;
 

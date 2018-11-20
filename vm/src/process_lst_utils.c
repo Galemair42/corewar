@@ -6,13 +6,13 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 16:34:40 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/16 11:57:19 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 17:13:15 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		cw_free_content(void *content, size_t size)
+void		cw_free_content(void *content, __unused size_t size)
 {
 	free((t_processus *)content);
 }

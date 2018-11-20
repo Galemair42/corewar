@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/20 14:37:14 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 17:28:17 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,16 @@ void			cw_read_processus_opc(int index, int ctd)
 	}
 }
 
-int				cw_fight(void)
+int				cw_fight(int visu)
 {
 	int				cycle;
-	int				cycle_decrementation;
-	t_processus		*delimiter;
 
-	cycle_decrementation = 0;
 	cycle = 0;
+	if (visu == 1)
+	{
+		cw_begin_visu(arena.champion);
+		cw_key_space();
+	}
 	while (1)
 	{
 		if (arena.cur_cycle == arena.cycle_to_dump)
@@ -106,34 +108,11 @@ int				cw_fight(void)
 			print_buffer_in_hexa(arena.memory, MEM_SIZE);
 			return (1);
 		}
-		if (cycle == arena.ctd)
-		{
-			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
-			{
-				arena.ctd = (int)(arena.ctd - CYCLE_DELTA) >= 0 ? arena.ctd - CYCLE_DELTA : 0;
-				cycle_decrementation = 0;
-			}
-			else
-				cycle_decrementation++;
-			//cw_clean_process_excedent();
-			cw_reset_live();
-			//cw_clean_process_excedent();
-			if (arena.cycle_live == 0)
-			{
-//				//printf("Total cycle : %d\n", arena.cur_cycle);
-//				if (arena.id_last_player_alive == 0)
-//					//printf("No Winner");
-//				else
-//					printf("The winner is %s!\n", get_champs_name_by_id(arena.id_last_player_alive));
+		if (cycle == (int)arena.ctd)
+			if (((cycle = cw_manage_ctd(visu)) == 1))
 				return (1);
-			}
-			if (!(delimiter = (t_processus *)ft_memalloc(sizeof(t_processus))))
-				return (-1);
-			ft_lstadd(&arena.process, ft_lstnew(delimiter, sizeof(t_processus)));
-			free(delimiter);
-			arena.cycle_live = 0;
-			cycle = 0;
-		}
+		if (cycle == -1)
+			return (-1);
 		cw_read_processus_opc(cycle, arena.ctd);
 		cw_exec_instructions();
 		cycle++;

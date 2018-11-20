@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 15:26:15 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/19 17:32:51 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 17:11:59 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void		cw_verif_processes(void)
 
 static void		cw_check_first_process(void)
 {
-	t_list			*lst;
 	t_list			*tmp;
 	t_processus		*process;
 	void			(*free_ptr)(void *, size_t);

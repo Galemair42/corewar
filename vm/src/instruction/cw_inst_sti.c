@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:11:06 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 15:22:31 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 17:07:04 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		cw_inst_sti(t_processus *process)
 {
 	unsigned int	landing;
-	unsigned int	ret;
+	int				ret;
 
 	landing = 0;
 	if ((ret = get_params(process)) == -1)

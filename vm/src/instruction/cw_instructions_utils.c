@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 13:39:56 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/20 14:15:47 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 17:07:44 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc)
 {
 	int diff1;
 	int	diff2;
-	int	tmp;
 	
 	diff1 = (former_pc >= new_pc ? former_pc : new_pc) - (former_pc >=
 	new_pc ? new_pc : former_pc);

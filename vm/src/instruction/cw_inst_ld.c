@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:10:34 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/19 16:18:09 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 17:04:56 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void		cw_inst_ld(t_processus *process)
 {
-	int		dir_1;
-	int		reg_2;
 	int		ret;
 	int		landing;
 

@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:45:30 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 10:49:22 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 17:10:29 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,6 @@ void				cw_init_funtab(void (**ptr)(t_processus *))
 	ptr[13] = &cw_inst_lldi;
 	ptr[14] = &cw_inst_lfork;
 	ptr[15] = &cw_inst_aff;
-}
-
-void				cw_exec_process(t_list *process)
-{
-	static void (*ptr[16]) (t_processus *);
-
-	if (!*ptr)
-		cw_init_funtab(ptr);
 }
 
 void				cw_reset_process(t_processus *process)

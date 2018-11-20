@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:54:40 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 18:01:29 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 17:09:29 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int			cw_is_valid_id(int id)
 {
-	int			ret;
 	t_list		*lst;
 	t_champion	*champ;
 
@@ -41,7 +40,6 @@ static int			cw_is_valid_id(int id)
 
 static int			cw_parse_flag(char **argv, int cur, int *index)
 {
-	int		i;
 	char	*arg;
 
 	arg = &argv[cur][1];

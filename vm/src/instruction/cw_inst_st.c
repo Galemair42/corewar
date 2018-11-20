@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:10:05 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 15:31:33 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 17:06:26 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void		cw_inst_st(t_processus *process)
 {
-	int		param_2;
 	int		ret;
 	int		landing;
 

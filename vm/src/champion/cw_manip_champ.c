@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 16:54:30 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/20 11:42:23 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 16:59:03 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ int		cw_is_valid_id(int id)
 int		cw_get_new_champ_id(void)
 {
 	int				id;
-	int				error;
-	t_list			*lst_champ;
-	t_champion		*champ;
 
 	if (!arena.champion)
 		return (1);
