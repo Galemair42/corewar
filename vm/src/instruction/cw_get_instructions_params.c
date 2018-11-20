@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 16:00:47 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/20 16:09:31 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 16:32:27 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,16 @@ int					get_params(t_processus *process)
 	unsigned int	current_pc;
 	unsigned int	error_pc;
 
-	i = 0;
+	i = -1;
 	ocp = cw_calculate_value_on_ram(MEM_MASK(process->pc + 1), 1);
 	process->ocp = ocp;
 	current_pc = MEM_MASK(process->pc + 2);
 	error_pc = current_pc;
 	if (ocp > 0xFC || process->opcode > 16)
 		return (manage_error(error_pc, process));
-	ocp = ocp << 24;
-	while (i < g_op_tab[process->opcode - 1].nb_args)
+	while (++i < g_op_tab[process->opcode - 1].nb_args)
 	{
-		if ((process->params[i] = get_params1(ocp, &current_pc,
+		if ((process->params[i] = get_params1(ocp << 24, &current_pc,
 						process->opcode - 1, i)) == -1)
 		{
 			if (g_arena.visu_fight)
@@ -94,7 +93,6 @@ int					get_params(t_processus *process)
 			process->pc = current_pc;
 			return (manage_error(error_pc, process));
 		}
-		i++;
 		ocp = ocp << 2;
 	}
 	return (current_pc);
