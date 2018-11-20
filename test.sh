@@ -12,7 +12,7 @@ CHAMP_ID2=4294967294;
 while [ $DIF_FLAG = 0 ];
 do
 	echo "$CYCLE\n"
-	./zaz/corewar -d $CYCLE $2 $1 > $ZAZ
+	./zaz/corewar -d $CYCLE $1 $2 > $ZAZ
 	./vm/corewar -dump $CYCLE -n $CHAMP_ID $1 -n $CHAMP_ID2 $2 > $OURS
 	diff zaz.txt corewar.txt > $DIFF_FILE
 	DIF_FLAG=$(wc -l < $DIFF_FILE);

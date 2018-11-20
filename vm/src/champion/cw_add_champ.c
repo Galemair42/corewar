@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 10:54:56 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 17:45:51 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 11:34:19 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void				cw_insert_champion(t_list *new_lst, t_champion *new_champ)
 	while (cur_lst)
 	{
 		cur_champ = (t_champion *)cur_lst->content;
-		if (new_champ->id < cur_champ->id)
+		if (new_champ->id > cur_champ->id)
 		{
 			new_lst->next = cur_lst;
 			if (cur_lst_tmp == NULL)
