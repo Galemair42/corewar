@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:22:45 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 17:20:55 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 16:09:12 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct				s_champion
 	char				*name;
 	int					id;
 	int					nb_live;
-	header_t			header;
+	t_header			header;
 	unsigned char		instruction[CHAMP_MAX_SIZE + 1];
 	int					color;
 }							t_champion;

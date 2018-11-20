@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 17:39:18 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 17:40:03 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 14:45:33 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char				*get_champs_name_by_id(int id)
 	t_list		*lst_champ;
 	t_champion	*champ;
 
-	lst_champ = arena.champion;
+	lst_champ = g_arena.champion;
 	while (lst_champ)
 	{
 		champ = (t_champion *)lst_champ->content;
@@ -54,12 +54,12 @@ int					cw_read_champion(char *champ_name, int id)
 	unsigned char	buffer[MAX_LEN_FILE];
 	size_t			ret;
 
-	if (arena.nb_champ >= MAX_PLAYERS)
+	if (g_arena.nb_champ >= MAX_PLAYERS)
 	{
 		printf("Corewar : too much champion\n");
 		return (-1);
 	}
-	arena.nb_champ++;
+	g_arena.nb_champ++;
 	if ((fd = open(champ_name, O_RDONLY)) == -1 ||
 			(ret = read(fd, buffer, MAX_LEN_FILE)) == -1)
 	{

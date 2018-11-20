@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:11:12 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 17:21:24 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 14:45:33 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			cw_init_processeur(void);
 int				cw_parse_arg(char **argv, int argc);
 
 /*
-** 		memory's arena
+** 		memory's g_arena
 */
 
 void			cw_put_champion_in_memory(void);
@@ -120,7 +120,7 @@ int				print_exec_tab(void);
 **		cw_instructions_utils.c
 */
 
-unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc);
+unsigned int	apply_idx_mod(unsigned int former_pc, unsigned int new_pc);
 
 /*
 **		utils
@@ -137,5 +137,6 @@ void			cw_clear_exec_tab(void);
 t_list			*free_list_elem(t_list *to_free);
 t_list			*cw_increment_pc(t_processus *process);
 void			cw_clean_process_excedent(void);
+int				cw_putstr_quit(char *str);
 
 #endif

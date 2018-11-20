@@ -1,2 +1,0 @@
-// essayer de faire le display de memoire comme zaz
-// et continuer la lecture d'un champion

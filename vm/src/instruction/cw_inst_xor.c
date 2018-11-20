@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 16:23:04 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 16:23:36 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 14:45:33 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		cw_inst_xor(t_processus *process)
 		process->carry = 1;
 	else
 		process->carry = 0;
-	if (arena.visu_fight)
+	if (g_arena.visu_fight)
 		cw_visu_incr_process(process, ret);
 	process->pc = ret;
 	cw_reset_process(process);

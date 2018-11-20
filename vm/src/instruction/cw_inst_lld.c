@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:04:46 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 16:21:53 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 14:45:33 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		cw_inst_lld(t_processus *process)
 			cw_calculate_value_on_ram(landing, 4);
 	}
 	process->carry = (process->reg[process->params[1]] == 0) ? 1 : 0;
-	if (arena.visu_fight)
+	if (g_arena.visu_fight)
 		cw_visu_incr_process(process, ret);
 	process->pc = ret;
 	cw_reset_process(process);

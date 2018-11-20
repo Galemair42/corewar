@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:07:03 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 13:28:26 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 14:45:33 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,22 @@ void			cw_display_champ_on_ram(t_champion *champ, t_processus *process)
 	color_pair = cw_champ_color(champ);
 	pc = process->pc;
 	i = 0;
-	wattron(arena.visu_fight, COLOR_PAIR(color_pair));
-	wattron(arena.visu_fight, WA_STANDOUT);
-	mvwprintw(arena.visu_fight, (pc / 64) + 1, ((pc % 64) * 3) + 3,
-			"%.2X", arena.memory[pc]);
-	wattroff(arena.visu_fight, WA_STANDOUT);
-	ft_memset(&arena.mem_color[pc], color_pair, champ->header.prog_size);
+	wattron(g_arena.visu_fight, COLOR_PAIR(color_pair));
+	wattron(g_arena.visu_fight, WA_STANDOUT);
+	mvwprintw(g_arena.visu_fight, (pc / 64) + 1, ((pc % 64) * 3) + 3,
+			"%.2X", g_arena.memory[pc]);
+	wattroff(g_arena.visu_fight, WA_STANDOUT);
+	ft_memset(&g_arena.mem_color[pc], color_pair, champ->header.prog_size);
 	i++;
 	pc++;
 	while (i < champ->header.prog_size)
 	{
-		mvwprintw(arena.visu_fight, (pc / 64) + 1, ((pc % 64) * 3) + 3,
-				"%.2X ", arena.memory[pc]);
+		mvwprintw(g_arena.visu_fight, (pc / 64) + 1, ((pc % 64) * 3) + 3,
+				"%.2X ", g_arena.memory[pc]);
 		pc++;
 		i++;
 	}
-	wattroff(arena.visu_fight, COLOR_PAIR(color_pair));
+	wattroff(g_arena.visu_fight, COLOR_PAIR(color_pair));
 }
 
 void			cw_visu_incr_process(t_processus *process, int next_pc)
@@ -71,16 +71,16 @@ void			cw_visu_incr_process(t_processus *process, int next_pc)
 	int		cur_pc;
 
 	cur_pc = process->pc;
-	wattron(arena.visu_fight, COLOR_PAIR(arena.mem_color[cur_pc]));
-	mvwprintw(arena.visu_fight, (cur_pc / 64) + 1, ((cur_pc % 64) * 3) + 3,
-			"%.2X", arena.memory[cur_pc]);
-	wattroff(arena.visu_fight, COLOR_PAIR(arena.mem_color[cur_pc]));
-	wattron(arena.visu_fight, COLOR_PAIR(arena.mem_color[next_pc]));
-	wattron(arena.visu_fight, WA_STANDOUT);
-	mvwprintw(arena.visu_fight, (next_pc / 64) + 1, ((next_pc % 64) * 3) + 3,
-			"%.2X", arena.memory[next_pc]);
-	wattroff(arena.visu_fight, WA_STANDOUT);
-	wattroff(arena.visu_fight, COLOR_PAIR(arena.mem_color[next_pc]));
+	wattron(g_arena.visu_fight, COLOR_PAIR(g_arena.mem_color[cur_pc]));
+	mvwprintw(g_arena.visu_fight, (cur_pc / 64) + 1, ((cur_pc % 64) * 3) + 3,
+			"%.2X", g_arena.memory[cur_pc]);
+	wattroff(g_arena.visu_fight, COLOR_PAIR(g_arena.mem_color[cur_pc]));
+	wattron(g_arena.visu_fight, COLOR_PAIR(g_arena.mem_color[next_pc]));
+	wattron(g_arena.visu_fight, WA_STANDOUT);
+	mvwprintw(g_arena.visu_fight, (next_pc / 64) + 1, ((next_pc % 64) * 3) + 3,
+			"%.2X", g_arena.memory[next_pc]);
+	wattroff(g_arena.visu_fight, WA_STANDOUT);
+	wattroff(g_arena.visu_fight, COLOR_PAIR(g_arena.mem_color[next_pc]));
 }
 
 void			cw_print_winner_visu(void)
@@ -90,19 +90,19 @@ void			cw_print_winner_visu(void)
 	int			i;
 
 	i = 0;
-	lst_champ = arena.champion;
+	lst_champ = g_arena.champion;
 	while (lst_champ)
 	{
 		i++;
 		champ = (t_champion *)lst_champ->content;
-		if (champ->id == arena.id_last_player_alive)
+		if (champ->id == g_arena.id_last_player_alive)
 		{
-			wattron(arena.visu_score, COLOR_PAIR(champ->color));
-			mvwprintw(arena.visu_score, SC_HEIGHT + 1, SC_FIRST_COL + 25,
+			wattron(g_arena.visu_score, COLOR_PAIR(champ->color));
+			mvwprintw(g_arena.visu_score, SC_HEIGHT + 1, SC_FIRST_COL + 25,
 					"Thewinner is %s!\n",
-					get_champs_name_by_id(arena.id_last_player_alive));
-			wattroff(arena.visu_score, COLOR_PAIR(champ->color));
-			wrefresh(arena.visu_score);
+					get_champs_name_by_id(g_arena.id_last_player_alive));
+			wattroff(g_arena.visu_score, COLOR_PAIR(champ->color));
+			wrefresh(g_arena.visu_score);
 			return ;
 		}
 		lst_champ = lst_champ->next;

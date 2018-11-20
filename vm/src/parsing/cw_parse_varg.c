@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:54:40 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 18:01:29 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 15:11:59 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int			cw_is_valid_id(int id)
 	t_list		*lst;
 	t_champion	*champ;
 
-	lst = arena.champion;
+	lst = g_arena.champion;
 	while (lst)
 	{
 		champ = (t_champion *)lst->content;
@@ -36,10 +36,10 @@ static int			cw_is_valid_id(int id)
 **		INPUT
 **		one string begining by '-'
 **		the goal is to see if its a good flag or not, if it is, then indicate
-**		it in arena->arg flag in question
+**		it in g_arena->arg flag in question
 */
 
-static int			cw_parse_flag(char **argv, int cur, int *index)
+static int			cw_gflag(char **argv, int cur, int *index)
 {
 	int		i;
 	char	*arg;
@@ -48,7 +48,7 @@ static int			cw_parse_flag(char **argv, int cur, int *index)
 	if (ft_strequ(arg, "dump"))
 	{
 		if (argv[cur + 1])
-			arena.cycle_to_dump = ft_atoi(argv[cur + 1]);
+			g_arena.cycle_to_dump = ft_atoi(argv[cur + 1]);
 		else
 			return (-1);
 		*index += 1;
@@ -77,16 +77,13 @@ int					cw_parse_arg(char **argv, int argc)
 	i = 0;
 	while (++i < argc)
 	{
-		if ((argv[i][0] != '-' || !(ret = cw_parse_flag(argv, i, &i))) && ret != -1)
+		if ((argv[i][0] != '-' || !(ret = cw_gflag(argv, i, &i))) && ret != -1)
 		{
 			if (ft_strequ(&argv[i][1], "n"))
 			{
 				if (!argv[i + 1] || !argv[i + 2] ||
 						!cw_is_valid_id((id = ft_atoi(argv[i + 1]))))
-				{
-					printf("Corewar : Wrong Arguement\n");
-					return (0);
-				}
+					return (cw_putstr_quit("Corewar : Wrong Argument\n"));
 				i += 2;
 			}
 			else
@@ -95,10 +92,7 @@ int					cw_parse_arg(char **argv, int argc)
 				return (0);
 		}
 		if (ret == -1)
-		{
-			printf("Corewar : Error");
-			return (-1);
-		}
+			return (cw_putstr_quit("Corewar : Error\n"));
 	}
 	return (1);
 }

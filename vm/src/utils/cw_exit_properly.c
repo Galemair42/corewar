@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 16:49:23 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/19 15:58:45 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 14:45:33 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	cw_free_process_tab(void (*free_ptr)(void*, size_t))
 	i = 0;
 	while (i < CYCLE_TO_DIE)
 	{
-		lst = arena.process_to_exec[i];
+		lst = g_arena.process_to_exec[i];
 		while (lst)
 		{
 			tmp = lst->next;
@@ -46,7 +46,7 @@ void	cw_free_processes(void (*free_ptr)(void*, size_t))
 	t_list			*lst;
 	t_list			*tmp;
 
-	lst = arena.process;
+	lst = g_arena.process;
 	while (lst)
 	{
 		tmp = lst->next;
@@ -60,7 +60,7 @@ void	cw_free_champs(void (*free_champs_ptr)(void *, size_t))
 	t_list *lst;
 	t_list *tmp;
 
-	lst = arena.champion;
+	lst = g_arena.champion;
 	while (lst)
 	{
 		tmp = lst->next;

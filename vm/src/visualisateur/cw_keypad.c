@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:23:07 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 14:26:03 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 14:45:33 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void		cw_key_space(void)
 {
 	int		c;
 
-	mvwprintw(arena.visu_score, SC_HEIGHT, SC_FIRST_COL, "**PAUSED**");
-	wrefresh(arena.visu_score);
+	mvwprintw(g_arena.visu_score, SC_HEIGHT, SC_FIRST_COL, "**PAUSED**");
+	wrefresh(g_arena.visu_score);
 	while (1)
 	{
 		c = getch();
@@ -26,8 +26,8 @@ void		cw_key_space(void)
 		else
 			cw_manage_getch(c);
 	}
-	mvwprintw(arena.visu_score, SC_HEIGHT, SC_FIRST_COL, "**RUNNING**");
-	wrefresh(arena.visu_score);
+	mvwprintw(g_arena.visu_score, SC_HEIGHT, SC_FIRST_COL, "**RUNNING**");
+	wrefresh(g_arena.visu_score);
 }
 
 void		cw_key_speed(int c)
@@ -53,6 +53,6 @@ void		cw_key_speed(int c)
 		timeout(1);
 	else
 		timeout(0);
-	mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, tab[speed]);
-	wrefresh(arena.visu_score);
+	mvwprintw(g_arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, tab[speed]);
+	wrefresh(g_arena.visu_score);
 }

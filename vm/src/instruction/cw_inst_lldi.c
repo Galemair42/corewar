@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 10:05:57 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/16 15:31:15 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 14:45:33 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		cw_inst_lldi(t_processus *process)
 	else if ((((process->ocp >> 4) & 3) == REG_CODE))
 		landing += process->reg[process->params[1]];
 	landing = MEM_MASK(process->pc + landing);
-	if (arena.visu_fight)
+	if (g_arena.visu_fight)
 		cw_visu_incr_process(process, ret);
 	process->reg[process->params[2]] = cw_calculate_value_on_ram(landing, 4);
 	process->pc = ret;

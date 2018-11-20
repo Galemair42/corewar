@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/20 14:37:14 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 16:09:31 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ t_list			*add_instruction_to_tab(t_list *process, int index,
 	t_list			*to_return;
 	int				i;
 
-	i = arena.current_process_to_exec;
+	i = g_arena.current_process_to_exec;
 	to_return = process->next;
 	process->next = NULL;
 	tmp = (t_processus *)process->content;
 	tmp->opcode = opc;
-	if (!arena.process_to_exec[(index + i) % CYCLE_TO_DIE])
-		arena.process_to_exec[(index + i) % CYCLE_TO_DIE] = process;
+	if (!g_arena.process_to_exec[(index + i) % CYCLE_TO_DIE])
+		g_arena.process_to_exec[(index + i) % CYCLE_TO_DIE] = process;
 	else
-		cw_insert_process(&arena.process_to_exec[(index + i) % CYCLE_TO_DIE],
+		cw_insert_process(&g_arena.process_to_exec[(index + i) % CYCLE_TO_DIE],
 		process);
 	return (to_return);
 }
@@ -41,36 +41,36 @@ void			cw_exec_instructions(void)
 
 	if (!*ptr)
 		cw_init_funtab(ptr);
-	lst = arena.process_to_exec[arena.current_process_to_exec];
+	lst = g_arena.process_to_exec[g_arena.current_process_to_exec];
 	while (lst)
 	{
 		process = (t_processus *)(lst->content);
 		tmp = lst->next;
 		(*ptr[process->opcode - 1])(process);
 		lst->next = NULL;
-		ft_lstappend(&arena.process, lst);
+		ft_lstappend(&g_arena.process, lst);
 		lst = tmp;
 	}
-	arena.process_to_exec[arena.current_process_to_exec] = NULL;
-	arena.current_process_to_exec = (arena.current_process_to_exec + 1)
+	g_arena.process_to_exec[g_arena.current_process_to_exec] = NULL;
+	g_arena.current_process_to_exec = (g_arena.current_process_to_exec + 1)
 	% CYCLE_TO_DIE;
 }
 
 void			cw_manage_valide_opc(unsigned int opc_tmp, int index, int ctd,
 		t_processus *process)
 {
-	if (!(op_tab[opc_tmp - 1].cycle >
+	if (!(g_op_tab[opc_tmp - 1].cycle >
 		(ctd - index) && process->nb_live == 0) && (((2 * ctd) - index)
-		>= op_tab[opc_tmp - 1].cycle))
-		arena.process = add_instruction_to_tab(arena.process,
-		(op_tab[opc_tmp - 1].cycle - 1), opc_tmp);
+		>= g_op_tab[opc_tmp - 1].cycle))
+		g_arena.process = add_instruction_to_tab(g_arena.process,
+		(g_op_tab[opc_tmp - 1].cycle - 1), opc_tmp);
 	else
 	{
-		arena.cur_processus--;
-		if (arena.visu_fight)
+		g_arena.cur_processus--;
+		if (g_arena.visu_fight)
 			cw_unhighlight_octet(process->pc,
-			arena.mem_color[process->pc]);
-		arena.process = free_list_elem(arena.process);
+			g_arena.mem_color[process->pc]);
+		g_arena.process = free_list_elem(g_arena.process);
 	}
 }
 
@@ -79,15 +79,15 @@ void			cw_read_processus_opc(int index, int ctd)
 	t_processus		*process;
 	unsigned int	opc_tmp;
 
-	ft_lstappend(&arena.process, arena.process);
-	while (arena.process && ((t_processus *)arena.process->content)->id != 0)
+	ft_lstappend(&g_arena.process, g_arena.process);
+	while (g_arena.process && ((t_processus *)g_arena.process->content)->id != 0)
 	{
-		process = (t_processus *)arena.process->content;
+		process = (t_processus *)g_arena.process->content;
 		opc_tmp = cw_calculate_value_on_ram(process->pc, 1);
 		if (opc_tmp >= 1 && opc_tmp <= 16)
 			cw_manage_valide_opc(opc_tmp, index, ctd, process);
 		else
-			arena.process = cw_increment_pc(process);
+			g_arena.process = cw_increment_pc(process);
 	}
 }
 
@@ -101,16 +101,16 @@ int				cw_fight(void)
 	cycle = 0;
 	while (1)
 	{
-		if (arena.cur_cycle == arena.cycle_to_dump)
+		if (g_arena.cur_cycle == g_arena.cycle_to_dump)
 		{
-			print_buffer_in_hexa(arena.memory, MEM_SIZE);
+			print_buffer_in_hexa(g_arena.memory, MEM_SIZE);
 			return (1);
 		}
-		if (cycle == arena.ctd)
+		if (cycle == g_arena.ctd)
 		{
-			if (arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
+			if (g_arena.cycle_live >= NBR_LIVE || cycle_decrementation == MAX_CHECKS - 1)
 			{
-				arena.ctd = (int)(arena.ctd - CYCLE_DELTA) >= 0 ? arena.ctd - CYCLE_DELTA : 0;
+				g_arena.ctd = (int)(g_arena.ctd - CYCLE_DELTA) >= 0 ? g_arena.ctd - CYCLE_DELTA : 0;
 				cycle_decrementation = 0;
 			}
 			else
@@ -118,26 +118,26 @@ int				cw_fight(void)
 			//cw_clean_process_excedent();
 			cw_reset_live();
 			//cw_clean_process_excedent();
-			if (arena.cycle_live == 0)
+			if (g_arena.cycle_live == 0)
 			{
-//				//printf("Total cycle : %d\n", arena.cur_cycle);
-//				if (arena.id_last_player_alive == 0)
+//				//printf("Total cycle : %d\n", g_arena.cur_cycle);
+//				if (g_arena.id_last_player_alive == 0)
 //					//printf("No Winner");
 //				else
-//					printf("The winner is %s!\n", get_champs_name_by_id(arena.id_last_player_alive));
+//					printf("The winner is %s!\n", get_champs_name_by_id(g_arena.id_last_player_alive));
 				return (1);
 			}
 			if (!(delimiter = (t_processus *)ft_memalloc(sizeof(t_processus))))
 				return (-1);
-			ft_lstadd(&arena.process, ft_lstnew(delimiter, sizeof(t_processus)));
+			ft_lstadd(&g_arena.process, ft_lstnew(delimiter, sizeof(t_processus)));
 			free(delimiter);
-			arena.cycle_live = 0;
+			g_arena.cycle_live = 0;
 			cycle = 0;
 		}
-		cw_read_processus_opc(cycle, arena.ctd);
+		cw_read_processus_opc(cycle, g_arena.ctd);
 		cw_exec_instructions();
 		cycle++;
-		arena.cur_cycle++;
+		g_arena.cur_cycle++;
 	}
 	return (1);
 }

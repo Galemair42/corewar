@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:31:34 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/17 17:13:36 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 16:11:52 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ typedef char		t_arg_type;
 
 # define OP_TAB_SIZE 16
 
-typedef struct		header_s
+typedef struct		s_header
 {
 	unsigned int		magic;
 	char				prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
-}					header_t;
+}					t_header;
 
 typedef struct		s_op
 {
@@ -82,7 +82,7 @@ typedef struct		s_op
 	int			f;
 }					t_op;
 
-static t_op			op_tab[OP_TAB_SIZE] =
+static t_op			g_op_tab[OP_TAB_SIZE] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},

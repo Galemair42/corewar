@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 16:00:47 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 16:08:20 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 16:09:31 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ static int			get_params1(unsigned int ocp, unsigned int *current_pc,
 	i = 0;
 	value = 0;
 	ocp = ocp >> 30;
-	if ((ocp == REG_CODE && !(op_tab[opc].types[index] & T_REG)) ||
-			(ocp == DIR_CODE && !(op_tab[opc].types[index] & T_DIR)) ||
-			(ocp == IND_CODE && !(op_tab[opc].types[index] & T_IND)))
+	if ((ocp == REG_CODE && !(g_op_tab[opc].types[index] & T_REG)) ||
+			(ocp == DIR_CODE && !(g_op_tab[opc].types[index] & T_DIR)) ||
+			(ocp == IND_CODE && !(g_op_tab[opc].types[index] & T_IND)))
 		return (-1);
 	if (ocp == 0)
 		return (-1);
 	value = cw_calculate_value_on_ram(*current_pc,
-			get_size(ocp, op_tab[opc].f));
+			get_size(ocp, g_op_tab[opc].f));
 	if (ocp == REG_CODE && (value < 1 || value > 16))
 		return (-1);
-	*current_pc = MEM_MASK(*current_pc + get_size(ocp, op_tab[opc].f));
+	*current_pc = MEM_MASK(*current_pc + get_size(ocp, g_op_tab[opc].f));
 	return (value);
 }
 
@@ -77,20 +77,19 @@ int					get_params(t_processus *process)
 	unsigned int	error_pc;
 
 	i = 0;
-	current_pc = MEM_MASK(process->pc + 1);
-	ocp = cw_calculate_value_on_ram(current_pc, 1);
+	ocp = cw_calculate_value_on_ram(MEM_MASK(process->pc + 1), 1);
 	process->ocp = ocp;
-	current_pc = MEM_MASK(current_pc + 1);
+	current_pc = MEM_MASK(process->pc + 2);
 	error_pc = current_pc;
 	if (ocp > 0xFC || process->opcode > 16)
 		return (manage_error(error_pc, process));
 	ocp = ocp << 24;
-	while (i < op_tab[process->opcode - 1].nb_args)
+	while (i < g_op_tab[process->opcode - 1].nb_args)
 	{
 		if ((process->params[i] = get_params1(ocp, &current_pc,
 						process->opcode - 1, i)) == -1)
 		{
-			if (arena.visu_fight)
+			if (g_arena.visu_fight)
 				cw_visu_incr_process(process, current_pc);
 			process->pc = current_pc;
 			return (manage_error(error_pc, process));
@@ -116,7 +115,7 @@ unsigned int		cw_get_one_params(t_processus *process, int number,
 	else if (((process->ocp >> padding) & 3) == IND_CODE)
 	{
 		if (apply_modulo)
-			landing = apply_IDX_MOD(process->pc, MEM_MASK(process->pc +
+			landing = apply_idx_mod(process->pc, MEM_MASK(process->pc +
 						process->params[number - 1]));
 		else
 			landing = MEM_MASK(process->pc + process->params[number - 1]);
