@@ -16,12 +16,12 @@ t_list	*cw_increment_pc(t_processus *process)
 {
 	t_list	*tmp;
 
-	if (arena.visu_fight)
+	if (g_arena.visu_fight)
 		cw_visu_incr_process(process, MEM_MASK(process->pc + 1));
 	process->pc = MEM_MASK(process->pc + 1);
-	tmp = arena.process->next;
-	arena.process->next = NULL;
-	ft_lstappend(&tmp, arena.process);
+	tmp = g_arena.process->next;
+	g_arena.process->next = NULL;
+	ft_lstappend(&tmp, g_arena.process);
 	return (tmp);
 }
 
@@ -54,4 +54,10 @@ int	cw_manage_ctd(void)
 	free(delimiter);
 	arena.cycle_live = 0;
 	return (0);	
+}
+
+int		cw_putstr_quit(char *str)
+{
+	write(1, str, ft_strlen(str));
+	return (0);
 }

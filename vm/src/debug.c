@@ -30,7 +30,7 @@ void	print_all_champ(void)
 	t_list	*lst;
 	t_champion	*champ;
 
-	lst = arena.champion;
+	lst = g_arena.champion;
 	while (lst)
 	{
 		champ = lst->content;
@@ -77,7 +77,7 @@ int		print_all_process(void)
 	t_list			*process;
 	int				ret=0;
 
-	process = arena.process;
+	process = g_arena.process;
 	while (process)
 	{
 		cur_process = (t_processus *)process->content;
@@ -97,7 +97,7 @@ int		print_exec_tab(void)
 	
 	for (int i=0; i < CYCLE_TO_DIE;i++)
 	{
-		list = arena.process_to_exec[i];
+		list = g_arena.process_to_exec[i];
 		while (list)
 		{
 			cur_process = (t_processus *)list->content;

@@ -31,7 +31,7 @@ void		cw_inst_lld(t_processus *process)
 			cw_calculate_value_on_ram(landing, 4);
 	}
 	process->carry = (process->reg[process->params[1]] == 0) ? 1 : 0;
-	if (arena.visu_fight)
+	if (g_arena.visu_fight)
 		cw_visu_incr_process(process, ret);
 	process->pc = ret;
 	cw_reset_process(process);

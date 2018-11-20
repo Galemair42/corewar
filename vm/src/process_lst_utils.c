@@ -25,12 +25,12 @@ void		cw_clean_lst(void)
 
 	free_ptr = &cw_free_content;
 	delimiter_flag = 0;
-	while (arena.process && delimiter_flag == 0)
+	while (g_arena.process && delimiter_flag == 0)
 	{
-		if (((t_processus *)arena.process->content)->id == 0)
+		if (((t_processus *)g_arena.process->content)->id == 0)
 			delimiter_flag++;
-		tmp = arena.process;
-		arena.process = arena.process->next;
+		tmp = g_arena.process;
+		g_arena.process = g_arena.process->next;
 		ft_lstdelone(&tmp, free_ptr);
 	}
 }

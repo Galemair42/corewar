@@ -30,7 +30,7 @@ static int		cw_get_modulo(int diff1, int diff2, int former_pc, int new_pc)
 		else
 		{
 			diff2 %= IDX_MOD;
-			tmp = (int)(former_pc - diff2) >= 0 ? 0 : diff2 - former_pc; 
+			tmp = (int)(former_pc - diff2) >= 0 ? 0 : diff2 - former_pc;
 			if (tmp == 0)
 				return (former_pc - diff2);
 			else
@@ -43,7 +43,7 @@ static int		cw_get_modulo(int diff1, int diff2, int former_pc, int new_pc)
 **		prend le pc et l'endroit ou ca doit atterir
 */
 
-unsigned int	apply_IDX_MOD(unsigned int former_pc, unsigned int new_pc)
+unsigned int	apply_idx_mod(unsigned int former_pc, unsigned int new_pc)
 {
 	int diff1;
 	int	diff2;

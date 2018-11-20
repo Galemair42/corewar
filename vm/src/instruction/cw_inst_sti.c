@@ -28,11 +28,11 @@ void		cw_inst_sti(t_processus *process)
 		landing += process->params[2];
 	else if (((process->ocp >> 2) & 3) == REG_CODE)
 		landing += process->reg[process->params[2]];
-	landing = apply_IDX_MOD(process->pc, MEM_MASK(process->pc + landing));
-	if (arena.visu_fight)
+	landing = apply_idx_mod(process->pc, MEM_MASK(process->pc + landing));
+	if (g_arena.visu_fight)
 	{
 		cw_put_four_octet_visu(landing, process->reg[process->params[0]],
-				arena.mem_color[process->pc]);
+				g_arena.mem_color[process->pc]);
 		cw_visu_incr_process(process, ret);
 	}
 	else

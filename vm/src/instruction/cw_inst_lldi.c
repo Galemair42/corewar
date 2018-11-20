@@ -28,7 +28,7 @@ void		cw_inst_lldi(t_processus *process)
 	else if ((((process->ocp >> 4) & 3) == REG_CODE))
 		landing += process->reg[process->params[1]];
 	landing = MEM_MASK(process->pc + landing);
-	if (arena.visu_fight)
+	if (g_arena.visu_fight)
 		cw_visu_incr_process(process, ret);
 	process->reg[process->params[2]] = cw_calculate_value_on_ram(landing, 4);
 	process->pc = ret;

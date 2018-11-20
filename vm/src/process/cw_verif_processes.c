@@ -20,16 +20,17 @@ static void		cw_verif_processes(void)
 	void			(*free_ptr)(void *, size_t);
 
 	free_ptr = &cw_free_content;
-	lst = arena.process;
+	lst = g_arena.process;
 	while (lst)
 	{
 		((t_processus *)lst->content)->nb_live = 0;
 		if (lst->next && ((t_processus *)lst->next->content)->nb_live <= 0)
 		{
 			process = (t_processus *)lst->next->content;
-			arena.cur_processus--;
-			if (arena.visu_fight)
-				cw_unhighlight_octet(process->pc, arena.mem_color[process->pc]);
+			g_arena.cur_processus--;
+			if (g_arena.visu_fight)
+				cw_unhighlight_octet(process->pc,
+						g_arena.mem_color[process->pc]);
 			tmp = lst->next->next;
 			ft_lstdelone(&lst->next, free_ptr);
 			lst->next = tmp;
@@ -46,19 +47,20 @@ static void		cw_check_first_process(void)
 	void			(*free_ptr)(void *, size_t);
 
 	free_ptr = &cw_free_content;
-	while (arena.process &&
-			((t_processus *)(arena.process)->content)->nb_live <= 0)
+	while (g_arena.process &&
+			((t_processus *)(g_arena.process)->content)->nb_live <= 0)
 	{
-		process = (t_processus *)arena.process->content;
+		process = (t_processus *)g_arena.process->content;
 		if (process->id != 0)
 		{
-			arena.cur_processus--;
-			if (arena.visu_fight)
-				cw_unhighlight_octet(process->pc, arena.mem_color[process->pc]);
+			g_arena.cur_processus--;
+			if (g_arena.visu_fight)
+				cw_unhighlight_octet(process->pc,
+						g_arena.mem_color[process->pc]);
 		}
-		tmp = (arena.process)->next;
-		ft_lstdelone(&arena.process, free_ptr);
-		arena.process = tmp;
+		tmp = (g_arena.process)->next;
+		ft_lstdelone(&g_arena.process, free_ptr);
+		g_arena.process = tmp;
 	}
 }
 
@@ -71,7 +73,7 @@ static void		cw_reset_tab_live(void)
 	i = 0;
 	while (i < CYCLE_TO_DIE)
 	{
-		lst = arena.process_to_exec[i];
+		lst = g_arena.process_to_exec[i];
 		while (lst)
 		{
 			processus = (t_processus *)(lst->content);
@@ -89,13 +91,13 @@ static void		cw_reset_champs_live(void)
 	int			i;
 
 	i = 0;
-	champs = arena.champion;
+	champs = g_arena.champion;
 	while (champs)
 	{
 		champion = (t_champion *)champs->content;
 		champion->nb_live = 0;
-		if (arena.visu_fight)
-			mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i,
+		if (g_arena.visu_fight)
+			mvwprintw(g_arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i,
 					SC_SECOND_COL + 15, "0          ");
 		champs = champs->next;
 	}

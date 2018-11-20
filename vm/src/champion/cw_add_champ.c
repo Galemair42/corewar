@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 10:54:56 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/20 11:34:19 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/20 16:14:35 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void			cw_bzero_champ(t_champion *champ)
 /*
 ** 		INPUT
 ** 		the content of my champion file in an unsigned char buffer and its size
-**		i'll parse it and put it in the header of the arena.champion list
+**		i'll parse it and put it in the header of the g_arena.champion list
 **		wich just has been added
 */
 
@@ -88,8 +88,8 @@ int					cw_add_new_champ(unsigned char *buffer,
 	cw_bzero_champ(champ);
 	new_node->content = (void *)champ;
 	new_node->next = NULL;
-	if (!arena.champion)
-		arena.champion = new_node;
+	if (!g_arena.champion)
+		g_arena.champion = new_node;
 	else
 		cw_insert_champion(new_node, champ);
 	if (cw_add_header(buffer, size_buf, champ) == -1)
@@ -113,7 +113,7 @@ void				cw_insert_champion(t_list *new_lst, t_champion *new_champ)
 	t_list		*cur_lst;
 	t_list		*cur_lst_tmp;
 
-	cur_lst = arena.champion;
+	cur_lst = g_arena.champion;
 	cur_lst_tmp = NULL;
 	while (cur_lst)
 	{
@@ -122,7 +122,7 @@ void				cw_insert_champion(t_list *new_lst, t_champion *new_champ)
 		{
 			new_lst->next = cur_lst;
 			if (cur_lst_tmp == NULL)
-				arena.champion = new_lst;
+				g_arena.champion = new_lst;
 			else
 				cur_lst_tmp->next = new_lst;
 			return ;
@@ -132,4 +132,3 @@ void				cw_insert_champion(t_list *new_lst, t_champion *new_champ)
 	}
 	cur_lst_tmp->next = new_lst;
 }
-

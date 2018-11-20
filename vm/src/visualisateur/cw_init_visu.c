@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:17:59 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/19 13:26:52 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/20 15:51:20 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 static void			cw_set_score_win(void)
 {
-	arena.visu_score = subwin(stdscr, 15, COLS - 2,
+	g_arena.visu_score = subwin(stdscr, 15, COLS - 2,
 			WIN_HEIGHT, 1);
-	box(arena.visu_score, ACS_VLINE, ACS_HLINE);
-	mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FIRST_COL, "cycle : 0");
-	mvwprintw(arena.visu_score, SC_HEIGHT - 1, SC_SECOND_COL, "LIVE:");
-	mvwprintw(arena.visu_score, SC_HEIGHT, SC_THIRD_COL, "KEY :");
-	mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_THIRD_COL,
+	box(g_arena.visu_score, ACS_VLINE, ACS_HLINE);
+	mvwprintw(g_arena.visu_score, SC_HEIGHT + 2, SC_FIRST_COL, "cycle : 0");
+	mvwprintw(g_arena.visu_score, SC_HEIGHT - 1, SC_SECOND_COL, "LIVE:");
+	mvwprintw(g_arena.visu_score, SC_HEIGHT, SC_THIRD_COL, "KEY :");
+	mvwprintw(g_arena.visu_score, SC_HEIGHT + 2, SC_THIRD_COL,
 			"-play/pause : space");
-	mvwprintw(arena.visu_score, SC_HEIGHT + 3, SC_THIRD_COL, "-speedup : r");
-	mvwprintw(arena.visu_score, SC_HEIGHT + 4, SC_THIRD_COL, "-slow down : q");
-	mvwprintw(arena.visu_score, SC_HEIGHT, SC_FOURTH_COL, "Speed :");
-	mvwprintw(arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "normal");
-	mvwprintw(arena.visu_score, SC_HEIGHT_PROC, SC_FOURTH_COL, "Processus :");
-	wrefresh(arena.visu_score);
+	mvwprintw(g_arena.visu_score, SC_HEIGHT + 3, SC_THIRD_COL, "-speedup : r");
+	mvwprintw(g_arena.visu_score, SC_HEIGHT + 4,
+			SC_THIRD_COL, "-slow down : q");
+	mvwprintw(g_arena.visu_score, SC_HEIGHT, SC_FOURTH_COL, "Speed :");
+	mvwprintw(g_arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, "normal");
+	mvwprintw(g_arena.visu_score, SC_HEIGHT_PROC, SC_FOURTH_COL, "Processus :");
+	wrefresh(g_arena.visu_score);
 }
 
 static void			cw_set_fight_window(void)
@@ -35,14 +36,14 @@ static void			cw_set_fight_window(void)
 	int		i;
 
 	i = 1;
-	arena.visu_fight = subwin(stdscr, WIN_HEIGHT, COLS - 2, 0, 1);
-	box(arena.visu_fight, ACS_VLINE, ACS_HLINE);
+	g_arena.visu_fight = subwin(stdscr, WIN_HEIGHT, COLS - 2, 0, 1);
+	box(g_arena.visu_fight, ACS_VLINE, ACS_HLINE);
 	while (i <= 64)
 	{
-		mvwprintw(arena.visu_fight, i, 3, "00 00 00 00 00 00 00 00 00 00 00 00 "
-			"00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 "
-			"00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 "
-			"00 00 00 00 00 00 00 00");
+		mvwprintw(g_arena.visu_fight, i, 3, "00 00 00 00 00 00 00 00 00 00 "
+			"00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 "
+			"00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 "
+			"00 00 00 00 00 00 00 00 00 00 00 00");
 		i++;
 	}
 }
@@ -72,8 +73,8 @@ int					cw_init_visu(void)
 	cw_init_color();
 	cw_set_score_win();
 	cw_set_fight_window();
-	if (!(arena.mem_color = malloc(sizeof(arena.mem_color) * MEM_SIZE)))
+	if (!(g_arena.mem_color = malloc(sizeof(g_arena.mem_color) * MEM_SIZE)))
 		return (-1);
-	ft_bzero(arena.mem_color, sizeof(arena.mem_color) * MEM_SIZE);
+	ft_bzero(g_arena.mem_color, sizeof(g_arena.mem_color) * MEM_SIZE);
 	return (1);
 }

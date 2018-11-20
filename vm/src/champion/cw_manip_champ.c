@@ -17,7 +17,7 @@ int		cw_is_valid_id(int id)
 	t_list			*lst_champ;
 	t_champion		*champ;
 
-	lst_champ = arena.champion;
+	lst_champ = g_arena.champion;
 	while (lst_champ)
 	{
 		champ = (t_champion *)lst_champ->content;
@@ -32,7 +32,7 @@ int		cw_get_new_champ_id(void)
 {
 	int				id;
 
-	if (!arena.champion)
+	if (!g_arena.champion)
 		return (1);
 	id = 1;
 	while (!cw_is_valid_id(id))
@@ -54,20 +54,20 @@ int		cw_update_champ_live(int id_champ)
 	int				i;
 
 	i = 0;
-	lst_champ = arena.champion;
+	lst_champ = g_arena.champion;
 	while (lst_champ)
 	{
 		champ = (t_champion *)lst_champ->content;
 		if (champ->id == id_champ)
 		{
 			champ->nb_live++;
-			arena.id_last_player_alive = id_champ;
-			arena.cycle_live++;
-//			if (!arena.visu_fight)
-//				printf("|Player 1 (%s) is said to be alive|\n", champ->name);
-//			else
-//				mvwprintw(arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i,
-//						SC_SECOND_COL + 15, "%u", champ->nb_live);
+			g_arena.id_last_player_alive = id_champ;
+			g_arena.cycle_live++;
+			if (!g_arena.visu_fight)
+				printf("|Player 1 (%s) is said to be alive|\n", champ->name);
+			else
+				mvwprintw(g_arena.visu_score, SC_HEIGHT + (i * 2) + 1 + i,
+						SC_SECOND_COL + 15, "%u", champ->nb_live);
 			return (1);
 		}
 		i++;
