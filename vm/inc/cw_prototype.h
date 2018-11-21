@@ -17,8 +17,8 @@
 **               core
 */
 
-int				cw_fight_visu();
-int				cw_fight(void);
+//int				cw_fight_visu();
+int				cw_fight(int visu);
 void			cw_exec_instructions();
 void			cw_init_funtab(void (**ptr)(t_processus *));
 void			cw_read_processus_opc(int index, int ctd);
@@ -102,6 +102,8 @@ void			cw_manage_getch(int c);
 void			cw_highlight_octet(unsigned int index, int color_pair);
 void			cw_unhighlight_octet(unsigned int index, int color_pair);
 void			cw_print_winner_visu(void);
+void			cw_begin_visu(t_list *lst_champ);
+void			cw_wait_and_quit_properly(void);
 
 /*
 ** 		debug
@@ -137,7 +139,7 @@ void			cw_clear_exec_tab(void);
 t_list			*free_list_elem(t_list *to_free);
 t_list			*cw_increment_pc(t_processus *process);
 void			cw_clean_process_excedent(void);
-int				cw_manage_ctd(void);
+int				cw_manage_ctd(int visu);
 int				cw_putstr_quit(char *str);
 
 #endif

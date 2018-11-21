@@ -52,7 +52,6 @@ static void		cw_insert_process_mid(t_list *lst_iter, t_list *process)
 void			cw_insert_process(t_list **process_tab, t_list *process)
 {
 	t_list			*lst_iter;
-	t_list			*before;
 
 	lst_iter = *process_tab;
 	if (((t_processus *)lst_iter->content)->id <

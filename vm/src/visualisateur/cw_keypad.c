@@ -20,6 +20,7 @@ void		cw_key_space(void)
 	wrefresh(g_arena.visu_score);
 	while (1)
 	{
+		refresh();
 		c = getch();
 		if (c == CW_KEY_SPACE)
 			break ;
@@ -41,9 +42,9 @@ void		cw_key_speed(int c)
 	tab[3] = "ultra fast  ";
 	if (!speed)
 		speed = 1;
-	if (c == CW_KEY_Q && speed > 0)
+	if (c == CW_KEY_Q && speed > 1)
 		speed--;
-	else if (c == CW_KEY_R && speed < 3)
+	else if (c == CW_KEY_R && speed < 4)
 		speed++;
 	if (speed == 1)
 		timeout(100);
@@ -53,6 +54,6 @@ void		cw_key_speed(int c)
 		timeout(1);
 	else
 		timeout(0);
-	mvwprintw(g_arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, tab[speed]);
+	mvwprintw(g_arena.visu_score, SC_HEIGHT + 2, SC_FOURTH_COL, tab[speed - 1]);
 	wrefresh(g_arena.visu_score);
 }

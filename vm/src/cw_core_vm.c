@@ -6,7 +6,7 @@
 /*   By: jabt <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 15:43:55 by jabt              #+#    #+#             */
-/*   Updated: 2018/11/20 17:28:17 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/21 08:17:24 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,16 @@ void			cw_read_processus_opc(int index, int ctd)
 int				cw_fight(int visu)
 {
 	int				cycle;
+	int				c;
 
 	cycle = 0;
 	if (visu == 1)
 	{
-		cw_begin_visu(arena.champion);
 		cw_key_space();
+
+		cw_begin_visu(g_arena.champion);
 	}
+
 	while (1)
 	{
 		if (g_arena.cur_cycle == g_arena.cycle_to_dump)
@@ -108,15 +111,22 @@ int				cw_fight(int visu)
 			print_buffer_in_hexa(g_arena.memory, MEM_SIZE);
 			return (1);
 		}
-		if (cycle == (int)arena.ctd)
+		if (cycle >= (int)g_arena.ctd)
 			if (((cycle = cw_manage_ctd(visu)) == 1))
 				return (1);
 		if (cycle == -1)
 			return (-1);
-		cw_read_processus_opc(cycle, arena.ctd);
+		cw_read_processus_opc(cycle, g_arena.ctd);
 		cw_exec_instructions();
 		cycle++;
 		g_arena.cur_cycle++;
+		if (visu == 1)
+		{
+			c = getch();
+			if (c != 1)
+				cw_manage_getch(c);
+			cw_update_cycle();
+		}
 	}
 	return (1);
 }

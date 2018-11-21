@@ -6,7 +6,7 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 13:39:56 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/20 17:07:44 by galemair         ###   ########.fr       */
+/*   Updated: 2018/11/21 09:06:07 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ unsigned int	apply_idx_mod(unsigned int former_pc, unsigned int new_pc)
 {
 	int diff1;
 	int	diff2;
-	
+
 	diff1 = (former_pc >= new_pc ? former_pc : new_pc) - (former_pc >=
 	new_pc ? new_pc : former_pc);
 	diff2 = (MEM_SIZE) - (former_pc >= new_pc ? former_pc : new_pc) +
