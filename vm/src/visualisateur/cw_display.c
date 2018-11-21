@@ -41,7 +41,7 @@ static int		cw_champ_color(t_champion *champ)
 
 void			cw_display_champ_on_ram(t_champion *champ, t_processus *process)
 {
-	int				i;
+	unsigned int	i;
 	unsigned int	pc;
 	int				color_pair;
 

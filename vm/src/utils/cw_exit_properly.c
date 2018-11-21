@@ -6,13 +6,13 @@
 /*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/17 16:49:23 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/20 14:45:33 by jabt             ###   ########.fr       */
+/*   Updated: 2018/11/21 09:07:09 by jabt             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	cw_free_champs_ptr(void *content, size_t size)
+void	cw_free_champs_ptr(void *content, __unused size_t size)
 {
 	t_champion		*to_free;
 

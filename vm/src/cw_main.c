@@ -21,9 +21,9 @@ int				main(int argc, char **argv)
 	if (!(g_arena.process = cw_init_process()))
 		return (42);
 	if (g_arena.visu_fight)
-		cw_fight_visu();
+		cw_fight(1);
 	else
-		cw_fight();
+		cw_fight(0);
 	cw_clean_everything();
 	free(g_arena.visu_fight);
 	free(g_arena.visu_score);
