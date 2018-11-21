@@ -3,24 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstappend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 16:29:04 by femaury           #+#    #+#             */
-/*   Updated: 2018/06/11 18:34:44 by femaury          ###   ########.fr       */
+/*   Created: 2018/11/05 16:27:31 by galemair          #+#    #+#             */
+/*   Updated: 2018/11/12 14:53:52 by galemair         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-void	ft_lstappend(t_list **alst, t_list *new)
+void	ft_lstappend(t_list **lst, t_list *to_add)
 {
-	t_list	*curr;
+	t_list *tmp;
 
-	curr = *alst;
-	if (new && curr)
+	if (*lst == to_add)
+		*lst = (*lst)->next;
+	if (!(*lst))
 	{
-		while (curr->next)
-			curr = curr->next;
-		curr->next = new;
+		*lst = to_add;
+		return ;
 	}
+	tmp = *lst;
+	while (tmp->next)
+	{
+		//printf("yo");
+		tmp = tmp->next;
+	}
+	tmp->next = to_add;
+	to_add->next = NULL;
 }
