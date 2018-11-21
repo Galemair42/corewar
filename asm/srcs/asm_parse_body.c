@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 15:40:56 by femaury           #+#    #+#             */
-/*   Updated: 2018/11/12 16:02:52 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/21 14:38:51 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	**prepare_params(char *ln, int nb)
 	{
 		if (kill)
 			ft_strdel(&params[i]);
-		if (ft_strhasc(params[i], COMMENT_CHAR))
+		else if (ft_strhasc(params[i], COMMENT_CHAR))
 		{
 			ft_strclrfrom(params[i], COMMENT_CHAR);
 			kill = 1;

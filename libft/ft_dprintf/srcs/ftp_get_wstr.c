@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftdprintf.h"
+#include "libftprintf.h"
 
 static void		ft_get_wc(t_buffer *buff, size_t bytes, wchar_t wc)
 {

@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 12:00:35 by femaury           #+#    #+#             */
-/*   Updated: 2018/11/21 13:11:06 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/21 14:01:47 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_readformat(char *format, t_buffer *buff, va_list args)
 		ftp_fill_buffer(buff, format + start, pos - start);
 }
 
-int			ft_dprintf(const char *restrict format, ...)
+int			ft_printf(const char *restrict format, ...)
 {
 	va_list		args;
 	t_buffer	buff;

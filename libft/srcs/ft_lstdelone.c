@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstappend.c                                     :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galemair <galemair@student.42.fr>          +#+  +:+       +#+        */
+/*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/05 16:27:31 by galemair          #+#    #+#             */
-/*   Updated: 2018/11/21 13:46:12 by femaury          ###   ########.fr       */
+/*   Created: 2018/11/21 13:44:57 by femaury           #+#    #+#             */
+/*   Updated: 2018/11/21 13:46:28 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstappend(t_list **lst, t_list *to_add)
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
-	t_list *tmp;
-
-	if (*lst == to_add)
-		*lst = (*lst)->next;
-	if (!(*lst))
-	{
-		*lst = to_add;
-		return ;
-	}
-	tmp = *lst;
-	while (tmp->next)
-	{
-		tmp = tmp->next;
-	}
-	tmp->next = to_add;
-	to_add->next = NULL;
+	del(alst[0]->content, alst[0]->content_size);
+	free(*alst);
+	*alst = NULL;
 }

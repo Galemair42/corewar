@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 12:01:47 by femaury           #+#    #+#             */
-/*   Updated: 2018/11/21 14:02:50 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/21 14:54:30 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_buffer
 	unsigned int	len;
 	unsigned int	pos;
 	unsigned int	error: 1;
+	int				fd;
 }				t_buffer;
 
 int				ft_printf(const char *restrict format, ...);

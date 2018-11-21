@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftdprintf.h"
+#include "libftprintf.h"
 
 int		ftp_check_wstr(t_buffer *buff, wchar_t *wstr)
 {

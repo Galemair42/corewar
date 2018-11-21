@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftdprintf.h"
+#include "libftprintf.h"
 
 static void	ft_readformat(char *format, t_buffer *buff, va_list args)
 {

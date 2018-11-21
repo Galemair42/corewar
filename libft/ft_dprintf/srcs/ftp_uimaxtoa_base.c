@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftdprintf.h"
+#include "libftprintf.h"
 
 char		*ftp_uimaxtoa_base(uintmax_t n, int base)
 {

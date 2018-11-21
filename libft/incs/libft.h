@@ -6,7 +6,7 @@
 /*   By: femaury <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 15:07:51 by femaury           #+#    #+#             */
-/*   Updated: 2018/09/25 16:42:03 by femaury          ###   ########.fr       */
+/*   Updated: 2018/11/21 14:52:36 by femaury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 
 # include "ft_gnl.h"
-# include "../ft_dprintf/incs/libftdprintf.h"
+# include "../ft_printf/incs/libftprintf.h"
 
 typedef struct	s_list
 {
@@ -139,6 +139,7 @@ void			ft_lstrev(t_list **alst);
 void			ft_lstdel(t_list **alst);
 void			ft_lstdelfirst(t_list **alst);
 int				ft_lstdellast(t_list **alst);
+void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 
 #endif

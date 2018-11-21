@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftdprintf.h"
+#include "libftprintf.h"
 
 void	ftp_colors(char *format, t_buffer *buff, int *pos, int *start)
 {

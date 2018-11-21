@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftdprintf.h"
+#include "libftprintf.h"
 
 static void	ft_parsing_flags(char *format, t_format *fstr, int *pos)
 {
