@@ -6,7 +6,7 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/11/07 16:33:35 by femaury          ###   ########.fr        #
+#    Updated: 2018/11/21 13:08:51 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ ECHO = echo "\r[\033[33m`expr $C '*' 100 / $T`%\033[0m] \
 
 all:
 	@$(MAKE) $(NAME)
+	@$(MAKE) -C ft_printf/
 	@$(MAKE) -C ft_dprintf/
 
 $(NAME): $(OBJ)
@@ -71,6 +72,7 @@ clean:
 ifeq ($(MAKECMDGOALS), clean)
 	@$(RM) $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
+	@$(MAKE) -C ft_printf/ clean
 	@$(MAKE) -C ft_dprintf/ clean
 	@echo "[\033[32mOK\033[0m] $(NAME) objects cleaned."
 else
@@ -81,6 +83,7 @@ endif
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(MAKE) -C ft_printf/ fclean
 	@$(MAKE) -C ft_dprintf/ fclean
 	@echo "[\033[32mOK\033[0m] $(NAME) \033[31mhas been removed.\033[0m"
 

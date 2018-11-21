@@ -6,14 +6,14 @@
 #    By: femaury <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/18 20:03:09 by femaury           #+#    #+#              #
-#    Updated: 2018/11/21 13:04:44 by femaury          ###   ########.fr        #
+#    Updated: 2018/11/21 13:09:24 by femaury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftdprintf.a
+NAME = libftprintf.a
 LIBFT = ../libft.a
 SRC_PATH = srcs
-SRC_NAME = ft_dprintf.c ftp_parsing.c ftp_get_arg.c ftp_get_int.c \
+SRC_NAME = ft_printf.c ftp_parsing.c ftp_get_arg.c ftp_get_int.c \
 		   ftp_fill_buffer.c ftp_pad_buffer.c ftp_get_str.c ftp_imaxtoa_base.c \
 		   ftp_uimaxtoa_base.c ftp_get_wstr.c ftp_check_wstr.c ftp_colors.c
 LIB_SRC_PATH = ../srcs
@@ -36,7 +36,7 @@ T := $(words $(SRC_NAME))
 N := x
 C = $(words $N)$(eval N := x $N)
 ECHO = echo "\r[\033[33m`expr $C '*' 100 / $T`%\033[0m] \
-	   Compiling \033[35mft_dprintf\033[0m...\c"
+	   Compiling \033[35mft_printf\033[0m...\c"
 
 .PHONY: all, clean, fclean, re
 
